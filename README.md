@@ -1,6 +1,6 @@
 # SIF-Resource-Explorer
 
-
+[![Build Status](https://travis-ci.org/xwang1024/SIF-Resource-Explorer.svg?branch=master)](https://travis-ci.org/xwang1024/SIF-Resource-Explorer)
 
 A desktop application which can explore the resources of the game named `Love Live! School Idol Festival`, writing with `Java` language, based on `JavaFX Framework`.
 
