@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="204.0" minWidth="600.0" prefHeight="204.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="58.0" layoutY="43.0" text="Data Directory:" />
+      <TextField layoutX="152.0" layoutY="39.0" prefHeight="23.0" prefWidth="306.0" />
+      <Button layoutX="478.0" layoutY="39.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="65.0" text="Choose" />
+      <ProgressIndicator layoutX="112.0" layoutY="87.0" prefHeight="30.0" prefWidth="40.0" />
+      <CheckBox layoutX="263.0" layoutY="94.0" mnemonicParsing="false" text="Database" />
+      <CheckBox layoutX="364.0" layoutY="94.0" mnemonicParsing="false" text="Image" />
+      <Label layoutX="190.0" layoutY="95.0" text="Found:" />
+      <Button layoutX="364.0" layoutY="152.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="65.0" text="Exit" />
+      <Button layoutX="456.0" layoutY="152.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="87.0" text="Continue" />
+   </children>
+</AnchorPane>

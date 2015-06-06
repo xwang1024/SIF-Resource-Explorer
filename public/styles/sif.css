@@ -1,0 +1,36 @@
+.noFocus {
+    -fx-focus-color: transparent;
+}
+
+.canfocus {
+    -fx-focus-color: #00a0e9;
+}
+
+.titlePane {
+    -fx-background-color: #555;
+}
+
+.modPane {
+    -fx-border-color: gray;
+    -fx-border-width: 0 1 1 0;
+}
+
+.toolPane {
+    -fx-background-color: #ddd;
+}
+
+.smile {
+    -fx-background-color: #ff669c;
+}
+
+.pure {
+    -fx-background-color: #04cb2b;
+}
+
+.cool {
+    -fx-background-color: #0ca7fd;
+}
+
+.stamina {
+    -fx-background-color: #999;
+}

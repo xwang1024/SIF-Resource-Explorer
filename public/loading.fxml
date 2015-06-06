@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="240.0" style="-fx-border-style: solid; -fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ProgressIndicator fx:id="progress" layoutX="50.0" layoutY="18.0" prefHeight="45.0" prefWidth="39.0" />
+      <Label layoutX="120.0" layoutY="33.0" text="正在载入......" />
+   </children>
+</AnchorPane>
