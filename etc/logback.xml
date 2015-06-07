@@ -7,7 +7,7 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</layout>
 	</appender>
-	<!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份) -->
+	<!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份)
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>xxxx.log</File>
@@ -24,7 +24,7 @@
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
 				%msg%n</Pattern>
 		</layout>
-	</appender>
+	</appender> -->
 	<!--这里指定logger name 是为jmx设置日志级别做铺垫 -->
 	<logger name="me.xwang1024.sifResExplorer">
 		<level value="DEBUG" />

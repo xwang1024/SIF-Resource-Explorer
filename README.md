@@ -23,3 +23,6 @@ A desktop application which can explore the resources of the game named `Love Li
 * You need to import the raw resource files which must be decrypted
 * These images or data cannot be used for commercial purposes
 * All these images is designed by `Bushimo Inc` and `KLAB Inc`
+
+## Shortage  (っ*'ω'*c)
+* 对配置的路径进行验证时，并没有验证里面的内容，就看文件夹名字对不对= =

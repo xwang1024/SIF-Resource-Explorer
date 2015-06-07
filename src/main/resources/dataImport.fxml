@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="204.0"
+	minWidth="600.0" prefHeight="204.0" prefWidth="600.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="me.xwang1024.sifResExplorer.controller.DataImportDialogController">
+	<children>
+		<Label layoutX="58.0" layoutY="43.0" text="Data Directory:" />
+		<TextField fx:id="pathField" layoutX="152.0" layoutY="39.0"
+			prefHeight="23.0" prefWidth="237.0" />
+		<Button fx:id="chooseBtn" layoutX="403.0" layoutY="39.0"
+			mnemonicParsing="false" onAction="#onChooseAction" prefHeight="23.0"
+			prefWidth="65.0" text="Choose" />
+		<CheckBox fx:id="databaseBox" disable="true" layoutX="152.0"
+			layoutY="105.0" mnemonicParsing="false" text="Database" />
+		<CheckBox fx:id="imageBox" disable="true" layoutX="235.0"
+			layoutY="105.0" mnemonicParsing="false" text="Image" />
+		<Label layoutX="105.0" layoutY="105.0" text="Found:" />
+		<Button fx:id="exitBtn" layoutX="364.0" layoutY="152.0"
+			mnemonicParsing="false" onAction="#onExitAction" prefHeight="23.0"
+			prefWidth="65.0" text="Exit" />
+		<Button fx:id="continueBtn" disable="true" layoutX="456.0"
+			layoutY="152.0" mnemonicParsing="false" onAction="#onContinueAction"
+			prefHeight="23.0" prefWidth="87.0" text="Continue" />
+		<CheckBox fx:id="defaultBox" disable="true" layoutX="58.0"
+			layoutY="154.0" mnemonicParsing="false" selected="true"
+			text="Use this as default" />
+		<Button fx:id="verifyBtn" disable="true" layoutX="478.0"
+			layoutY="39.0" mnemonicParsing="false" onAction="#onVerifyAction"
+			prefHeight="23.0" prefWidth="65.0" text="Verify" />
+		<Label layoutX="90.0" layoutY="76.0" text="Verifying:" />
+		<Label fx:id="verifyLabel" layoutX="152.0" layoutY="76.0"
+			prefHeight="15.0" prefWidth="359.0" style="-fx-background-color: #eeeeee;"
+			text="Choose or input the data directory first.">
+			<font>
+				<Font name="System Bold" size="12.0" />
+			</font>
+		</Label>
+	</children>
+</AnchorPane>
