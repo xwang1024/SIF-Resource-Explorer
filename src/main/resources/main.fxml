@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
@@ -23,7 +24,7 @@
             <MenuItem mnemonicParsing="false" text="Save As…" />
             <MenuItem mnemonicParsing="false" text="Revert" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <MenuItem mnemonicParsing="false" text="Change raw data path..." />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
@@ -51,22 +52,24 @@
     </MenuBar>
       <HBox VBox.vgrow="ALWAYS">
          <children>
-            <VBox prefHeight="552.0" prefWidth="200.0">
+            <VBox prefHeight="552.0" prefWidth="200.0" spacing="4.0">
                <children>
-              <AnchorPane>
-                <children>
-                  <Label alignment="CENTER" minWidth="60.0" prefHeight="48.0" prefWidth="200.0" style="&#10;" text="Tools" textAlignment="CENTER" textFill="WHITE" wrapText="false">
-                    <font>
-                      <Font size="18.0" fx:id="x1" />
-                    </font>
-                  </Label>
-                </children>
-                     <styleClass>
-                        <String fx:value="titlePane" />
-                        <String fx:value="noFocus" />
-                     </styleClass>
-              </AnchorPane>
-                  <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="canfocus" text="ToggleButton" />
+                  <ImageView fitHeight="53.0" fitWidth="199.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/lllogo.jpg" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" selected="true" styleClass="canfocus" text=" Raw Meterial">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/rawImageIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
                   <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="canfocus" text="ToggleButton" />
                   <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="canfocus" text="ToggleButton" />
                   <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="canfocus" text="ToggleButton" />
