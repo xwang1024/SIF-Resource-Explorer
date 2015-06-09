@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
 import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.SIFStage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,7 +140,7 @@ public class DataImportDialogController {
 	@FXML
 	public void onExitAction(ActionEvent event) {
 		logger.debug("onExitAction");
-		Stage stage = ApplicationContext.stageStack.pop();
+		SIFStage stage = ApplicationContext.stageStack.pop();
 		stage.close();
 	}
 
@@ -152,8 +153,7 @@ public class DataImportDialogController {
 			configService.saveConfig();
 		}
 		ApplicationContext.stageStack.pop().close();
-		Stage parent = ApplicationContext.stageStack.peek();
-		((IStageBuilder) parent.getUserData()).build();
+		SIFStage parent = ApplicationContext.stageStack.peek();
 		parent.show();
 	}
 

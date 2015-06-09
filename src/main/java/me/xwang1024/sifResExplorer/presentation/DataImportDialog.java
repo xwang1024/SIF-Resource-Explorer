@@ -2,6 +2,7 @@ package me.xwang1024.sifResExplorer.presentation;
 
 import java.io.IOException;
 
+import me.xwang1024.sifResExplorer.presentation.builder.SIFStage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +36,8 @@ public class DataImportDialog {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		ApplicationContext.stageStack.push(stage);
+		SIFStage importStage = new SIFStage(stage, null);
+		ApplicationContext.stageStack.push(importStage);
 	}
 
 	public void initElements(final Parent root) {

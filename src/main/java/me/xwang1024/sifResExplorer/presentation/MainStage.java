@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.config.SIFConfig.ConfigName;
 import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.SIFStage;
 import me.xwang1024.sifResExplorer.presentation.builder.impl.MainStageBuider;
 
 import org.slf4j.Logger;
@@ -31,9 +32,9 @@ public class MainStage extends Application {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("SIF Resource Explorer");
-		stage.setUserData(new MainStageBuider(root));
-
-		ApplicationContext.stageStack.push(stage);
+		SIFStage mainStage = new SIFStage(stage, new MainStageBuider(root));
+		ApplicationContext.stageStack.push(mainStage);
+		
 		// 检查配置文件，目前只有数据路径
 		configService.loadConfig();
 		String dbPath = configService.get(ConfigName.dbPath);
@@ -45,8 +46,7 @@ public class MainStage extends Application {
 			logger.debug("dbPath/assetsPath配置的目录已经失效");
 			DataImportDialog md = new DataImportDialog(stage);
 		} else { // 读取数据文件
-			((IStageBuilder) stage.getUserData()).build();
-			stage.show();
+			mainStage.show();
 		}
 
 	}
