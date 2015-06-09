@@ -3,7 +3,8 @@
 }
 
 .canfocus {
-    -fx-focus-color: #00a0e9;
+    -fx-focus-color: #fd8cb1;
+    -fx-base: #fec4d6;
 }
 
 .titlePane {
@@ -12,7 +13,7 @@
 
 .modPane {
     -fx-border-color: gray;
-    -fx-border-width: 0 1 1 0;
+    -fx-border-width: 0 0 1 0;
 }
 
 .toolPane {
@@ -33,4 +34,18 @@
 
 .stamina {
     -fx-background-color: #999;
+}
+
+.toggleBtn {
+	-fx-base: #fed5e3;
+	-fx-font: 22px "Arial";
+	-fx-text-fill: white;
+}
+
+.toggleBtn:hover {
+	-fx-base: #fd7cad;
+}
+
+.toggleBtn:selected {
+	-fx-base: #de3273;
 }

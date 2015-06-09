@@ -15,13 +15,13 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
+import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DataImportDialogController {
-	private static final Logger logger = LoggerFactory
-			.getLogger(DataImportDialogController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DataImportDialogController.class);
 	private SIFConfig configService;
 	private String dbPath;
 	private String assetsPath;
@@ -53,8 +53,7 @@ public class DataImportDialogController {
 		logger.debug("onChooseAction");
 		DirectoryChooser chooser = new DirectoryChooser();
 		chooser.setTitle("Choose raw data directory...");
-		File f = chooser.showDialog(((Node) event.getTarget()).getScene()
-				.getWindow());
+		File f = chooser.showDialog(((Node) event.getTarget()).getScene().getWindow());
 		if (f != null) {
 			pathField.setText(f.getAbsolutePath());
 		}
@@ -149,11 +148,13 @@ public class DataImportDialogController {
 		logger.debug("onContinueAction");
 		configService.set("dbPath", dbPath);
 		configService.set("assetsPath", assetsPath);
-		if(defaultBox.isSelected()) {
+		if (defaultBox.isSelected()) {
 			configService.saveConfig();
 		}
 		ApplicationContext.stageStack.pop().close();
-		ApplicationContext.stageStack.peek().show();
+		Stage parent = ApplicationContext.stageStack.peek();
+		((IStageBuilder) parent.getUserData()).build();
+		parent.show();
 	}
 
 }

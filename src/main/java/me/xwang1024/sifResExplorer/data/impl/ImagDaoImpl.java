@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.zip.Inflater;
 
 import javax.imageio.ImageIO;
@@ -19,7 +21,6 @@ import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.config.SIFConfig.ConfigName;
 import me.xwang1024.sifResExplorer.data.ImagDao;
 
-import org.dom4j.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,11 +29,10 @@ public class ImagDaoImpl implements ImagDao {
 	private File tempDir = new File("temp");
 	private String imagPath;
 
-	public ImagDaoImpl() throws DocumentException {
+	public ImagDaoImpl() {
 		if (!tempDir.exists()) {
 			tempDir.mkdir();
 		}
-		SIFConfig.getInstance().loadConfig();
 	}
 
 	private String readString(DataInputStream dis, int len) throws IOException {
@@ -271,12 +271,18 @@ public class ImagDaoImpl implements ImagDao {
 	@Override
 	public BufferedImage getImage(String path) throws IOException {
 		// 检查Temp中有没有这个图片
-		File tempChecker = new File(tempDir, path);
+		String checkerPath;
+		if (path.endsWith(".imag")) {
+			checkerPath = path.replaceAll("\\.imag.*$", "");
+		} else {
+			checkerPath = path;
+		}
+		File tempChecker = new File(tempDir, checkerPath);
 		if (tempChecker.exists()) {
 			BufferedImage image = ImageIO.read(tempChecker);
 			return image;
 		}
-		
+
 		if (path.endsWith(".imag")) {
 			this.imagPath = new String(path.trim());
 		} else {
@@ -377,8 +383,37 @@ public class ImagDaoImpl implements ImagDao {
 	}
 
 	public static void main(String[] args) throws Exception {
-		BufferedImage image = new ImagDaoImpl()
-				.getImage("assets/image/background/b_liveback_001.png");
-		ImageIO.write(image, "png", new File("t.png"));
+//		BufferedImage image = new ImagDaoImpl()
+//				.getImage("assets/image/background/b_liveback_001.png");
+//		ImageIO.write(image, "png", new File("t.png"));
+		SIFConfig.getInstance().loadConfig();
+		List<String> l = new ImagDaoImpl().getImagList();
+		for(String s:l) {
+			System.out.println(s);
+		}
+	}
+
+	@Override
+	public List<String> getImagList() {
+		List<String> l = new LinkedList<String>();
+		String startPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
+		File startFile = new File(startPath);
+		dfsImag(startFile, l);
+		return l;
+	}
+
+	private void dfsImag(File f, List<String> l) {
+		if (f.isDirectory()) {
+			File[] children = f.listFiles();
+			if (children != null) {
+				for (File child : children) {
+					dfsImag(child, l);
+				}
+			}
+		} else if (f.isFile()) {
+			if (f.getName().endsWith(".imag")) {
+				l.add(f.getAbsolutePath());
+			}
+		}
 	}
 }
