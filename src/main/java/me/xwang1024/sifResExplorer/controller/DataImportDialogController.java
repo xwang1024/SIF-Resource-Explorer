@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
-import me.xwang1024.sifResExplorer.service.ConfigService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class DataImportDialogController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DataImportDialogController.class);
-	private ConfigService configService;
+	private SIFConfig configService;
 	private String dbPath;
 	private String assetsPath;
 	@FXML
@@ -45,7 +45,7 @@ public class DataImportDialogController {
 	private Button continueBtn;
 
 	public DataImportDialogController() {
-		configService = ConfigService.getInstance();
+		configService = SIFConfig.getInstance();
 	}
 
 	@FXML

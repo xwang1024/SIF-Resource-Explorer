@@ -11,18 +11,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.zip.Inflater;
 
 import javax.imageio.ImageIO;
 
+import me.xwang1024.sifResExplorer.config.SIFConfig;
+import me.xwang1024.sifResExplorer.config.SIFConfig.ConfigName;
 import me.xwang1024.sifResExplorer.data.ImagDao;
 
+import org.dom4j.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ImagDaoImpl implements ImagDao {
 	private static final Logger logger = LoggerFactory.getLogger(ImagDaoImpl.class);
+	private File tempDir = new File("temp");
+	private String imagPath;
+
+	public ImagDaoImpl() throws DocumentException {
+		if (!tempDir.exists()) {
+			tempDir.mkdir();
+		}
+		SIFConfig.getInstance().loadConfig();
+	}
 
 	private String readString(DataInputStream dis, int len) throws IOException {
 		byte[] b = new byte[len];
@@ -30,7 +41,7 @@ public class ImagDaoImpl implements ImagDao {
 		return new String(b);
 	}
 
-	public byte[] getBitmap(DataInputStream dis) throws IOException {
+	private byte[] getBitmap(DataInputStream dis) throws IOException {
 		byte[] b = new byte[1024];
 		int len = 0;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -68,25 +79,48 @@ public class ImagDaoImpl implements ImagDao {
 		return output;
 	}
 
-	@Override
-	public BufferedImage getImage(File imagFile) throws IOException {
-		Imag imag = new Imag();
-		DataInputStream dis = new DataInputStream(new FileInputStream(imagFile));
-		imag.tag = readString(dis, 4);
-		imag.pathLen = dis.readInt();
-		imag.refPath = readString(dis, imag.pathLen);
-		System.out.println(imag);
-		dis.close();
-		return null;
+	private BufferedImage splitImage(Texb texture, BufferedImage image) {
+		BufferedImage cache = null;
+		for (Timg img : texture.image) {
+			long x1 = img.vertices[0].u;
+			long y1 = img.vertices[0].v;
+			long x2 = img.vertices[img.vertexLen - 1].u;
+			long y2 = img.vertices[img.vertexLen - 1].v;
+			BufferedImage bimg = image.getSubimage((int) x1, (int) y1, (int) (x2 - x1),
+					(int) (y2 - y1));
+			String pngPath = img.path.replaceAll("\\.imag.*$", "");
+			File pngFile = new File(tempDir, pngPath);
+			System.out.println(pngFile.getAbsolutePath());
+			pngFile.getParentFile().mkdirs();
+			try {
+				ImageIO.write(bimg, "png", pngFile);
+			} catch (IOException e) {
+				logger.error("{} temp file write error.", pngFile.getAbsolutePath());
+				e.printStackTrace();
+				continue;
+			}
+			if (img.path.contains(this.imagPath)) {
+				cache = bimg;
+			} else {
+				logger.debug("{}:{}", img.path, this.imagPath);
+			}
+		}
+		return cache;
 	}
 
-	public void readTexb(File texbFile) throws IOException {
+	private BufferedImage extractTexb(String texbPath) throws IOException {
+		// 构造texb文件的位置
+		String assetsPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
+		File root = new File(assetsPath).getParentFile();
+		File texbFile = new File(root, texbPath);
+		logger.info("Extract Texture: {}", texbFile.getAbsolutePath());
+		// 解压Texb文件
 		Texb t = new Texb();
 		DataInputStream dis = new DataInputStream(new FileInputStream(texbFile));
 		t.tag = readString(dis, 4);
 		t.size = dis.readInt();
 		t.pathLen = dis.readUnsignedShort();
-		t.path = readString(dis, t.pathLen).replaceAll("^T", "");
+		t.path = readString(dis, t.pathLen).replaceAll("^T", "").trim();
 		t.canvasWidth = dis.readUnsignedShort();
 		t.canvasHeight = dis.readUnsignedShort();
 		dis.skipBytes(1);
@@ -126,14 +160,11 @@ public class ImagDaoImpl implements ImagDao {
 					logger.info("该图片是ScrollBar");
 					dis.skipBytes(31);
 				} else if (imgTypeFlag == 5) {
-					logger.error("该图片是Scale9");
-					return;
+					throw new IOException("该图片是Scale9");
 				} else {
-					logger.error("该图片的KLB类型未知");
-					return;
+					throw new IOException("该图片的KLB类型未知");
 				}
 			} else {
-				// logger.info("该图片是一般类型");
 				dis.skipBytes(2);
 			}
 			img.vertexLen = dis.readUnsignedByte();
@@ -170,8 +201,7 @@ public class ImagDaoImpl implements ImagDao {
 		byte[] bitmap = getBitmap(dis);
 		if (t.isCompressed) {
 			if (compressType != 0) {
-				logger.error("未知的压缩格式");
-				return;
+				throw new IOException("未知的压缩格式");
 			}
 			bitmap = decompress(bitmap);
 		}
@@ -229,11 +259,44 @@ public class ImagDaoImpl implements ImagDao {
 				ptr++;
 			}
 		}
+		dis.close();
+		// 根据bitmap构造图片
 		BufferedImage image = new BufferedImage(t.canvasWidth, t.canvasHeight,
 				BufferedImage.TYPE_INT_ARGB);
 		image.setRGB(0, 0, t.canvasWidth, t.canvasHeight, pixelArr, 0, t.canvasWidth);
+		// 拆分图片并进行缓存
+		return splitImage(t, image);
+	}
+
+	@Override
+	public BufferedImage getImage(String path) throws IOException {
+		// 检查Temp中有没有这个图片
+		File tempChecker = new File(tempDir, path);
+		if (tempChecker.exists()) {
+			BufferedImage image = ImageIO.read(tempChecker);
+			return image;
+		}
+		
+		if (path.endsWith(".imag")) {
+			this.imagPath = new String(path.trim());
+		} else {
+			this.imagPath = path.trim() + ".imag";
+		}
+
+		// 如果Temp中没有这个图片，得到这个图片对应的Texb文件的path
+		String assetsPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
+		File root = new File(assetsPath).getParentFile();
+		File imagFile = new File(root, imagPath);
+
+		Imag imag = new Imag();
+		DataInputStream dis = new DataInputStream(new FileInputStream(imagFile));
+		imag.tag = readString(dis, 4);
+		imag.pathLen = dis.readInt();
+		imag.texbPath = readString(dis, imag.pathLen).trim();
 		dis.close();
-		ImageIO.write(image, "png", new File("test/" + texbFile.getName() + ".png"));
+
+		// 解压这个texb文件, 到临时文件, 同时返回需要的图片
+		return extractTexb(imag.texbPath);
 	}
 
 	private static class Vertice {
@@ -305,38 +368,17 @@ public class ImagDaoImpl implements ImagDao {
 	private static class Imag {
 		String tag;
 		int pathLen;
-		String refPath;
+		String texbPath;
 
 		@Override
 		public String toString() {
-			return "Imag [tag=" + tag + ", pathLen=" + pathLen + ", refPath=" + refPath + "]";
+			return "Imag [tag=" + tag + ", pathLen=" + pathLen + ", refPath=" + texbPath + "]";
 		}
 	}
 
 	public static void main(String[] args) throws Exception {
-		// new ImagDaoImpl().readTexb(new File(
-		// "D:/data/Application Support/assets/flash/ui/live/img/tx_live_play.texb"));
-		Date d1 = new Date();
-		tree(new File("D:/data/Application Support/assets"));
-		Date d2 = new Date();
-		System.out.println("Total Time: " + (d2.getTime() - d1.getTime()));
-	}
-
-	public static void tree(File f) throws IOException {
-		if (f.isFile()) {
-			if (f.getName().endsWith(".texb")) {
-				System.out.println(f.getAbsolutePath());
-				Date d1 = new Date();
-				new ImagDaoImpl().readTexb(f);
-				Date d2 = new Date();
-				System.out.println("Time: " + (d2.getTime() - d1.getTime()));
-			}
-		} else if (f.isDirectory()) {
-			if (f.listFiles() != null) {
-				for (File child : f.listFiles()) {
-					tree(child);
-				}
-			}
-		}
+		BufferedImage image = new ImagDaoImpl()
+				.getImage("assets/image/background/b_liveback_001.png");
+		ImageIO.write(image, "png", new File("t.png"));
 	}
 }

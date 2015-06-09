@@ -7,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import me.xwang1024.sifResExplorer.service.ConfigService;
-import me.xwang1024.sifResExplorer.service.ConfigService.ConfigName;
+import me.xwang1024.sifResExplorer.config.SIFConfig;
+import me.xwang1024.sifResExplorer.config.SIFConfig.ConfigName;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
 public class MainStage extends Application {
 	private static final Logger logger = LoggerFactory
 			.getLogger(MainStage.class);
-	private ConfigService configService;
+	private SIFConfig configService;
 
 	public MainStage() {
 		super();
-		configService = ConfigService.getInstance();
+		configService = SIFConfig.getInstance();
 	}
 
 	@Override

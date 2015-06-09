@@ -5,5 +5,5 @@ import java.io.File;
 import java.io.IOException;
 
 public interface ImagDao {
-	public BufferedImage getImage(File imagFile) throws IOException;
+	public BufferedImage getImage(String imagPath) throws IOException;
 }

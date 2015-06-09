@@ -1,4 +1,4 @@
-package me.xwang1024.sifResExplorer.service;
+package me.xwang1024.sifResExplorer.config;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,23 +21,23 @@ import org.dom4j.io.XMLWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ConfigService {
+public class SIFConfig {
 	private static final Logger logger = LoggerFactory
-			.getLogger(ConfigService.class);
+			.getLogger(SIFConfig.class);
 
-	public static ConfigService instance;
+	public static SIFConfig instance;
 	private String filePath = "sif.xml";
 	private Map<String, String> conf = Collections
 			.synchronizedMap(new HashMap<String, String>());
 
-	public static ConfigService getInstance() {
+	public static SIFConfig getInstance() {
 		if (instance == null) {
-			instance = new ConfigService();
+			instance = new SIFConfig();
 		}
 		return instance;
 	}
 
-	private ConfigService() {
+	private SIFConfig() {
 	}
 
 	public void loadConfig() throws DocumentException {
