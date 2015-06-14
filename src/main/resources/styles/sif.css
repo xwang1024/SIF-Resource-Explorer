@@ -4,7 +4,7 @@
 
 .canfocus {
     -fx-focus-color: #fd8cb1;
-    -fx-base: #fec4d6;
+    -fx-base: white;
 }
 
 .titlePane {
@@ -37,15 +37,16 @@
 }
 
 .toggleBtn {
-	-fx-base: #fed5e3;
-	-fx-font: 22px "Arial";
+	-fx-background-color: #de3273;
+	-fx-font: 22px "Consolas";
 	-fx-text-fill: white;
+	-fx-background-radius: 0;
 }
 
 .toggleBtn:hover {
-	-fx-base: #fd7cad;
+	-fx-background-color: #eb588f;
 }
 
 .toggleBtn:selected {
-	-fx-base: #de3273;
+	-fx-background-color: #ee70a0;
 }
