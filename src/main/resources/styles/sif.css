@@ -1,8 +1,11 @@
 .noFocus {
+	-fx-background-insets: 0, 0, 1, 2;
     -fx-focus-color: transparent;
+    -fx-faint-focus-color:#fd8cb111;
 }
 
 .canfocus {
+	-fx-faint-focus-color:#fd8cb133;
     -fx-focus-color: #fd8cb1;
     -fx-base: white;
 }

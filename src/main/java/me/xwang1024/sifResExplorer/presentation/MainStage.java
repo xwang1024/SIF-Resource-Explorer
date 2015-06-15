@@ -41,14 +41,14 @@ public class MainStage extends Application {
 		String assetsPath = configService.get(ConfigName.assetsPath);
 		if (dbPath == null || assetsPath == null) { // 如果没有这个配置项目
 			logger.debug("没有找到配置项dbPath/assetsPath");
-			DataImportDialog md = new DataImportDialog(stage);
+			new DataImportDialog(stage);
 		} else if (!(new File(dbPath).exists()) || !(new File(assetsPath).exists())) { // 如果没有这个目录
 			logger.debug("dbPath/assetsPath配置的目录已经失效");
-			DataImportDialog md = new DataImportDialog(stage);
+			new DataImportDialog(stage);
 		} else { // 读取数据文件
 			mainStage.show();
 		}
-
+		
 	}
 
 	public static void main(String[] args) {

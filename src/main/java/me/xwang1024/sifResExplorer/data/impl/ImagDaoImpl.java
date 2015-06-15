@@ -269,6 +269,29 @@ public class ImagDaoImpl implements ImagDao {
 	}
 
 	@Override
+	public String getRefTextureFilePath(String path) throws IOException {
+		if (path.endsWith(".imag")) {
+			this.imagPath = new String(path.trim());
+		} else {
+			this.imagPath = path.trim() + ".imag";
+		}
+		String assetsPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
+		File root = new File(assetsPath).getParentFile();
+		File imagFile = new File(imagPath);
+		if (!imagFile.isAbsolute()) {
+			imagFile = new File(root, imagPath);
+		}
+
+		Imag imag = new Imag();
+		DataInputStream dis = new DataInputStream(new FileInputStream(imagFile));
+		imag.tag = readString(dis, 4);
+		imag.pathLen = dis.readInt();
+		imag.texbPath = readString(dis, imag.pathLen).trim();
+		dis.close();
+		return imag.texbPath;
+	}
+
+	@Override
 	public BufferedImage getImage(String path) throws IOException {
 		// 检查Temp中有没有这个图片
 		String checkerPath;
@@ -283,26 +306,10 @@ public class ImagDaoImpl implements ImagDao {
 			return image;
 		}
 
-		if (path.endsWith(".imag")) {
-			this.imagPath = new String(path.trim());
-		} else {
-			this.imagPath = path.trim() + ".imag";
-		}
-
 		// 如果Temp中没有这个图片，得到这个图片对应的Texb文件的path
-		String assetsPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
-		File root = new File(assetsPath).getParentFile();
-		File imagFile = new File(root, imagPath);
-
-		Imag imag = new Imag();
-		DataInputStream dis = new DataInputStream(new FileInputStream(imagFile));
-		imag.tag = readString(dis, 4);
-		imag.pathLen = dis.readInt();
-		imag.texbPath = readString(dis, imag.pathLen).trim();
-		dis.close();
-
+		String texbPath = getRefTextureFilePath(path);
 		// 解压这个texb文件, 到临时文件, 同时返回需要的图片
-		return extractTexb(imag.texbPath);
+		return extractTexb(texbPath);
 	}
 
 	private static class Vertice {
@@ -383,12 +390,12 @@ public class ImagDaoImpl implements ImagDao {
 	}
 
 	public static void main(String[] args) throws Exception {
-//		BufferedImage image = new ImagDaoImpl()
-//				.getImage("assets/image/background/b_liveback_001.png");
-//		ImageIO.write(image, "png", new File("t.png"));
+		// BufferedImage image = new ImagDaoImpl()
+		// .getImage("assets/image/background/b_liveback_001.png");
+		// ImageIO.write(image, "png", new File("t.png"));
 		SIFConfig.getInstance().loadConfig();
 		List<String> l = new ImagDaoImpl().getImagList();
-		for(String s:l) {
+		for (String s : l) {
 			System.out.println(s);
 		}
 	}
@@ -416,4 +423,5 @@ public class ImagDaoImpl implements ImagDao {
 			}
 		}
 	}
+
 }

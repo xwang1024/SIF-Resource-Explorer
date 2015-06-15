@@ -1,5 +1,7 @@
 package me.xwang1024.sifResExplorer.presentation.builder;
 
+import java.io.IOException;
+
 import javafx.stage.Stage;
 
 public class SIFStage {
@@ -23,7 +25,7 @@ public class SIFStage {
 		this.builder = builder;
 	}
 
-	public void show() {
+	public void show() throws IOException {
 		if (builder != null && !isBuild) {
 			builder.build();
 		}

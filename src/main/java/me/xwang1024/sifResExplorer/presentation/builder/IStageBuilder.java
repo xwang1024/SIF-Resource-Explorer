@@ -1,5 +1,7 @@
 package me.xwang1024.sifResExplorer.presentation.builder;
 
+import java.io.IOException;
+
 import javafx.scene.Parent;
 
 public abstract class IStageBuilder {
@@ -17,5 +19,5 @@ public abstract class IStageBuilder {
 		this.root = root;
 	}
 	
-	public abstract void build();
+	public abstract void build() throws IOException;
 }
