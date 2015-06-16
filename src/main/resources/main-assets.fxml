@@ -9,61 +9,50 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="assetsPane" prefHeight="554.0" prefWidth="237.0"
-	stylesheets="@styles/sif.css" style="-fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="assetsPane" prefHeight="554.0" prefWidth="237.0" style="-fx-border-width: 0 0 1 0;" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.AssetsBoxController">
 	<children>
 		<ToolBar prefHeight="45.0" prefWidth="700.0">
 			<items>
-				<Button mnemonicParsing="false" styleClass="canfocus"
-					text="Export Selected Item" />
-				<Separator maxHeight="30.0" orientation="VERTICAL"
-					prefHeight="20.0" prefWidth="5.0">
+				<Button fx:id="exportSelectedBtn" mnemonicParsing="false" onAction="#onExportSelectedAction" styleClass="canfocus" text="Export Selected Item" />
+				<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="20.0" prefWidth="5.0">
 					<padding>
 						<Insets left="5.0" right="5.0" />
 					</padding>
 				</Separator>
 				<Pane prefHeight="29.0" prefWidth="332.0" HBox.hgrow="ALWAYS" />
-				<Button mnemonicParsing="false" prefWidth="85.0" styleClass="canfocus"
-					text="Select All" />
-				<Button mnemonicParsing="false" prefHeight="23.0" prefWidth="85.0"
-					styleClass="canfocus" text="Deselect All" />
+				<Button fx:id="selectAllBtn" mnemonicParsing="false" onAction="#onSelectAllAction" prefWidth="85.0" styleClass="canfocus" text="Select All" />
+				<Button fx:id="deselectAllBtn" mnemonicParsing="false" onAction="#onDeselectAllAction" prefHeight="23.0" prefWidth="85.0" styleClass="canfocus" text="Deselect All" />
 			</items>
 			<padding>
 				<Insets left="15.0" right="15.0" />
 			</padding>
 		</ToolBar>
-		<ToolBar prefHeight="40.0" prefWidth="700.0" styleClass="noFocus"
-			VBox.vgrow="NEVER">
+		<ToolBar prefHeight="40.0" prefWidth="700.0" styleClass="noFocus" VBox.vgrow="NEVER">
 			<items>
-				<ComboBox prefWidth="90.0" styleClass="canfocus" />
-				<Label text="&gt;" />
-				<ComboBox prefWidth="90.0" styleClass="canfocus" />
-				<Label text="&gt;" />
-				<ComboBox prefWidth="90.0" styleClass="canfocus" />
+            <ComboBox fx:id="pathBox1" maxWidth="150.0" minWidth="90.0" onAction="#onPathBox1Action" styleClass="canfocus" />
+				<Label fx:id="pathLb1" text="&gt;" visible="false" />
+            <ComboBox fx:id="pathBox2" maxWidth="150.0" minWidth="90.0" onAction="#onPathBox2Action" styleClass="canfocus" visible="false" />
+				<Label fx:id="pathLb2" text="&gt;" visible="false" />
+            <ComboBox fx:id="pathBox3" maxWidth="150.0" minWidth="90.0" onAction="#onPathBox3Action" styleClass="canfocus" visible="false" />
 				<Pane prefHeight="1.0" prefWidth="1.0" HBox.hgrow="ALWAYS" />
-				<TextField promptText="Search..."
-					style="-fx-border-radius: 20; -fx-background-radius: 20;"
-					styleClass="canfocus" />
+				<TextField fx:id="searchTf" onAction="#onSearchAction" promptText="Search..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="canfocus" />
 			</items>
 			<padding>
 				<Insets left="15.0" right="15.0" />
 			</padding>
 		</ToolBar>
-		<TableView fixedCellSize="0.0" prefHeight="320.0" prefWidth="699.0"
-			VBox.vgrow="ALWAYS">
+		<TableView fx:id="assetsTable" fixedCellSize="0.0" prefHeight="320.0" prefWidth="699.0" styleClass="table" VBox.vgrow="ALWAYS">
 			<columnResizePolicy>
 				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 			</columnResizePolicy>
-			<columns>
-				<TableColumn maxWidth="30.0" minWidth="30.0" prefWidth="30.0"
-					text="#" />
-				<TableColumn prefWidth="330.0" text="Image File Path" />
-				<TableColumn prefWidth="330.0" text="Ref. Texture File" />
-			</columns>
 			<VBox.margin>
 				<Insets />
 			</VBox.margin>
+			<columns>
+				<TableColumn fx:id="checkboxCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" text="#" />
+				<TableColumn fx:id="imageNameCol" prefWidth="75.0" text="Image" />
+				<TableColumn fx:id="textureNameCol" prefWidth="75.0" text="Ref. Texture" />
+			</columns>
 		</TableView>
 	</children>
 	<styleClass>

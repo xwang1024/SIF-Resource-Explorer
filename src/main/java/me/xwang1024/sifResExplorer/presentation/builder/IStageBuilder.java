@@ -2,21 +2,21 @@ package me.xwang1024.sifResExplorer.presentation.builder;
 
 import java.io.IOException;
 
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 
 public abstract class IStageBuilder {
-	protected Parent root;
+	protected FXMLLoader loader;
 
-	public Parent getRoot() {
-		return root;
+	public FXMLLoader getRoot() {
+		return loader;
 	}
 
-	public void setRoot(Parent root) {
-		this.root = root;
+	public void setRoot(FXMLLoader loader) {
+		this.loader = loader;
 	}
 	
-	public IStageBuilder(Parent root) {
-		this.root = root;
+	public IStageBuilder(FXMLLoader loader) {
+		this.loader = loader;
 	}
 	
 	public abstract void build() throws IOException;

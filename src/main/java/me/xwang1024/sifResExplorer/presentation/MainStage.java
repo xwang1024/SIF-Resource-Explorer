@@ -18,21 +18,17 @@ import org.slf4j.LoggerFactory;
 
 public class MainStage extends Application {
 	private static final Logger logger = LoggerFactory.getLogger(MainStage.class);
-	private SIFConfig configService;
-
-	public MainStage() {
-		super();
-		configService = SIFConfig.getInstance();
-	}
+	private SIFConfig configService = SIFConfig.getInstance();
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		final Parent root = FXMLLoader.load(this.getClass().getClassLoader()
+		FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getClassLoader()
 				.getResource("main.fxml"));
+		Parent root = fxmlLoader.load();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("SIF Resource Explorer");
-		SIFStage mainStage = new SIFStage(stage, new MainStageBuider(root));
+		SIFStage mainStage = new SIFStage(stage, new MainStageBuider(fxmlLoader));
 		ApplicationContext.stageStack.push(mainStage);
 		
 		// 检查配置文件，目前只有数据路径

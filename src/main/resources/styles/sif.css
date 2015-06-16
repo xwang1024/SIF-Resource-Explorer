@@ -1,13 +1,24 @@
 .noFocus {
 	-fx-background-insets: 0, 0, 1, 2;
     -fx-focus-color: transparent;
-    -fx-faint-focus-color:#fd8cb111;
+    -fx-faint-focus-color:#fd8cb100;
 }
 
 .canfocus {
 	-fx-faint-focus-color:#fd8cb133;
     -fx-focus-color: #fd8cb1;
     -fx-base: white;
+}
+
+.table {
+	-fx-background-insets: 0, 0, 1, 2;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color:#fd8cb100;
+}
+
+.table .table-column {
+	-fx-faint-focus-color:#fd8cb133;
+    -fx-focus-color: transparent;
 }
 
 .titlePane {

@@ -405,20 +405,29 @@ public class ImagDaoImpl implements ImagDao {
 		List<String> l = new LinkedList<String>();
 		String startPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
 		File startFile = new File(startPath);
-		dfsImag(startFile, l);
+		dfs(startFile, l, ".imag");
+		return l;
+	}
+	
+	@Override
+	public List<String> getTexbList() {
+		List<String> l = new LinkedList<String>();
+		String startPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
+		File startFile = new File(startPath);
+		dfs(startFile, l, ".texb");
 		return l;
 	}
 
-	private void dfsImag(File f, List<String> l) {
+	private void dfs(File f, List<String> l, String suffix) {
 		if (f.isDirectory()) {
 			File[] children = f.listFiles();
 			if (children != null) {
 				for (File child : children) {
-					dfsImag(child, l);
+					dfs(child, l, suffix);
 				}
 			}
 		} else if (f.isFile()) {
-			if (f.getName().endsWith(".imag")) {
+			if (f.getName().endsWith(suffix)) {
 				l.add(f.getAbsolutePath());
 			}
 		}

@@ -10,4 +10,6 @@ public interface ImagDao {
 	public String getRefTextureFilePath(String imagPath) throws IOException;
 	
 	public List<String> getImagList();
+	
+	public List<String> getTexbList();
 }

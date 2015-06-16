@@ -1,41 +1,30 @@
 package me.xwang1024.sifResExplorer.vo;
 
-import java.util.Arrays;
-
 public class AssetItemVO {
-	private String[] pathTree;
 
-	private String imagePath;
-	private String refTexturepath;
+	private String imageFilePath;
+	private String refTextureFilePath;
 
-	public String[] getPathTree() {
-		return pathTree;
+	public String getImageFilePath() {
+		return imageFilePath;
 	}
 
-	public void setPathTree(String[] pathTree) {
-		this.pathTree = pathTree;
+	public void setImageFilePath(String imageFilePath) {
+		this.imageFilePath = imageFilePath;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public String getRefTextureFilePath() {
+		return refTextureFilePath;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
-	public String getRefTexturepath() {
-		return refTexturepath;
-	}
-
-	public void setRefTexturepath(String refTexturepath) {
-		this.refTexturepath = refTexturepath;
+	public void setRefTextureFilePath(String refTextureFilePath) {
+		this.refTextureFilePath = refTextureFilePath;
 	}
 
 	@Override
 	public String toString() {
-		return "AssetItemVO [pathTree=" + Arrays.toString(pathTree) + ", imagePath=" + imagePath
-				+ ", refTexturepath=" + refTexturepath + "]";
+		return "AssetItemVO [imageFilePath=" + imageFilePath + ", refTextureFilePath="
+				+ refTextureFilePath + "]";
 	}
 
 }
