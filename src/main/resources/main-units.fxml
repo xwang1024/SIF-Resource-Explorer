@@ -62,13 +62,13 @@
 				<TableColumn fx:id="checkboxCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" text="#" />
 				<TableColumn fx:id="idCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="ID" />
 				<TableColumn fx:id="numCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="NUM" />
-				<TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+				<TableColumn fx:id="nameCol" maxWidth="120.0" minWidth="75.0" prefWidth="75.0" text="Name" />
 				<TableColumn fx:id="eponymCol" prefWidth="75.0" text="Eponym" />
-				<TableColumn fx:id="attrCol" prefWidth="75.0" text="Attr" />
-				<TableColumn fx:id="rarityCol" prefWidth="75.0" text="Rarity" />
-				<TableColumn fx:id="smileCol" prefWidth="75.0" text="Smile" />
-				<TableColumn fx:id="pureCol" prefWidth="75.0" text="Pure" />
-				<TableColumn fx:id="coolCol" prefWidth="75.0" text="Cool" />
+				<TableColumn fx:id="attrCol" maxWidth="120.0" minWidth="70.0" prefWidth="70.0" text="Attr" />
+				<TableColumn fx:id="rarityCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Rarity" />
+				<TableColumn fx:id="smileCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Smile" />
+				<TableColumn fx:id="pureCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Pure" />
+				<TableColumn fx:id="coolCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="Cool" />
             <TableColumn fx:id="leaderSkillCol" prefWidth="75.0" text="Ld. Skill" />
 				<TableColumn prefWidth="75.0" text="Skill">
 					<columns>

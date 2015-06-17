@@ -121,7 +121,7 @@ public class AssetService {
 			initAssetList();
 		}
 		List<AssetItem> list = new ArrayList<AssetItem>();
-		if (path == null || path.length == 0) {
+		if (path[0] == null) {
 			list.addAll(assetList);
 		} else if (path[0].equals("<Unknown>")) {
 			for (AssetItem vo : assetList) {
@@ -136,9 +136,11 @@ public class AssetService {
 				String[] sp = vo.getImageFilePath().replace("\\", "/").split("/");
 				boolean flag = true;
 				for (int i = 0; i < path.length; i++) {
-					if (!(i + 1 < sp.length && sp[i + 1].equals(path[i]))) {
-						flag = false;
-						break;
+					if (path[i] != null) {
+						if (!(i + 1 < sp.length && sp[i + 1].equals(path[i]))) {
+							flag = false;
+							break;
+						}
 					}
 				}
 				if (flag) {
@@ -148,7 +150,7 @@ public class AssetService {
 		}
 		if (keywords != null && !keywords.equals("")) {
 			for (int i = 0; i < list.size(); i++) {
-				if (!list.get(i).getImageFilePath().contains(keywords)) {
+				if (!list.get(i).getImageFilePath().contains(keywords) && !list.get(i).getRefTextureFilePath().contains(keywords)) {
 					list.remove(i);
 					i--;
 				}

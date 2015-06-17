@@ -3,6 +3,7 @@ package me.xwang1024.sifResExplorer.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,6 +62,8 @@ public class AssetsBoxController {
 	@FXML
 	private TableView<AssetLine> assetsTable;
 
+	private String[] currentPath = { null, null, null };
+
 	private ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
 		public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
 			refreshSelectStat();
@@ -77,6 +80,17 @@ public class AssetsBoxController {
 			}
 		}
 		selectStatLb.setText("(" + selected + "/" + total + ")");
+	}
+	
+	private void updateTableData() {
+		List<AssetItem> l = assetService.getAssetListByPath(searchTf.getText(), currentPath);
+		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
+		for (AssetItem vo : l) {
+			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
+					listener));
+		}
+		assetsTable.setItems(data);
+		refreshSelectStat();
 	}
 
 	@FXML
@@ -106,19 +120,12 @@ public class AssetsBoxController {
 			pathBox2.setItems(list);
 			pathBox2.getSelectionModel().select(0);
 		}
-		List<AssetItem> l;
 		if (selectedPath.equals("<All>")) {
-			l = assetService.getAssetListByPath(searchTf.getText());
+			currentPath = new String[] { null, null, null };
 		} else {
-			l = assetService.getAssetListByPath(searchTf.getText(), selectedPath);
+			currentPath = new String[] { selectedPath, null, null };
 		}
-		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
-		for (AssetItem vo : l) {
-			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
-					listener));
-		}
-		assetsTable.setItems(data);
-		refreshSelectStat();
+		updateTableData();
 	}
 
 	@FXML
@@ -146,20 +153,12 @@ public class AssetsBoxController {
 			pathBox3.getSelectionModel().select(0);
 		}
 
-		List<AssetItem> l;
 		if (selectedPath.equals("<All>")) {
-			l = assetService.getAssetListByPath(searchTf.getText(), pathBox1.getValue());
+			currentPath = new String[] { pathBox1.getValue(), null, null };
 		} else {
-			l = assetService.getAssetListByPath(searchTf.getText(), pathBox1.getValue(),
-					selectedPath);
+			currentPath = new String[] { pathBox1.getValue(), selectedPath, null };
 		}
-		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
-		for (AssetItem vo : l) {
-			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
-					listener));
-		}
-		assetsTable.setItems(data);
-		refreshSelectStat();
+		updateTableData();
 	}
 
 	@FXML
@@ -175,36 +174,18 @@ public class AssetsBoxController {
 			System.out.println(selectedPath);
 		}
 
-		List<AssetItem> l;
 		if (selectedPath.equals("<All>")) {
-			l = assetService.getAssetListByPath(searchTf.getText(), pathBox1.getValue(),
-					pathBox2.getValue());
+			currentPath = new String[] { pathBox1.getValue(), pathBox2.getValue(), null };
 		} else {
-			l = assetService.getAssetListByPath(searchTf.getText(), pathBox1.getValue(),
-					pathBox2.getValue(), selectedPath);
+			currentPath = new String[] { pathBox1.getValue(), pathBox2.getValue(), selectedPath };
 		}
-		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
-		for (AssetItem vo : l) {
-			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
-					listener));
-		}
-		assetsTable.setItems(data);
-		refreshSelectStat();
+		updateTableData();
 	}
 
 	@FXML
 	public void onSearchAction(ActionEvent event) {
 		logger.debug("onSearchAction");
-		ObservableList<AssetLine> list = assetsTable.getItems();
-		for (int i = 0; i < list.size(); i++) {
-			AssetLine item = list.get(i);
-			if (!item.getImagePath().contains(searchTf.getText())
-					&& !item.getTexturePath().contains(searchTf.getText())) {
-				list.remove(i);
-				i--;
-			}
-		}
-		refreshSelectStat();
+		updateTableData();
 	}
 
 	@FXML
