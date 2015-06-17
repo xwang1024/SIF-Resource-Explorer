@@ -59,12 +59,13 @@ public class AssetService {
 				continue;
 			}
 		}
-		for (String path : texbSet) {
-			AssetItemVO vo = new AssetItemVO();
-			vo.setImageFilePath("<Unknown>");
-			vo.setRefTextureFilePath(path);
-			assetList.add(vo);
-		}
+		// 对于没有imag的texb目前不做处理
+		// for (String path : texbSet) {
+		// AssetItemVO vo = new AssetItemVO();
+		// vo.setImageFilePath("<Unknown>");
+		// vo.setRefTextureFilePath(path);
+		// assetList.add(vo);
+		// }
 	}
 
 	private void initPathNode() {

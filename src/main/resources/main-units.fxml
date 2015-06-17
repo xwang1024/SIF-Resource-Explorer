@@ -17,7 +17,13 @@
 	<children>
 		<ToolBar prefHeight="45.0" prefWidth="700.0">
 			<items>
-				<Button mnemonicParsing="false" styleClass="canfocus" text="Export Selected Item" />
+            <MenuButton mnemonicParsing="false" styleClass="canfocus" text="Export Selected Units...">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Card" />
+                <MenuItem mnemonicParsing="false" text="Icon" />
+                  <MenuItem mnemonicParsing="false" text="Navi" />
+              </items>
+            </MenuButton>
 				<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="20.0" prefWidth="5.0">
 					<padding>
 						<Insets left="5.0" right="5.0" />

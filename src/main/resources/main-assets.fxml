@@ -14,12 +14,17 @@
 		<ToolBar prefHeight="45.0" prefWidth="700.0">
 			<items>
 				<Button fx:id="exportSelectedBtn" mnemonicParsing="false" onAction="#onExportSelectedAction" styleClass="canfocus" text="Export Selected Item" />
+            <Label fx:id="selectStatLb" text="(0/0)" textFill="#333333">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
 				<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="20.0" prefWidth="5.0">
 					<padding>
 						<Insets left="5.0" right="5.0" />
 					</padding>
 				</Separator>
-				<Pane prefHeight="29.0" prefWidth="332.0" HBox.hgrow="ALWAYS" />
+				<Pane prefHeight="1.0" prefWidth="1.0" HBox.hgrow="ALWAYS" />
 				<Button fx:id="selectAllBtn" mnemonicParsing="false" onAction="#onSelectAllAction" prefWidth="85.0" styleClass="canfocus" text="Select All" />
 				<Button fx:id="deselectAllBtn" mnemonicParsing="false" onAction="#onDeselectAllAction" prefHeight="23.0" prefWidth="85.0" styleClass="canfocus" text="Deselect All" />
 			</items>

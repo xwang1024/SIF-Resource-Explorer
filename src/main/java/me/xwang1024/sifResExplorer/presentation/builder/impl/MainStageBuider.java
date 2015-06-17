@@ -13,6 +13,7 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -47,7 +49,7 @@ public class MainStageBuider extends IStageBuilder {
 	private VBox assetsVBox;
 	private VBox unitsVBox;
 	private final ToggleGroup group = new ToggleGroup();
-
+	private Label selectStatLb;
 	private ComboBox pathBox1;
 
 	private TableView assetsTable;
@@ -56,9 +58,27 @@ public class MainStageBuider extends IStageBuilder {
 	private TableColumn textureNameCol;
 
 	private Map<Object, Node> stackMap = new HashMap<Object, Node>();
+	
+	private ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+		public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+			refreshSelectStat();
+		}
+	};
 
 	public MainStageBuider(FXMLLoader loader) {
 		super(loader);
+	}
+
+	private void refreshSelectStat() {
+		ObservableList<AssetLine> list = assetsTable.getItems();
+		int total = list.size();
+		int selected = 0;
+		for (AssetLine item : list) {
+			if (item.getSelected()) {
+				selected++;
+			}
+		}
+		selectStatLb.setText("(" + selected + "/" + total + ")");
 	}
 
 	private void initElements() throws IOException {
@@ -74,8 +94,9 @@ public class MainStageBuider extends IStageBuilder {
 				.load(this.getClass().getClassLoader().getResource("main-units.fxml"));
 		stack.getChildren().add(assetsVBox);
 
+		selectStatLb = (Label) fxmlLoader.getNamespace().get("selectStatLb");
 		pathBox1 = (ComboBox) fxmlLoader.getNamespace().get("pathBox1");
-		assetsTable = (TableView) ((Parent)loader.getRoot()).lookup("#assetsTable");
+		assetsTable = (TableView) ((Parent) loader.getRoot()).lookup("#assetsTable");
 		checkboxCol = (TableColumn) assetsTable.getColumns().get(0);
 		imageNameCol = (TableColumn) assetsTable.getColumns().get(1);
 		textureNameCol = (TableColumn) assetsTable.getColumns().get(2);
@@ -128,9 +149,11 @@ public class MainStageBuider extends IStageBuilder {
 		// init table data
 		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
 		for (AssetItemVO vo : l) {
-			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath()));
+			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
+					listener));
 		}
 		assetsTable.setItems(data);
+		refreshSelectStat();
 	}
 
 	private void initToggleGroup() {
@@ -189,17 +212,14 @@ public class MainStageBuider extends IStageBuilder {
 		private StringProperty imagePath;
 		private StringProperty texturePath;
 
-		public AssetLine(boolean selected, String imagePath, String texturePath) {
+		public AssetLine(boolean selected, String imagePath, String texturePath,
+				ChangeListener<Boolean> listener) {
 			this.selected = new SimpleBooleanProperty(selected);
 			this.imagePath = new SimpleStringProperty(imagePath);
 			this.texturePath = new SimpleStringProperty(texturePath);
-			// this.selected.addListener(new ChangeListener<Boolean>() {
-			// public void changed(ObservableValue<? extends Boolean> ov,
-			// Boolean t, Boolean t1) {
-			// System.out.println(imageNameProperty().get() + " selected: " +
-			// t1);
-			// }
-			// });
+			if (listener != null) {
+				this.selected.addListener(listener);
+			}
 		}
 
 		public BooleanProperty selectedProperty() {
