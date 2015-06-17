@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" styleClass="noFocus"
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="noFocus"
 	stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8"
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.MainStageController">
 	<children>
@@ -60,8 +60,8 @@
 				</VBox>
 				<StackPane fx:id="stackPane" HBox.hgrow="ALWAYS">
 					<children>
-						
-						
+
+
 					</children>
 				</StackPane>
 			</children>

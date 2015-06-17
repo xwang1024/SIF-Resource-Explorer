@@ -1,6 +1,6 @@
-package me.xwang1024.sifResExplorer.vo;
+package me.xwang1024.sifResExplorer.model;
 
-public class AssetItemVO {
+public class AssetItem {
 
 	private String imageFilePath;
 	private String refTextureFilePath;

@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="unitsPane" prefHeight="554.0" prefWidth="237.0" style="-fx-border-width: 0 0 1 0;" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="unitsPane" prefHeight="554.0" prefWidth="237.0" style="-fx-border-width: 0 0 1 0;" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.UnitsBoxController">
 	<styleClass>
 		<String fx:value="noFocus" />
 		<String fx:value="modPane" />
@@ -17,21 +17,26 @@
 	<children>
 		<ToolBar prefHeight="45.0" prefWidth="700.0">
 			<items>
-            <MenuButton mnemonicParsing="false" styleClass="canfocus" text="Export Selected Units...">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Card" />
-                <MenuItem mnemonicParsing="false" text="Icon" />
-                  <MenuItem mnemonicParsing="false" text="Navi" />
-              </items>
-            </MenuButton>
+				<MenuButton mnemonicParsing="false" popupSide="RIGHT" styleClass="canfocus" text="Export Selected Units...">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#onExportCardAction" text="Card" />
+						<MenuItem mnemonicParsing="false" onAction="#onExportIconAction" text="Icon" />
+						<MenuItem mnemonicParsing="false" onAction="#onExportNaviAction" text="Navi" />
+					</items>
+				</MenuButton>
+            <Label fx:id="selectStatLb" text="(0/0)" textFill="#333333">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
 				<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="20.0" prefWidth="5.0">
 					<padding>
 						<Insets left="5.0" right="5.0" />
 					</padding>
 				</Separator>
-				<Pane prefHeight="29.0" prefWidth="332.0" HBox.hgrow="ALWAYS" />
-				<Button mnemonicParsing="false" prefWidth="85.0" styleClass="canfocus" text="Select All" />
-				<Button mnemonicParsing="false" prefHeight="23.0" prefWidth="85.0" styleClass="canfocus" text="Deselect All" />
+				<Pane prefHeight="1" prefWidth="1" HBox.hgrow="ALWAYS" />
+				<Button fx:id="selectAllBtn" mnemonicParsing="false" onAction="#onSelectAllAction" prefWidth="85.0" styleClass="canfocus" text="Select All" />
+				<Button fx:id="deselectAllBtn" mnemonicParsing="false" onAction="#onDeselectAllAction" prefHeight="23.0" prefWidth="85.0" styleClass="canfocus" text="Deselect All" />
 			</items>
 			<padding>
 				<Insets left="15.0" right="15.0" />
@@ -42,24 +47,36 @@
 				<Insets left="15.0" right="15.0" />
 			</padding>
 			<items>
-				<ComboBox prefWidth="90.0" promptText="Stamina" styleClass="canfocus" />
-				<ComboBox prefWidth="90.0" promptText="Attr" styleClass="canfocus" />
-				<ComboBox prefWidth="90.0" promptText="Rarity " styleClass="canfocus" />
-				<ComboBox prefWidth="90.0" promptText="Role" styleClass="canfocus" />
-				<ComboBox prefWidth="90.0" promptText="Skill" styleClass="canfocus" />
-				<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="20.0" prefWidth="5.0">
-					<padding>
-						<Insets left="5.0" right="5.0" />
-					</padding>
-				</Separator>
-				<ComboBox prefWidth="90.0" promptText="Level" styleClass="canfocus" />
-				<ComboBox prefWidth="90.0" promptText="Bond" styleClass="canfocus" />
+				<ComboBox fx:id="nameBox" onAction="#onNameBoxAction" prefWidth="80.0" promptText="Name" styleClass="canfocus" />
+				<ComboBox fx:id="attrBox" onAction="#onAttrBoxAction" prefWidth="80.0" promptText="Attr" styleClass="canfocus" />
+				<ComboBox fx:id="rarityBox" onAction="#onRarityBoxAction" prefWidth="80.0" promptText="Rarity " styleClass="canfocus" />
+            <ComboBox fx:id="leaderSkillTypeBox" onAction="#onLeaderSkillTypeBoxAction" prefWidth="90.0" promptText="Ld. Skill" styleClass="canfocus" />
+				<ComboBox fx:id="skillEffectBox" onAction="#onSkillEffectBoxAction" prefWidth="90.0" promptText="Skill Eff." styleClass="canfocus" />
+            <ComboBox fx:id="skillTriggerBox" onAction="#onSkillTriggerBoxAction" prefWidth="90.0" promptText="Skill Tri." styleClass="canfocus" />
+				<Pane prefHeight="1.0" prefWidth="1.0" HBox.hgrow="ALWAYS" />
+				<TextField fx:id="searchTf" onAction="#onSearchAction" promptText="Search..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="canfocus" />
 			</items>
 		</ToolBar>
-		<TableView fixedCellSize="0.0" prefHeight="320.0" prefWidth="699.0" VBox.vgrow="ALWAYS">
+		<TableView fx:id="unitsTable" fixedCellSize="0.0" prefHeight="320.0" prefWidth="699.0" VBox.vgrow="ALWAYS">
 			<columns>
-				<TableColumn prefWidth="75.0" text="C1" />
-				<TableColumn prefWidth="75.0" text="C2" />
+				<TableColumn fx:id="checkboxCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" text="#" />
+				<TableColumn fx:id="idCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="ID" />
+				<TableColumn fx:id="numCol" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" text="NUM" />
+				<TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+				<TableColumn fx:id="eponymCol" prefWidth="75.0" text="Eponym" />
+				<TableColumn fx:id="attrCol" prefWidth="75.0" text="Attr" />
+				<TableColumn fx:id="rarityCol" prefWidth="75.0" text="Rarity" />
+				<TableColumn fx:id="smileCol" prefWidth="75.0" text="Smile" />
+				<TableColumn fx:id="pureCol" prefWidth="75.0" text="Pure" />
+				<TableColumn fx:id="coolCol" prefWidth="75.0" text="Cool" />
+            <TableColumn fx:id="leaderSkillCol" prefWidth="75.0" text="Ld. Skill" />
+				<TableColumn prefWidth="75.0" text="Skill">
+					<columns>
+						<TableColumn fx:id="skillNameCol" prefWidth="75.0" text="Name" />
+						<TableColumn fx:id="skillEffectCol" prefWidth="75.0" text="Effect" />
+                  <TableColumn fx:id="skillTriggerCol" prefWidth="75.0" text="Triggle" />
+					</columns>
+				</TableColumn>
 			</columns>
 			<VBox.margin>
 				<Insets />

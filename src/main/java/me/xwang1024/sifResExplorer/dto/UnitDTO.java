@@ -4,6 +4,7 @@ public class UnitDTO {
 	private int unitId;
 	private int unitNumber;
 	private int unitTypeId;
+	private String eponym;
 	private String name;
 	private int normalCardId;
 	private int idolizeCardId;
@@ -263,13 +264,21 @@ public class UnitDTO {
 		this.maxIdolizeBond = maxIdolizeBond;
 	}
 
+	public String getEponym() {
+		return eponym;
+	}
+
+	public void setEponym(String eponym) {
+		this.eponym = eponym;
+	}
+
 	@Override
 	public String toString() {
 		return "UnitDTO [unitId=" + unitId + ", unitNumber=" + unitNumber + ", unitTypeId="
-				+ unitTypeId + ", name=" + name + ", normalCardId=" + normalCardId
-				+ ", idolizeCardId=" + idolizeCardId + ", maxLevelCardId=" + maxLevelCardId
-				+ ", maxBondCardId=" + maxBondCardId + ", allMaxCardId=" + allMaxCardId
-				+ ", normalAvatarPath=" + normalAvatarPath + ", idolizeAvatarPath="
+				+ unitTypeId + ", eponym=" + eponym + ", name=" + name + ", normalCardId="
+				+ normalCardId + ", idolizeCardId=" + idolizeCardId + ", maxLevelCardId="
+				+ maxLevelCardId + ", maxBondCardId=" + maxBondCardId + ", allMaxCardId="
+				+ allMaxCardId + ", normalAvatarPath=" + normalAvatarPath + ", idolizeAvatarPath="
 				+ idolizeAvatarPath + ", normalCGAssetId=" + normalCGAssetId
 				+ ", idolizeCGAssetId=" + idolizeCGAssetId + ", rarity=" + rarity + ", attrId="
 				+ attrId + ", defaultSkillId=" + defaultSkillId + ", skillAssetVoiceId="

@@ -66,6 +66,7 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setUnitId(rs.getInt("unit_id"));
 			dto.setUnitNumber(rs.getInt("unit_number"));
 			dto.setUnitTypeId(rs.getInt("unit_type_id"));
+			dto.setEponym(rs.getString("eponym"));
 			dto.setName(rs.getString("name"));
 			dto.setNormalCardId(rs.getInt("normal_card_id"));
 			dto.setIdolizeCardId(rs.getInt("rank_max_card_id"));
@@ -108,6 +109,7 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setUnitId(rs.getInt("unit_id"));
 			dto.setUnitNumber(rs.getInt("unit_number"));
 			dto.setUnitTypeId(rs.getInt("unit_type_id"));
+			dto.setEponym(rs.getString("eponym"));
 			dto.setName(rs.getString("name"));
 			dto.setNormalCardId(rs.getInt("normal_card_id"));
 			dto.setIdolizeCardId(rs.getInt("rank_max_card_id"));
@@ -149,6 +151,7 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setUnitId(rs.getInt("unit_id"));
 			dto.setUnitNumber(rs.getInt("unit_number"));
 			dto.setUnitTypeId(rs.getInt("unit_type_id"));
+			dto.setEponym(rs.getString("eponym"));
 			dto.setName(rs.getString("name"));
 			dto.setNormalCardId(rs.getInt("normal_card_id"));
 			dto.setIdolizeCardId(rs.getInt("rank_max_card_id"));
@@ -265,22 +268,27 @@ public class UnitDaoImpl implements UnitDao {
 	@Override
 	public String getSkillEffectTypeName(int skillEffectType) {
 		switch (skillEffectType) {
+		case 0:
+			return "<Unavailable>";
 		case 4:
-			return "Time";
+			return "Discount+";
 		case 5:
-			return "Note";
+			return "Discount++";
 		case 9:
-			return "Combo";
+			return "Life+";
 		case 11:
-			return "Score";
+			return "Score+";
 		default:
-			return "Unknown";
+			System.err.println("Unknown Effect ID: " + skillEffectType);
+			return "<Unknown>";
 		}
 	}
 
 	@Override
-	public String getTriggerTypeName(int triggerType) {
+	public String getSkillTriggerTypeName(int triggerType) {
 		switch (triggerType) {
+		case 0:
+			return "<Unavailable>";
 		case 1:
 			return "Time";
 		case 3:
@@ -291,10 +299,11 @@ public class UnitDaoImpl implements UnitDao {
 			return "Score";
 		case 6:
 			return "Perfect";
-		case 10:
+		case 12:
 			return "Star";
 		default:
-			return "Unknown";
+			System.err.println("Unknown Trigger ID: " + triggerType);
+			return "<Unknown>";
 		}
 	}
 

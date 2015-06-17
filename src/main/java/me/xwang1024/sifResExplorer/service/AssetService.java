@@ -13,13 +13,13 @@ import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.config.SIFConfig.ConfigName;
 import me.xwang1024.sifResExplorer.data.ImagDao;
 import me.xwang1024.sifResExplorer.data.impl.ImagDaoImpl;
-import me.xwang1024.sifResExplorer.vo.AssetItemVO;
+import me.xwang1024.sifResExplorer.model.AssetItem;
 
 public class AssetService {
 	private static AssetService instance;
 	private ImagDao imageDao = new ImagDaoImpl();
 
-	private List<AssetItemVO> assetList;
+	private List<AssetItem> assetList;
 	private PathNode root;
 
 	private AssetService() {
@@ -33,7 +33,7 @@ public class AssetService {
 	}
 
 	private void initAssetList() {
-		assetList = new ArrayList<AssetItemVO>();
+		assetList = new ArrayList<AssetItem>();
 		List<String> texbList = imageDao.getTexbList();
 		HashSet<String> texbSet = new HashSet<String>();
 		for (String path : texbList) {
@@ -45,7 +45,7 @@ public class AssetService {
 		List<String> imagList = imageDao.getImagList();
 		for (String path : imagList) {
 			try {
-				AssetItemVO vo = new AssetItemVO();
+				AssetItem vo = new AssetItem();
 				String absRoot = SIFConfig.getInstance().get(ConfigName.assetsPath);
 				String relativePath = "assets"
 						+ path.replace('\\', '/').replace(absRoot.replace('\\', '/'), "");
@@ -73,7 +73,7 @@ public class AssetService {
 			initAssetList();
 		}
 		root = new PathNode("Root");
-		for (AssetItemVO vo : assetList) {
+		for (AssetItem vo : assetList) {
 			String path = vo.getImageFilePath();
 			path = new String(path.replaceAll("assets/", ""));
 			String[] sp = path.split("/");
@@ -99,7 +99,7 @@ public class AssetService {
 		}
 	}
 
-	public List<AssetItemVO> getAssetList() {
+	public List<AssetItem> getAssetList() {
 		if (assetList == null) {
 			initAssetList();
 		}
@@ -116,15 +116,15 @@ public class AssetService {
 		return root;
 	}
 
-	public List<AssetItemVO> getAssetListByPath(String keywords, String... path) {
+	public List<AssetItem> getAssetListByPath(String keywords, String... path) {
 		if (assetList == null) {
 			initAssetList();
 		}
-		List<AssetItemVO> list = new ArrayList<AssetItemVO>();
+		List<AssetItem> list = new ArrayList<AssetItem>();
 		if (path == null || path.length == 0) {
 			list.addAll(assetList);
 		} else if (path[0].equals("<Unknown>")) {
-			for (AssetItemVO vo : assetList) {
+			for (AssetItem vo : assetList) {
 				if (vo.getImageFilePath().equals(path[0])) {
 					if (vo.getImageFilePath().contains(keywords)) {
 						list.add(vo);
@@ -132,7 +132,7 @@ public class AssetService {
 				}
 			}
 		} else {
-			for (AssetItemVO vo : assetList) {
+			for (AssetItem vo : assetList) {
 				String[] sp = vo.getImageFilePath().replace("\\", "/").split("/");
 				boolean flag = true;
 				for (int i = 0; i < path.length; i++) {
@@ -165,8 +165,8 @@ public class AssetService {
 		AssetService service = AssetService.getInstance();
 		// PathNode node = service.getRootNode();
 		// AssetService.printTree(node, " ");
-		List<AssetItemVO> l = service.getAssetListByPath("<Unknown>");
-		for (AssetItemVO vo : l) {
+		List<AssetItem> l = service.getAssetListByPath("<Unknown>");
+		for (AssetItem vo : l) {
 			System.out.println(vo);
 		}
 	}

@@ -25,7 +25,7 @@ public class AssetPreviewStageBuilder extends IStageBuilder {
 
 	private String imagPath;
 
-	public AssetPreviewStageBuilder(FXMLLoader root) {
+	public AssetPreviewStageBuilder(FXMLLoader root) throws Exception {
 		super(root);
 	}
 

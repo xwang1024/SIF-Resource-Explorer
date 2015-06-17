@@ -14,10 +14,10 @@ public abstract class IStageBuilder {
 	public void setRoot(FXMLLoader loader) {
 		this.loader = loader;
 	}
-	
-	public IStageBuilder(FXMLLoader loader) {
+
+	public IStageBuilder(FXMLLoader loader) throws Exception {
 		this.loader = loader;
 	}
-	
-	public abstract void build() throws IOException;
+
+	public abstract void build() throws Exception;
 }

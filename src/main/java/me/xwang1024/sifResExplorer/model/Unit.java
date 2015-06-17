@@ -6,6 +6,7 @@ public class Unit {
 	private int id;
 	private int unitNo;
 	private String name;
+	private String eponym;
 	private Card[] card; // normal, idolize normal, idolize rankMax, idolize
 							// bondMax, idolize doubleMax
 	private String[] avatar; // normal, idolize
@@ -13,7 +14,11 @@ public class Unit {
 	private String rarity;
 	private String attribute;
 	private UnitSkill unitSkill;
+	private String skillName;
+	private String skillEffect;
+	private String skillTrigger;
 	private LeaderSkill leaderSkill;
+	private String leaderSkillType;
 	private String message;
 	private int stamina;
 	private int smile;
@@ -43,6 +48,14 @@ public class Unit {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEponym() {
+		return eponym;
+	}
+
+	public void setEponym(String eponym) {
+		this.eponym = eponym;
 	}
 
 	public Card[] getCard() {
@@ -149,16 +162,48 @@ public class Unit {
 		this.rankupCost = rankupCost;
 	}
 
+	public String getLeaderSkillType() {
+		return leaderSkillType;
+	}
+
+	public void setLeaderSkillType(String leaderSkillType) {
+		this.leaderSkillType = leaderSkillType;
+	}
+
+	public String getSkillEffect() {
+		return skillEffect;
+	}
+
+	public void setSkillEffect(String skillEffect) {
+		this.skillEffect = skillEffect;
+	}
+
+	public String getSkillTrigger() {
+		return skillTrigger;
+	}
+
+	public void setSkillTrigger(String skillTrigger) {
+		this.skillTrigger = skillTrigger;
+	}
+
+	public String getSkillName() {
+		return skillName;
+	}
+
+	public void setSkillName(String skillName) {
+		this.skillName = skillName;
+	}
+
 	@Override
 	public String toString() {
-		return "Unit [id=" + id + ", unitNo=" + unitNo + ", name=" + name
-				+ ", card=" + Arrays.toString(card) + ", avatar="
-				+ Arrays.toString(avatar) + ", cg=" + Arrays.toString(cg)
-				+ ", rarity=" + rarity + ", attribute=" + attribute
-				+ ", unitSkill=" + unitSkill + ", leaderSkill=" + leaderSkill
-				+ ", message=" + message + ", stamina=" + stamina + ", smile="
-				+ smile + ", pure=" + pure + ", cool=" + cool + ", rankupCost="
-				+ rankupCost + "]";
+		return "Unit [id=" + id + ", unitNo=" + unitNo + ", name=" + name + ", eponym=" + eponym
+				+ ", card=" + Arrays.toString(card) + ", avatar=" + Arrays.toString(avatar)
+				+ ", cg=" + Arrays.toString(cg) + ", rarity=" + rarity + ", attribute=" + attribute
+				+ ", unitSkill=" + unitSkill + ", skillName=" + skillName + ", skillEffect="
+				+ skillEffect + ", skillTrigger=" + skillTrigger + ", leaderSkill=" + leaderSkill
+				+ ", leaderSkillType=" + leaderSkillType + ", message=" + message + ", stamina="
+				+ stamina + ", smile=" + smile + ", pure=" + pure + ", cool=" + cool
+				+ ", rankupCost=" + rankupCost + "]";
 	}
 
 }

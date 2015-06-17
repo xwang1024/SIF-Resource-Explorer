@@ -25,7 +25,7 @@ public class SIFStage {
 		this.builder = builder;
 	}
 
-	public void show() throws IOException {
+	public void show() throws Exception {
 		if (builder != null && !isBuild) {
 			builder.build();
 		}

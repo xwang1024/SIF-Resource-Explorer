@@ -31,5 +31,5 @@ public interface UnitDao {
 	
 	public String getSkillEffectTypeName(int skillEffectType);
 	
-	public String getTriggerTypeName(int triggerType);
+	public String getSkillTriggerTypeName(int triggerType);
 }

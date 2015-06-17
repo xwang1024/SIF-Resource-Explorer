@@ -145,7 +145,7 @@ public class DataImportDialogController {
 	}
 
 	@FXML
-	public void onContinueAction(ActionEvent event) throws IOException {
+	public void onContinueAction(ActionEvent event) throws Exception {
 		logger.debug("onContinueAction");
 		configService.set("dbPath", dbPath);
 		configService.set("assetsPath", assetsPath);

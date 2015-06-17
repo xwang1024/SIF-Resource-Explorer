@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,13 +23,13 @@ import javafx.stage.DirectoryChooser;
 
 import javax.imageio.ImageIO;
 
+import me.xwang1024.sifResExplorer.model.AssetItem;
 import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
 import me.xwang1024.sifResExplorer.presentation.ProgressStage;
-import me.xwang1024.sifResExplorer.presentation.builder.impl.MainStageBuider.AssetLine;
+import me.xwang1024.sifResExplorer.presentation.builder.impl.AssetsBoxBuilder.AssetLine;
 import me.xwang1024.sifResExplorer.service.AssetService;
 import me.xwang1024.sifResExplorer.service.AssetService.PathNode;
 import me.xwang1024.sifResExplorer.service.ImageService;
-import me.xwang1024.sifResExplorer.vo.AssetItemVO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,14 +106,14 @@ public class AssetsBoxController {
 			pathBox2.setItems(list);
 			pathBox2.getSelectionModel().select(0);
 		}
-		List<AssetItemVO> l;
+		List<AssetItem> l;
 		if (selectedPath.equals("<All>")) {
 			l = assetService.getAssetListByPath(searchTf.getText());
 		} else {
 			l = assetService.getAssetListByPath(searchTf.getText(), selectedPath);
 		}
 		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
-		for (AssetItemVO vo : l) {
+		for (AssetItem vo : l) {
 			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
 					listener));
 		}
@@ -147,7 +146,7 @@ public class AssetsBoxController {
 			pathBox3.getSelectionModel().select(0);
 		}
 
-		List<AssetItemVO> l;
+		List<AssetItem> l;
 		if (selectedPath.equals("<All>")) {
 			l = assetService.getAssetListByPath(searchTf.getText(), pathBox1.getValue());
 		} else {
@@ -155,7 +154,7 @@ public class AssetsBoxController {
 					selectedPath);
 		}
 		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
-		for (AssetItemVO vo : l) {
+		for (AssetItem vo : l) {
 			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
 					listener));
 		}
@@ -176,7 +175,7 @@ public class AssetsBoxController {
 			System.out.println(selectedPath);
 		}
 
-		List<AssetItemVO> l;
+		List<AssetItem> l;
 		if (selectedPath.equals("<All>")) {
 			l = assetService.getAssetListByPath(searchTf.getText(), pathBox1.getValue(),
 					pathBox2.getValue());
@@ -185,7 +184,7 @@ public class AssetsBoxController {
 					pathBox2.getValue(), selectedPath);
 		}
 		final ObservableList<AssetLine> data = FXCollections.observableArrayList();
-		for (AssetItemVO vo : l) {
+		for (AssetItem vo : l) {
 			data.add(new AssetLine(false, vo.getImageFilePath(), vo.getRefTextureFilePath(),
 					listener));
 		}

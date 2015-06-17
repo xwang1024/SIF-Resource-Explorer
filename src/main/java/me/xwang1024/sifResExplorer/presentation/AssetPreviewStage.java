@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class AssetPreviewStage {
 	private static final Logger logger = LoggerFactory.getLogger(MainStage.class);
 
-	public AssetPreviewStage(final Stage father, final String imagPath) throws IOException {
+	public AssetPreviewStage(final Stage father, final String imagPath) throws Exception {
 		final Stage stage = new Stage();
 		stage.initModality(Modality.NONE);
 		stage.initOwner(father);
