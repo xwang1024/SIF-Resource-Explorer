@@ -222,11 +222,12 @@ public class AssetsBoxController {
 		chooser.setInitialDirectory(ApplicationContext.tracedFile);
 		final File file = chooser.showDialog(ApplicationContext.stageStack.peek().getStage());
 		if (file != null) {
-			Task<Void> task = new Task<Void>() {
-				ImageService imageService = new ImageService();
-				List<String> errorList = new ArrayList<String>();
+			Task<Void> task;
+			task = new Task<Void>() {
 
 				protected Void call() throws Exception {
+					ImageService imageService = new ImageService();
+					List<String> errorList = new ArrayList<String>();
 					// init
 					updateMessage("0/" + exportList.size());
 					updateProgress(0, exportList.size());

@@ -1,9 +1,11 @@
 package me.xwang1024.sifResExplorer.service;
 
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -114,6 +116,13 @@ public class UnitService {
 			leaderSkillTypeSet.add(leaderSkillType);
 			unitList.add(u);
 		}
+
+		Collections.sort(unitList, new Comparator<Unit>() {
+			@Override
+			public int compare(Unit u1, Unit u2) {
+				return u1.getId() - u2.getId();
+			}
+		});
 		nameList = new ArrayList<String>(nameSet);
 		Collections.sort(nameList);
 		attrList = new ArrayList<String>(attrSet);
@@ -200,6 +209,28 @@ public class UnitService {
 		return l;
 	}
 
+	public Unit getUnitById(int id) {
+		Unit u = unitList.get(id > (unitList.size() - 1) ? (unitList.size() - 1) : id);
+		if (u.getId() == id) {
+			return u;
+		} else if (u.getId() > id) {
+			for (int i = id - 1; i >= 0; i--) {
+				u = unitList.get(i);
+				if (u.getId() == id) {
+					return u;
+				}
+			}
+		} else {
+			for (int i = id + 1; i < unitList.size(); i++) {
+				u = unitList.get(i);
+				if (u.getId() == id) {
+					return u;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public static void main(String[] args) throws Exception {
 		SIFConfig.getInstance().loadConfig();
 		UnitService.getInstance().initUnitList();

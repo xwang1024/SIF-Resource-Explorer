@@ -24,6 +24,8 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import me.xwang1024.sifResExplorer.model.Unit;
+import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
+import me.xwang1024.sifResExplorer.presentation.UnitPreviewStage;
 import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 import me.xwang1024.sifResExplorer.service.UnitService;
 
@@ -112,7 +114,12 @@ public class UnitsBoxBuilder extends AbsStageBuilder {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					UnitLine rowData = (UnitLine) row.getItem();
 					System.out.println(rowData);
-					// TODO call preview stage
+					try {
+						new UnitPreviewStage(ApplicationContext.stageStack.peek().getStage(),
+								rowData);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			});
 			return row;
@@ -310,6 +317,18 @@ public class UnitsBoxBuilder extends AbsStageBuilder {
 
 		public boolean getSelected() {
 			return selected.get();
+		}
+
+		public String getEponym() {
+			return eponym.get();
+		}
+
+		public String getName() {
+			return name.get();
+		}
+
+		public int getId() {
+			return id.get();
 		}
 	}
 }

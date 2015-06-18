@@ -9,249 +9,313 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefHeight="40.0" prefWidth="600.0" styleClass="titlePane">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-         <padding>
-            <Insets left="15.0" right="15.0" />
-         </padding>
-         <children>
-            <Label text="Name: " textFill="WHITE" />
-         </children>
-      </FlowPane>
-      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="60.0" VBox.vgrow="ALWAYS">
-        <tabs>
-          <Tab text="Card">
-               <content>
-                  <VBox prefHeight="560.0" prefWidth="800.0">
-                     <children>
-                        <ToolBar prefHeight="40.0" prefWidth="200.0">
-                           <padding>
-                              <Insets left="15.0" right="15.0" />
-                           </padding>
-                           <items>
-                              <Label text="Avatar Layer: " />
-                              <CheckBox mnemonicParsing="false" selected="true" text="bk" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="border" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="star" />
-                              <Pane prefHeight="40.0" prefWidth="10.0" />
-                              <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="64.0" text="Export" />
-                              <Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="30.0">
-                                 <padding>
-                                    <Insets left="10.0" right="10.0" />
-                                 </padding>
-                              </Separator>
-                              <Label text="Card Layer: " />
-                              <CheckBox mnemonicParsing="false" selected="true" text="1" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="2" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="3" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="4" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="5" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="6" />
-                              <CheckBox mnemonicParsing="false" selected="true" text="7" />
-                              <Pane prefHeight="40.0" prefWidth="10.0" />
-                              <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="69.0" text="Export" />
-                           </items>
-                        </ToolBar>
-                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox style="-fx-border-color: gray; -fx-border-width: 0 1 0 0;">
-                                 <children>
-                                    <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="21.0" prefWidth="64.0" styleClass="titlePane">
-                                       <children>
-                                          <Label text="Avatar" textFill="WHITE" />
-                                       </children>
-                                    </FlowPane>
-                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" />
-                                       </VBox.margin>
-                                    </ImageView>
-                                    <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="21.0" prefWidth="64.0" styleClass="titlePane">
-                                       <children>
-                                          <Label text="Attr.val" textFill="WHITE" />
-                                       </children>
-                                    </FlowPane>
-                                    <VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" styleClass="stamina">
-                                       <children>
-                                          <Label text="Stamina" textFill="WHITE">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="1" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" styleClass="smile">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" />
-                                       </VBox.margin>
-                                       <children>
-                                          <Label text="Smile" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font></Label>
-                                          <Label text="1000" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" styleClass="pure">
-                                       <children>
-                                          <Label text="Pure" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="1000" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" styleClass="cool">
-                                       <children>
-                                          <Label text="Cool" textFill="WHITE">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="1000" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                              <HBox>
-                                 <children>
-                                    <ImageView fitHeight="492.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-                                       <HBox.margin>
-                                          <Insets left="5.0" right="5.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <ImageView fitHeight="492.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </content>
-            </Tab>
-          <Tab text="CG">
-               <content>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <VBox style="-fx-border-width: 0 1 0 0;" styleClass="modPane">
-                           <children>
-                              <ToolBar prefHeight="40.0" prefWidth="200.0">
-                                <items>
-                                  <Button mnemonicParsing="false" text="Export" />
-                                    <Separator maxHeight="30.0" maxWidth="40.0" orientation="VERTICAL" prefHeight="30.0">
-                                       <padding>
-                                          <Insets left="5.0" right="5.0" />
-                                       </padding>
-                                    </Separator>
-                                </items>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets left="15.0" right="15.0" />
-                                 </padding>
-                              </ToolBar>
-                              <FlowPane alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="400.0">
-                                 <children>
-                                    <Label text="Normal">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </FlowPane>
-                              <ScrollPane prefViewportHeight="400.0" prefViewportWidth="400.0">
-                                 <content>
-                                    <ImageView fitHeight="396.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true" />
-                                 </content>
-                              </ScrollPane>
-                              <FlowPane alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
-                                 <children>
-                                    <Label text="1024 * 1024">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </FlowPane>
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <ToolBar prefHeight="40.0" prefWidth="200.0">
-                                 <items>
-                                    <Button mnemonicParsing="false" text="Export" />
-                                    <Separator maxHeight="30.0" maxWidth="40.0" orientation="VERTICAL" prefHeight="30.0">
-                                       <padding>
-                                          <Insets left="5.0" right="5.0" />
-                                       </padding>
-                                    </Separator>
-                                 </items>
-                                 <padding>
-                                    <Insets left="15.0" right="15.0" />
-                                 </padding>
-                              </ToolBar>
-                              <FlowPane alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="400.0">
-                                 <children>
-                                    <Label text="Idolize">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </FlowPane>
-                              <ScrollPane prefViewportHeight="400.0" prefViewportWidth="400.0">
-                                 <content>
-                                    <ImageView fitHeight="396.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true" />
-                                 </content>
-                              </ScrollPane>
-                              <FlowPane alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
-                                 <children>
-                                    <Label text="1024 * 1024">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </FlowPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </content></Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<VBox prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/sif.css"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="me.xwang1024.sifResExplorer.controller.UnitPreviewStageController">
+	<children>
+		<FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER"
+			prefHeight="40.0" prefWidth="600.0" styleClass="titlePane">
+			<VBox.margin>
+				<Insets />
+			</VBox.margin>
+			<padding>
+				<Insets left="15.0" right="15.0" />
+			</padding>
+			<children>
+				<Label text="Name: " textFill="WHITE" />
+				<Label fx:id="nameLb" textFill="WHITE" />
+				<Label fx:id="idLb" textFill="WHITE" />
+			</children>
+		</FlowPane>
+		<TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+			minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0"
+			prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="60.0"
+			VBox.vgrow="ALWAYS">
+			<tabs>
+				<Tab text="Card">
+					<content>
+						<VBox prefHeight="560.0" prefWidth="800.0">
+							<children>
+								<ToolBar prefHeight="40.0" prefWidth="200.0">
+									<padding>
+										<Insets left="15.0" right="15.0" />
+									</padding>
+									<items>
+										<Label text="Avatar Layer: " />
+										<CheckBox fx:id="bkBox" mnemonicParsing="false"
+											onAction="#onUpdateAvatarAction" selected="true" text="bk" />
+										<CheckBox fx:id="avatarBox" mnemonicParsing="false"
+											onAction="#onUpdateAvatarAction" selected="true" text="avatar" />
+										<CheckBox fx:id="starBox" mnemonicParsing="false"
+											onAction="#onUpdateAvatarAction" selected="true" text="star" />
+										<Pane prefHeight="40.0" prefWidth="10.0" />
+										<Button mnemonicParsing="false" prefHeight="23.0"
+											prefWidth="64.0" text="Export" />
+										<Separator maxHeight="30.0" orientation="VERTICAL"
+											prefHeight="30.0">
+											<padding>
+												<Insets left="10.0" right="10.0" />
+											</padding>
+										</Separator>
+										<Label text="Card Layer: " />
+										<CheckBox fx:id="layer1Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="1" />
+										<CheckBox fx:id="layer2Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="2" />
+										<CheckBox fx:id="layer3Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="3" />
+										<CheckBox fx:id="layer4Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="4" />
+										<CheckBox fx:id="layer5Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="5" />
+										<CheckBox fx:id="layer6Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="6" />
+										<CheckBox fx:id="layer7Box" mnemonicParsing="false"
+											onAction="#onUpdateCardAction" selected="true" text="7" />
+										<Pane prefHeight="40.0" prefWidth="10.0" />
+										<Button mnemonicParsing="false" prefHeight="23.0"
+											prefWidth="69.0" text="Export" />
+									</items>
+								</ToolBar>
+								<HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+									<children>
+										<VBox style="-fx-border-color: gray; -fx-border-width: 0 1 0 0;"
+											styleClass="titlePane">
+											<children>
+												<FlowPane alignment="CENTER" columnHalignment="CENTER"
+													prefHeight="21.0" prefWidth="64.0" styleClass="titlePane">
+													<children>
+														<Label text="Avatar" textFill="WHITE" />
+													</children>
+												</FlowPane>
+												<ImageView fx:id="normalAvatarImage" fitHeight="64.0"
+													fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+													<VBox.margin>
+														<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+													</VBox.margin>
+												</ImageView>
+												<ImageView fx:id="idolizeAvatarImage" fitHeight="64.0"
+													fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+													<VBox.margin>
+														<Insets bottom="5.0" left="5.0" right="5.0" />
+													</VBox.margin>
+												</ImageView>
+												<FlowPane alignment="CENTER" columnHalignment="CENTER"
+													prefHeight="21.0" prefWidth="64.0" styleClass="titlePane">
+													<children>
+														<Label text="Attr.val" textFill="WHITE" />
+													</children>
+												</FlowPane>
+												<VBox alignment="TOP_CENTER" prefHeight="30.0"
+													prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;"
+													styleClass="stamina">
+													<children>
+														<Label text="Stamina" textFill="WHITE">
+															<font>
+																<Font size="14.0" />
+															</font>
+														</Label>
+														<Label fx:id="staminaLb" text="1" textFill="WHITE">
+															<font>
+																<Font name="System Bold" size="12.0" />
+															</font>
+														</Label>
+													</children>
+													<padding>
+														<Insets bottom="5.0" top="5.0" />
+													</padding>
+													<VBox.margin>
+														<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+													</VBox.margin>
+												</VBox>
+												<VBox alignment="TOP_CENTER" prefHeight="30.0"
+													prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;"
+													styleClass="smile">
+													<VBox.margin>
+														<Insets bottom="5.0" left="5.0" right="5.0" />
+													</VBox.margin>
+													<children>
+														<Label text="Smile" textFill="WHITE">
+															<font>
+																<Font size="18.0" />
+															</font>
+														</Label>
+														<Label fx:id="smileLb" text="1000" textFill="WHITE">
+															<font>
+																<Font name="System Bold" size="12.0" />
+															</font>
+														</Label>
+													</children>
+													<padding>
+														<Insets bottom="5.0" top="5.0" />
+													</padding>
+												</VBox>
+												<VBox alignment="TOP_CENTER" prefHeight="30.0"
+													prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;"
+													styleClass="pure">
+													<children>
+														<Label text="Pure" textFill="WHITE">
+															<font>
+																<Font size="18.0" />
+															</font>
+														</Label>
+														<Label fx:id="pureLb" text="1000" textFill="WHITE">
+															<font>
+																<Font name="System Bold" size="12.0" />
+															</font>
+														</Label>
+													</children>
+													<padding>
+														<Insets bottom="5.0" top="5.0" />
+													</padding>
+													<VBox.margin>
+														<Insets bottom="5.0" left="5.0" right="5.0" />
+													</VBox.margin>
+												</VBox>
+												<VBox alignment="TOP_CENTER" prefHeight="30.0"
+													prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;"
+													styleClass="cool">
+													<children>
+														<Label text="Cool" textFill="WHITE">
+															<font>
+																<Font size="18.0" />
+															</font>
+														</Label>
+														<Label fx:id="coolLb" text="1000" textFill="WHITE">
+															<font>
+																<Font name="System Bold" size="12.0" />
+															</font>
+														</Label>
+													</children>
+													<padding>
+														<Insets bottom="5.0" top="5.0" />
+													</padding>
+													<VBox.margin>
+														<Insets bottom="5.0" left="5.0" right="5.0" />
+													</VBox.margin>
+												</VBox>
+											</children>
+										</VBox>
+										<HBox>
+											<children>
+												<ImageView fx:id="normalCardImage" fitHeight="492.0"
+													fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+													<HBox.margin>
+														<Insets left="5.0" right="5.0" />
+													</HBox.margin>
+												</ImageView>
+												<ImageView fx:id="idolizeCardImage" fitHeight="492.0"
+													fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
+											</children>
+										</HBox>
+									</children>
+								</HBox>
+							</children>
+						</VBox>
+					</content>
+				</Tab>
+				<Tab text="CG">
+					<content>
+						<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+							<children>
+								<VBox style="-fx-border-width: 0 1 0 0;" styleClass="modPane">
+									<children>
+										<ToolBar prefHeight="40.0" prefWidth="200.0">
+											<items>
+												<Button mnemonicParsing="false" text="Export" />
+												<Separator maxHeight="30.0" maxWidth="40.0"
+													orientation="VERTICAL" prefHeight="30.0">
+													<padding>
+														<Insets left="5.0" right="5.0" />
+													</padding>
+												</Separator>
+											</items>
+											<VBox.margin>
+												<Insets />
+											</VBox.margin>
+											<padding>
+												<Insets left="15.0" right="15.0" />
+											</padding>
+										</ToolBar>
+										<FlowPane alignment="BOTTOM_CENTER" prefHeight="50.0"
+											prefWidth="400.0">
+											<children>
+												<Label text="Normal">
+													<font>
+														<Font size="24.0" />
+													</font>
+												</Label>
+											</children>
+										</FlowPane>
+										<ScrollPane prefViewportHeight="400.0"
+											prefViewportWidth="400.0">
+											<content>
+												<ImageView fx:id="normalCGImage" fitHeight="396.0"
+													fitWidth="396.0" pickOnBounds="true" preserveRatio="true" />
+											</content>
+										</ScrollPane>
+										<FlowPane alignment="CENTER" prefHeight="50.0"
+											prefWidth="400.0">
+											<children>
+												<Label text="1024 * 1024" visible="false">
+													<font>
+														<Font size="18.0" />
+													</font>
+												</Label>
+											</children>
+										</FlowPane>
+									</children>
+								</VBox>
+								<VBox>
+									<children>
+										<ToolBar prefHeight="40.0" prefWidth="200.0">
+											<items>
+												<Button mnemonicParsing="false" text="Export" />
+												<Separator maxHeight="30.0" maxWidth="40.0"
+													orientation="VERTICAL" prefHeight="30.0">
+													<padding>
+														<Insets left="5.0" right="5.0" />
+													</padding>
+												</Separator>
+											</items>
+											<padding>
+												<Insets left="15.0" right="15.0" />
+											</padding>
+										</ToolBar>
+										<FlowPane alignment="BOTTOM_CENTER" prefHeight="50.0"
+											prefWidth="400.0">
+											<children>
+												<Label text="Idolize">
+													<font>
+														<Font size="24.0" />
+													</font>
+												</Label>
+											</children>
+										</FlowPane>
+										<ScrollPane prefViewportHeight="400.0"
+											prefViewportWidth="400.0">
+											<content>
+												<ImageView fx:id="idolizeCGImage" fitHeight="396.0"
+													fitWidth="396.0" pickOnBounds="true" preserveRatio="true" />
+											</content>
+										</ScrollPane>
+										<FlowPane alignment="CENTER" prefHeight="50.0"
+											prefWidth="400.0">
+											<children>
+												<Label text="1024 * 1024" visible="false">
+													<font>
+														<Font size="18.0" />
+													</font>
+												</Label>
+											</children>
+										</FlowPane>
+									</children>
+								</VBox>
+							</children>
+						</HBox>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
 </VBox>
