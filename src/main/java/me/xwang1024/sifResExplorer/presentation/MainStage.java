@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.config.SIFConfig.ConfigName;
-import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 import me.xwang1024.sifResExplorer.presentation.builder.SIFStage;
 import me.xwang1024.sifResExplorer.presentation.builder.impl.MainStageBuider;
 

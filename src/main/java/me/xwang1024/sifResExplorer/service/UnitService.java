@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -66,7 +67,7 @@ public class UnitService {
 			u.setUnitNo(dto.getUnitNumber());
 			u.setName(dto.getName());
 			String eponym = dto.getEponym();
-			if(eponym == null || eponym.equals("null")){
+			if (eponym == null || eponym.equals("null")) {
 				u.setEponym("<Empty>");
 			} else {
 				u.setEponym(dto.getEponym());
@@ -139,6 +140,10 @@ public class UnitService {
 		return rarityList;
 	}
 
+	public List<String> getLeaderSkillTypeList() {
+		return leaderSkillTypeList;
+	}
+
 	public List<String> getSkillEffectList() {
 		return skillEffectList;
 	}
@@ -147,12 +152,52 @@ public class UnitService {
 		return skillTriggerList;
 	}
 
-	public List<String> getLeaderSkillTypeList() {
-		return leaderSkillTypeList;
-	}
-
 	public List<Unit> getUnitList() {
 		return unitList;
+	}
+
+	public List<Unit> getUnitListByConditions(String keywords, String name, String attr,
+			String rarity, String leaderSkill, String skillEffect, String skillTrigger) {
+		List<Unit> l = new LinkedList<Unit>();
+		for (Unit u : unitList) {
+			if (keywords != null) {
+				if (!u.toFlatString().contains(keywords)) {
+					continue;
+				}
+			}
+			if (name != null) {
+				if (!u.getName().equals(name)) {
+					continue;
+				}
+			}
+			if (attr != null) {
+				if (!u.getAttribute().equals(attr)) {
+					continue;
+				}
+			}
+			if (rarity != null) {
+				if (!u.getRarity().equals(rarity)) {
+					continue;
+				}
+			}
+			if (leaderSkill != null) {
+				if (!u.getLeaderSkillType().equals(leaderSkill)) {
+					continue;
+				}
+			}
+			if (skillEffect != null) {
+				if (!u.getSkillEffect().equals(skillEffect)) {
+					continue;
+				}
+			}
+			if (skillTrigger != null) {
+				if (!u.getSkillTrigger().equals(skillTrigger)) {
+					continue;
+				}
+			}
+			l.add(u);
+		}
+		return l;
 	}
 
 	public static void main(String[] args) throws Exception {

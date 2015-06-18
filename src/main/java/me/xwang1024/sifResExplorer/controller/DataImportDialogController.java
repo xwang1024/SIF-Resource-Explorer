@@ -15,7 +15,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import me.xwang1024.sifResExplorer.config.SIFConfig;
 import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
-import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 import me.xwang1024.sifResExplorer.presentation.builder.SIFStage;
 
 import org.slf4j.Logger;

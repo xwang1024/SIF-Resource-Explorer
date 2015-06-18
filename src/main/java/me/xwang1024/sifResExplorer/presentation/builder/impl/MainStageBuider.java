@@ -16,9 +16,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 
-public class MainStageBuider extends IStageBuilder {
+public class MainStageBuider extends AbsStageBuilder {
 	private FXMLLoader assetsLoader;
 	private FXMLLoader unitsLoader;
 

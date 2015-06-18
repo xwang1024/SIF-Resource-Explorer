@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class SIFStage {
 	private boolean isBuild = false;
 	private Stage stage;
-	private IStageBuilder builder;
+	private AbsStageBuilder builder;
 
 	public Stage getStage() {
 		return stage;
@@ -17,11 +17,11 @@ public class SIFStage {
 		this.stage = stage;
 	}
 
-	public IStageBuilder getBuilder() {
+	public AbsStageBuilder getBuilder() {
 		return builder;
 	}
 
-	public void setBuilder(IStageBuilder builder) {
+	public void setBuilder(AbsStageBuilder builder) {
 		this.builder = builder;
 	}
 
@@ -44,7 +44,7 @@ public class SIFStage {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SIFStage(Stage stage, IStageBuilder builder) {
+	public SIFStage(Stage stage, AbsStageBuilder builder) {
 		super();
 		this.stage = stage;
 		this.builder = builder;

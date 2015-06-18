@@ -47,14 +47,15 @@
 				<Insets left="15.0" right="15.0" />
 			</padding>
 			<items>
-				<ComboBox fx:id="nameBox" onAction="#onNameBoxAction" prefWidth="80.0" promptText="Name" styleClass="canfocus" />
-				<ComboBox fx:id="attrBox" onAction="#onAttrBoxAction" prefWidth="80.0" promptText="Attr" styleClass="canfocus" />
-				<ComboBox fx:id="rarityBox" onAction="#onRarityBoxAction" prefWidth="80.0" promptText="Rarity " styleClass="canfocus" />
-            <ComboBox fx:id="leaderSkillTypeBox" onAction="#onLeaderSkillTypeBoxAction" prefWidth="90.0" promptText="Ld. Skill" styleClass="canfocus" />
-				<ComboBox fx:id="skillEffectBox" onAction="#onSkillEffectBoxAction" prefWidth="90.0" promptText="Skill Eff." styleClass="canfocus" />
-            <ComboBox fx:id="skillTriggerBox" onAction="#onSkillTriggerBoxAction" prefWidth="90.0" promptText="Skill Tri." styleClass="canfocus" />
+				<ComboBox fx:id="nameBox" onAction="#onUpdateTableAction" prefWidth="80.0" promptText="Name" styleClass="canfocus" />
+				<ComboBox fx:id="attrBox" onAction="#onUpdateTableAction" prefWidth="80.0" promptText="Attr" styleClass="canfocus" />
+				<ComboBox fx:id="rarityBox" onAction="#onUpdateTableAction" prefWidth="80.0" promptText="Rarity " styleClass="canfocus" />
+            <ComboBox fx:id="leaderSkillTypeBox" onAction="#onUpdateTableAction" prefWidth="90.0" promptText="Ld. Skill" styleClass="canfocus" />
+				<ComboBox fx:id="skillEffectBox" onAction="#onUpdateTableAction" prefWidth="90.0" promptText="Skill Eff." styleClass="canfocus" />
+            <ComboBox fx:id="skillTriggerBox" onAction="#onUpdateTableAction" prefWidth="90.0" promptText="Skill Tri." styleClass="canfocus" />
+            <Button disable="true" mnemonicParsing="false" onAction="#onClearFilterAction" style="-fx-base: gray;" styleClass="canfocus" text="Clear" visible="false" />
 				<Pane prefHeight="1.0" prefWidth="1.0" HBox.hgrow="ALWAYS" />
-				<TextField fx:id="searchTf" onAction="#onSearchAction" promptText="Search..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="canfocus" />
+				<TextField fx:id="searchTf" onAction="#onUpdateTableAction" promptText="Search..." style="-fx-border-radius: 20; -fx-background-radius: 20;" styleClass="canfocus" />
 			</items>
 		</ToolBar>
 		<TableView fx:id="unitsTable" fixedCellSize="0.0" prefHeight="320.0" prefWidth="699.0" VBox.vgrow="ALWAYS">

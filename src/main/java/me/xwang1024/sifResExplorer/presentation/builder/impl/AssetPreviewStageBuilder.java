@@ -14,10 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 import me.xwang1024.sifResExplorer.service.ImageService;
 
-public class AssetPreviewStageBuilder extends IStageBuilder {
+public class AssetPreviewStageBuilder extends AbsStageBuilder {
 	private ImageService imageService = new ImageService();
 	private ScrollPane scrollPane;
 	private StackPane nodeContainer;

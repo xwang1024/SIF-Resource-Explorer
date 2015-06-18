@@ -206,4 +206,12 @@ public class Unit {
 				+ ", rankupCost=" + rankupCost + "]";
 	}
 
+	public String toFlatString() {
+		return id + " " + unitNo + " " + name + " " + eponym + " " + Arrays.toString(card) + " "
+				+ Arrays.toString(avatar) + " " + Arrays.toString(cg) + " " + rarity + " "
+				+ attribute + " " + unitSkill + " " + skillName + " " + skillEffect + " "
+				+ skillTrigger + " " + leaderSkill + " " + leaderSkillType + " " + message + " "
+				+ stamina + " " + smile + " " + pure + " " + cool + " " + rankupCost;
+	}
+
 }

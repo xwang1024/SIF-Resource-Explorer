@@ -20,15 +20,14 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import me.xwang1024.sifResExplorer.model.Unit;
-import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 import me.xwang1024.sifResExplorer.service.UnitService;
 
-public class UnitsBoxBuilder extends IStageBuilder {
+public class UnitsBoxBuilder extends AbsStageBuilder {
 	private final UnitService unitService;
 
 	private Label selectStatLb;
@@ -38,7 +37,6 @@ public class UnitsBoxBuilder extends IStageBuilder {
 	private ComboBox<String> skillEffectBox;
 	private ComboBox<String> skillTriggerBox;
 	private ComboBox<String> leaderSkillTypeBox;
-	private TextField searchTf;
 	private TableView<UnitLine> unitsTable;
 	private TableColumn<UnitLine, Boolean> checkboxCol;
 	private TableColumn<UnitLine, Integer> idCol;
@@ -86,7 +84,6 @@ public class UnitsBoxBuilder extends IStageBuilder {
 		skillEffectBox = (ComboBox<String>) loader.getNamespace().get("skillEffectBox");
 		skillTriggerBox = (ComboBox<String>) loader.getNamespace().get("skillTriggerBox");
 		leaderSkillTypeBox = (ComboBox<String>) loader.getNamespace().get("leaderSkillTypeBox");
-		searchTf = (TextField) loader.getNamespace().get("searchTf");
 
 		unitsTable = (TableView<UnitLine>) loader.getNamespace().get("unitsTable");
 		checkboxCol = (TableColumn<UnitLine, Boolean>) loader.getNamespace().get("checkboxCol");
@@ -164,15 +161,30 @@ public class UnitsBoxBuilder extends IStageBuilder {
 		List<String> nameList = unitService.getNameList();
 		List<String> attrList = unitService.getAttrList();
 		List<String> rarityList = unitService.getRarityList();
-		List<String> skillTypeList = unitService.getSkillEffectList();
-		List<String> skillTriggerList = unitService.getSkillTriggerList();
 		List<String> leaderSkillTypeList = unitService.getLeaderSkillTypeList();
-		nameBox.setItems(FXCollections.observableArrayList(nameList));
-		attrBox.setItems(FXCollections.observableArrayList(attrList));
-		rarityBox.setItems(FXCollections.observableArrayList(rarityList));
-		skillEffectBox.setItems(FXCollections.observableArrayList(skillTypeList));
-		skillTriggerBox.setItems(FXCollections.observableArrayList(skillTriggerList));
-		leaderSkillTypeBox.setItems(FXCollections.observableArrayList(leaderSkillTypeList));
+		List<String> skillEffectList = unitService.getSkillEffectList();
+		List<String> skillTriggerList = unitService.getSkillTriggerList();
+		ObservableList<String> nameObList = FXCollections.observableArrayList(nameList);
+		ObservableList<String> attrObList = FXCollections.observableArrayList(attrList);
+		ObservableList<String> rarityObList = FXCollections.observableArrayList(rarityList);
+		ObservableList<String> leaderSkillTypeObList = FXCollections
+				.observableArrayList(leaderSkillTypeList);
+		ObservableList<String> skillEffectObList = FXCollections
+				.observableArrayList(skillEffectList);
+		ObservableList<String> skillTriggerObList = FXCollections
+				.observableArrayList(skillTriggerList);
+		nameObList.add(0, "<All>");
+		attrObList.add(0, "<All>");
+		rarityObList.add(0, "<All>");
+		leaderSkillTypeObList.add(0, "<All>");
+		skillEffectObList.add(0, "<All>");
+		skillTriggerObList.add(0, "<All>");
+		nameBox.setItems(nameObList);
+		attrBox.setItems(attrObList);
+		rarityBox.setItems(rarityObList);
+		leaderSkillTypeBox.setItems(leaderSkillTypeObList);
+		skillEffectBox.setItems(skillEffectObList);
+		skillTriggerBox.setItems(skillTriggerObList);
 	}
 
 	private void initTableData() {
@@ -277,7 +289,7 @@ public class UnitsBoxBuilder extends IStageBuilder {
 		}
 
 		public StringProperty leaderSkillProperty() {
-			return skillName;
+			return leaderSkill;
 		}
 
 		public StringProperty skillNameProperty() {

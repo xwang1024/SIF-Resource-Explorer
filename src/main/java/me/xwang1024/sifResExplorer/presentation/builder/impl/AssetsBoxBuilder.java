@@ -26,11 +26,11 @@ import javafx.util.Callback;
 import me.xwang1024.sifResExplorer.model.AssetItem;
 import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
 import me.xwang1024.sifResExplorer.presentation.AssetPreviewStage;
-import me.xwang1024.sifResExplorer.presentation.builder.IStageBuilder;
+import me.xwang1024.sifResExplorer.presentation.builder.AbsStageBuilder;
 import me.xwang1024.sifResExplorer.service.AssetService;
 import me.xwang1024.sifResExplorer.service.AssetService.PathNode;
 
-public class AssetsBoxBuilder extends IStageBuilder {
+public class AssetsBoxBuilder extends AbsStageBuilder {
 	private final AssetService assetService = AssetService.getInstance();
 	private Label selectStatLb;
 	private ComboBox pathBox1;

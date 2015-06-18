@@ -1,7 +1,12 @@
 package me.xwang1024.sifResExplorer.controller;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
+import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,15 +14,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import me.xwang1024.sifResExplorer.presentation.builder.impl.AssetsBoxBuilder.AssetLine;
+import me.xwang1024.sifResExplorer.model.Unit;
 import me.xwang1024.sifResExplorer.presentation.builder.impl.UnitsBoxBuilder.UnitLine;
+import me.xwang1024.sifResExplorer.service.UnitService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UnitsBoxController {
 	private static final Logger logger = LoggerFactory.getLogger(UnitsBoxController.class);
-
+	private final UnitService unitService;
 	@FXML
 	private Label selectStatLb;
 	@FXML
@@ -43,6 +49,10 @@ public class UnitsBoxController {
 		}
 	};
 
+	public UnitsBoxController() throws ClassNotFoundException, FileNotFoundException, SQLException {
+		unitService = UnitService.getInstance();
+	}
+
 	private void refreshSelectStat() {
 		ObservableList<UnitLine> list = unitsTable.getItems();
 		int total = list.size();
@@ -55,18 +65,44 @@ public class UnitsBoxController {
 		selectStatLb.setText("(" + selected + "/" + total + ")");
 	}
 
-	@FXML
-	public void onSearchAction(ActionEvent event) {
-		logger.debug("onSearchAction");
-		ObservableList<UnitLine> list = unitsTable.getItems();
-		for (int i = 0; i < list.size(); i++) {
-			UnitLine item = list.get(i);
-			// if (!item.getImagePath().contains(searchTf.getText())
-			// && !item.getTexturePath().contains(searchTf.getText())) {
-			// list.remove(i);
-			// i--;
-			// }
+	private void updateTableData() {
+		List<Unit> l = unitService.getUnitListByConditions(searchTf.getText(), nameBox.getValue(),
+				attrBox.getValue(), rarityBox.getValue(), leaderSkillTypeBox.getValue(),
+				skillEffectBox.getValue(), skillTriggerBox.getValue());
+		final ObservableList<UnitLine> data = FXCollections.observableArrayList();
+		for (Unit vo : l) {
+			data.add(new UnitLine(false, vo.getId(), vo.getUnitNo(), vo.getName(), vo.getEponym(),
+					vo.getAttribute(), vo.getRarity(), vo.getSmile(), vo.getPure(), vo.getCool(),
+					vo.getLeaderSkillType(), vo.getSkillName(), vo.getSkillEffect(), vo
+							.getSkillTrigger(), listener));
 		}
+		unitsTable.setItems(data);
+		refreshSelectStat();
+	}
+
+	@FXML
+	public void onUpdateTableAction(ActionEvent event) {
+		logger.debug("onSearchAction");
+		if (event.getSource() instanceof ComboBox) {
+			ComboBox<String> source = (ComboBox<String>) event.getSource();
+			if (source.getValue() != null && source.getValue().equals("<All>")) {
+				source.setValue(null);
+			}
+		}
+		updateTableData();
+		refreshSelectStat();
+	}
+
+	@FXML
+	public void onClearFilterAction(ActionEvent event) {
+		logger.debug("onClearFilterAction");
+		nameBox.setValue(null);
+		attrBox.setValue(null);
+		rarityBox.setValue(null);
+		skillEffectBox.setValue(null);
+		skillTriggerBox.setValue(null);
+		leaderSkillTypeBox.setValue(null);
+		updateTableData();
 		refreshSelectStat();
 	}
 
@@ -90,7 +126,7 @@ public class UnitsBoxController {
 
 	@FXML
 	public void onExportCardAction(ActionEvent event) {
-
+		
 	}
 
 	@FXML
@@ -100,36 +136,6 @@ public class UnitsBoxController {
 
 	@FXML
 	public void onExportNaviAction(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void onNameBoxAction(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void onAttrBoxAction(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void onRarityBoxAction(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void onSkillEffectBoxAction(ActionEvent event) {
-
-	}
-	
-	@FXML
-	public void onSkillTriggerBoxAction(ActionEvent event) {
-
-	}
-	
-	@FXML
-	public void onLeaderSkillTypeBoxAction(ActionEvent event) {
 
 	}
 }

@@ -3,7 +3,6 @@ package me.xwang1024.sifResExplorer.controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,7 +80,7 @@ public class AssetsBoxController {
 		}
 		selectStatLb.setText("(" + selected + "/" + total + ")");
 	}
-	
+
 	private void updateTableData() {
 		List<AssetItem> l = assetService.getAssetListByPath(searchTf.getText(), currentPath);
 		final ObservableList<AssetLine> data = FXCollections.observableArrayList();

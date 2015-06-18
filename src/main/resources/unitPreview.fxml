@@ -34,9 +34,9 @@
                            </padding>
                            <items>
                               <Label text="Avatar Layer: " />
-                              <CheckBox mnemonicParsing="false" text="bk" />
-                              <CheckBox mnemonicParsing="false" text="border" />
-                              <CheckBox mnemonicParsing="false" text="star" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="bk" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="border" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="star" />
                               <Pane prefHeight="40.0" prefWidth="10.0" />
                               <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="64.0" text="Export" />
                               <Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="30.0">
@@ -45,13 +45,13 @@
                                  </padding>
                               </Separator>
                               <Label text="Card Layer: " />
-                              <CheckBox mnemonicParsing="false" text="1" />
-                              <CheckBox mnemonicParsing="false" text="2" />
-                              <CheckBox mnemonicParsing="false" text="3" />
-                              <CheckBox mnemonicParsing="false" text="4" />
-                              <CheckBox mnemonicParsing="false" text="5" />
-                              <CheckBox mnemonicParsing="false" text="6" />
-                              <CheckBox mnemonicParsing="false" text="7" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="1" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="2" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="3" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="4" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="5" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="6" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="7" />
                               <Pane prefHeight="40.0" prefWidth="10.0" />
                               <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="69.0" text="Export" />
                            </items>
@@ -66,17 +66,11 @@
                                        </children>
                                     </FlowPane>
                                     <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../data/sif/png/icon/1_0.png" />
-                                       </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </ImageView>
                                     <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../data/sif/png/icon/1_0.png" />
-                                       </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" />
                                        </VBox.margin>
@@ -154,18 +148,11 @@
                               <HBox>
                                  <children>
                                     <ImageView fitHeight="492.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../data/sif/png/card/1.png" />
-                                       </image>
                                        <HBox.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <ImageView fitHeight="492.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../data/sif/png/card/1.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fitHeight="492.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </HBox>
                            </children>
@@ -188,8 +175,6 @@
                                           <Insets left="5.0" right="5.0" />
                                        </padding>
                                     </Separator>
-                                    <Button mnemonicParsing="false" text="zoom in" />
-                                    <Button mnemonicParsing="false" text="zoom out" />
                                 </items>
                                  <VBox.margin>
                                     <Insets />
@@ -209,11 +194,7 @@
                               </FlowPane>
                               <ScrollPane prefViewportHeight="400.0" prefViewportWidth="400.0">
                                  <content>
-                                    <ImageView fitHeight="396.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../data/sif/png/assets/image/units/u_normal_navi_31002007.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fitHeight="396.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true" />
                                  </content>
                               </ScrollPane>
                               <FlowPane alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
@@ -237,8 +218,6 @@
                                           <Insets left="5.0" right="5.0" />
                                        </padding>
                                     </Separator>
-                                    <Button mnemonicParsing="false" text="zoom in" />
-                                    <Button mnemonicParsing="false" text="zoom out" />
                                  </items>
                                  <padding>
                                     <Insets left="15.0" right="15.0" />
@@ -255,11 +234,7 @@
                               </FlowPane>
                               <ScrollPane prefViewportHeight="400.0" prefViewportWidth="400.0">
                                  <content>
-                                    <ImageView fitHeight="396.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../data/sif/png/assets/image/units/u_normal_navi_31002007.png" />
-                                       </image>
-                                    </ImageView>
+                                    <ImageView fitHeight="396.0" fitWidth="396.0" pickOnBounds="true" preserveRatio="true" />
                                  </content>
                               </ScrollPane>
                               <FlowPane alignment="CENTER" prefHeight="50.0" prefWidth="400.0">

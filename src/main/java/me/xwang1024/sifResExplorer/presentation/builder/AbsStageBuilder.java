@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 
-public abstract class IStageBuilder {
+public abstract class AbsStageBuilder {
 	protected FXMLLoader loader;
 
 	public FXMLLoader getRoot() {
@@ -15,7 +15,7 @@ public abstract class IStageBuilder {
 		this.loader = loader;
 	}
 
-	public IStageBuilder(FXMLLoader loader) throws Exception {
+	public AbsStageBuilder(FXMLLoader loader) throws Exception {
 		this.loader = loader;
 	}
 
