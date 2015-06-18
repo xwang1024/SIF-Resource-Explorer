@@ -29,7 +29,10 @@ public interface UnitDao {
 
 	public List<SkillLevelDetailDTO> getSkillLevelDetail(int skillId) throws SQLException;
 	
+	public String getUnitNaviAsset(int unitNaviAssetId) throws SQLException;
+	
 	public String getSkillEffectTypeName(int skillEffectType);
 	
 	public String getSkillTriggerTypeName(int triggerType);
+	
 }

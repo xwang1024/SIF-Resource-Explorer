@@ -108,7 +108,7 @@ public class ImagDaoImpl implements ImagDao {
 		return cache;
 	}
 
-	private BufferedImage extractTexb(String texbPath) throws IOException {
+	private Texb extractTexb(String texbPath) throws IOException {
 		// 构造texb文件的位置
 		String assetsPath = SIFConfig.getInstance().get(ConfigName.assetsPath);
 		File root = new File(assetsPath).getParentFile();
@@ -209,53 +209,52 @@ public class ImagDaoImpl implements ImagDao {
 		int[] pixelArr = new int[t.canvasWidth * t.canvasHeight];
 		if (t.pixelType.equals("4444 RGBA")) {
 			int ptr = 0;
-			for (int j = 0; j < bitmap.length; j++) {
-				if ((bitmap[j] & 0x0F) == 0x0F) {
+			for (int i = 0; i < bitmap.length; i++) {
+				if ((bitmap[i] & 0x0F) == 0x0F) {
 					pixelArr[ptr] = (0xFF) << 24; // A
 				} else {
-					pixelArr[ptr] = (bitmap[j] & 0x0F) << 28; // A
-					pixelArr[ptr] += (0x09) << 24; // A
+					pixelArr[ptr] = (bitmap[i] & 0x0F) << 28; // A
 				}
-				pixelArr[ptr] += (bitmap[j + 1] & 0xF0) << 16; // R
-				pixelArr[ptr] += (bitmap[j + 1] & 0x0F) << 12; // G
-				pixelArr[ptr] += (bitmap[j] & 0xF0); // B
-				j++;
+				pixelArr[ptr] += (bitmap[i + 1] & 0xF0) << 16; // R
+				pixelArr[ptr] += (bitmap[i + 1] & 0x0F) << 12; // G
+				pixelArr[ptr] += (bitmap[i] & 0xF0); // B
+				i++;
 				ptr++;
 			}
 		} else if (t.pixelType.equals("5551 RGBA")) {
 			int ptr = 0;
-			for (int j = 0; j < bitmap.length; j++) {
-				if ((bitmap[j] & 0x01) == 1) {
+			for (int i = 0; i < bitmap.length; i++) {
+				if ((bitmap[i] & 0x01) == 1) {
 					pixelArr[ptr] = (0xFF) << 28; // A
 				} else {
 					pixelArr[ptr] = (0x00) << 28; // A
 				}
-				pixelArr[ptr] += (bitmap[j + 1] & 0xF8) << 16; // R
-				pixelArr[ptr] += (bitmap[j + 1] & 0x07) << 13; // G
-				pixelArr[ptr] += (bitmap[j] & 0xC0) << 5; // G
-				pixelArr[ptr] += (bitmap[j] & 0x3E) << 2; // B
-				j++;
+				pixelArr[ptr] += (bitmap[i + 1] & 0xF8) << 16; // R
+				pixelArr[ptr] += (bitmap[i + 1] & 0x07) << 13; // G
+				pixelArr[ptr] += (bitmap[i] & 0xC0) << 5; // G
+				pixelArr[ptr] += (bitmap[i] & 0x3E) << 2; // B
+				i++;
 				ptr++;
 			}
 		} else if (t.pixelType.equals("565 RGB")) {
 			int ptr = 0;
-			for (int j = 0; j < bitmap.length; j++) {
+			for (int i = 0; i < bitmap.length; i++) {
 				pixelArr[ptr] = (0xFF) << 28; // A
-				pixelArr[ptr] += (bitmap[j + 1] & 0xF8) << 16; // R
-				pixelArr[ptr] += (bitmap[j + 1] & 0x07) << 13; // G
-				pixelArr[ptr] += (bitmap[j] & 0xE0) << 5; // G
-				pixelArr[ptr] += (bitmap[j] & 0x1F) << 3; // B
-				j++;
+				pixelArr[ptr] += (bitmap[i + 1] & 0xF8) << 16; // R
+				pixelArr[ptr] += (bitmap[i + 1] & 0x07) << 13; // G
+				pixelArr[ptr] += (bitmap[i] & 0xE0) << 5; // G
+				pixelArr[ptr] += (bitmap[i] & 0x1F) << 3; // B
+				i++;
 				ptr++;
 			}
 		} else if (t.pixelType.equals("Byte")) {
 			int ptr = 0;
-			for (int j = 0; j < bitmap.length; j++) {
-				pixelArr[ptr] = (bitmap[j + 3] & 0xFF) << 24; // A
-				pixelArr[ptr] += (bitmap[j] & 0xFF) << 16; // R
-				pixelArr[ptr] += (bitmap[j + 1] & 0xFF) << 8; // G
-				pixelArr[ptr] += (bitmap[j + 2] & 0xFF); // B
-				j += 3;
+			for (int i = 0; i < bitmap.length; i++) {
+				pixelArr[ptr] = (bitmap[i + 3] & 0xFF) << 24; // A
+				pixelArr[ptr] += (bitmap[i] & 0xFF) << 16; // R
+				pixelArr[ptr] += (bitmap[i + 1] & 0xFF) << 8; // G
+				pixelArr[ptr] += (bitmap[i + 2] & 0xFF); // B
+				i += 3;
 				ptr++;
 			}
 		}
@@ -264,8 +263,10 @@ public class ImagDaoImpl implements ImagDao {
 		BufferedImage image = new BufferedImage(t.canvasWidth, t.canvasHeight,
 				BufferedImage.TYPE_INT_ARGB);
 		image.setRGB(0, 0, t.canvasWidth, t.canvasHeight, pixelArr, 0, t.canvasWidth);
+		t.totalImage = image;
+		return t;
 		// 拆分图片并进行缓存
-		return splitImage(t, image);
+
 	}
 
 	@Override
@@ -309,7 +310,26 @@ public class ImagDaoImpl implements ImagDao {
 		// 如果Temp中没有这个图片，得到这个图片对应的Texb文件的path
 		String texbPath = getRefTextureFilePath(path);
 		// 解压这个texb文件, 到临时文件, 同时返回需要的图片
-		return extractTexb(texbPath);
+		Texb t = extractTexb(texbPath);
+		return splitImage(t, t.totalImage);
+	}
+
+	public BufferedImage getImageWithoutSplit(String texbPath) throws IOException {
+		String checkerPath;
+		if (texbPath.endsWith(".texb")) {
+			checkerPath = texbPath + ".png";
+		} else {
+			checkerPath = texbPath;
+		}
+		File tempChecker = new File(tempDir, checkerPath);
+		if (tempChecker.exists()) {
+			BufferedImage image = ImageIO.read(tempChecker);
+			return image;
+		}
+		Texb t = extractTexb(texbPath);
+		tempChecker.getParentFile().mkdirs();
+		ImageIO.write(t.totalImage, "png", tempChecker);
+		return t.totalImage;
 	}
 
 	private static class Vertice {
@@ -365,6 +385,7 @@ public class ImagDaoImpl implements ImagDao {
 		int indexLen;
 		int imageCnt;
 		Timg[] image;
+		BufferedImage totalImage;
 
 		@Override
 		public String toString() {
@@ -408,7 +429,7 @@ public class ImagDaoImpl implements ImagDao {
 		dfs(startFile, l, ".imag");
 		return l;
 	}
-	
+
 	@Override
 	public List<String> getTexbList() {
 		List<String> l = new LinkedList<String>();

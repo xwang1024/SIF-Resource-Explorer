@@ -32,7 +32,7 @@ public class UnitPreviewStage {
 		Parent root = fxmlLoader.load();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		UnitPreviewStageBuilder builder = new UnitPreviewStageBuilder(fxmlLoader);
+		UnitPreviewStageBuilder builder = new UnitPreviewStageBuilder(fxmlLoader,stage);
 		builder.setUnit(unitLine);
 		SIFStage showStage = new SIFStage(stage, builder);
 		showStage.show();

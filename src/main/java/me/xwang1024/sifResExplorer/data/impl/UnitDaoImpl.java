@@ -317,4 +317,16 @@ public class UnitDaoImpl implements UnitDao {
 //		System.out.println(new UnitDaoImpl().getRarityName(1));
 	}
 
+	@Override
+	public String getUnitNaviAsset(int unitNaviAssetId) throws SQLException {
+		PreparedStatement preStatement = conn
+				.prepareStatement("select unit_navi_asset from unit_navi_asset_m where unit_navi_asset_id=?");
+		preStatement.setInt(1, unitNaviAssetId);
+		ResultSet rs = preStatement.executeQuery();
+		if (rs.next()) {
+			return rs.getString("unit_navi_asset");
+		}
+		return null;
+	}
+
 }

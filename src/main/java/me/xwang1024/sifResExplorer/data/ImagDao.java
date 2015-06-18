@@ -7,6 +7,8 @@ import java.util.List;
 public interface ImagDao {
 	public BufferedImage getImage(String imagPath) throws IOException;
 	
+	public BufferedImage getImageWithoutSplit(String texbPath) throws IOException;
+	
 	public String getRefTextureFilePath(String imagPath) throws IOException;
 	
 	public List<String> getImagList();

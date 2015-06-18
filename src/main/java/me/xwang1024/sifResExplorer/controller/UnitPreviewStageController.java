@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
-import me.xwang1024.sifResExplorer.service.ImageService;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +11,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import me.xwang1024.sifResExplorer.model.CardImage;
+import me.xwang1024.sifResExplorer.service.ImageService;
 
 public class UnitPreviewStageController {
 	private final ImageService imageService;
@@ -50,6 +51,10 @@ public class UnitPreviewStageController {
 	private CheckBox layer6Box;
 	@FXML
 	private CheckBox layer7Box;
+	@FXML
+	private CheckBox layer8Box;
+	
+	private CheckBox[] layerBox = new CheckBox[8];
 
 	@FXML
 	private ImageView normalAvatarImage;
@@ -64,24 +69,46 @@ public class UnitPreviewStageController {
 	@FXML
 	private ImageView idolizeCGImage;
 	
+	
+	
 	public UnitPreviewStageController() throws ClassNotFoundException, FileNotFoundException, SQLException {
 		imageService = new ImageService();
+		
 	}
 
 	@FXML
 	public void onUpdateAvatarAction(ActionEvent event) throws Exception {
-		int id = Integer.parseInt(idLb.getText());
+		int unitId = Integer.parseInt(idLb.getText());
 		boolean[] layerFlag = new boolean[]{bkBox.isSelected(),avatarBox.isSelected(),starBox.isSelected()};
-		BufferedImage normal = imageService.getNormalAvatar(id, layerFlag);
+		BufferedImage normal = imageService.getNormalAvatar(unitId, layerFlag);
 		WritableImage normalImage = SwingFXUtils.toFXImage(normal, null);
 		normalAvatarImage.setImage(normalImage);
-		BufferedImage idolize = imageService.getIdolizedAvatar(id, layerFlag);
+		BufferedImage idolize = imageService.getIdolizedAvatar(unitId, layerFlag);
 		WritableImage idolizeImage = SwingFXUtils.toFXImage(idolize, null);
 		idolizeAvatarImage.setImage(idolizeImage);
 	}
 
 	@FXML
 	public void onUpdateCardAction(ActionEvent event) throws Exception {
-
+		layerBox[0] = layer1Box;
+		layerBox[1] = layer2Box;
+		layerBox[2] = layer3Box;
+		layerBox[3] = layer4Box;
+		layerBox[4] = layer5Box;
+		layerBox[5] = layer6Box;
+		layerBox[6] = layer7Box;
+		layerBox[7] = layer8Box;
+		
+		int unitId = Integer.parseInt(idLb.getText());
+		boolean[] layerFlag = new boolean[8];
+		for(int i = 0; i < layerFlag.length; i++) {
+			layerFlag[i] = layerBox[i].isSelected();
+		}
+		CardImage normalCard = imageService.getNormalCard(unitId, layerFlag);
+		CardImage idolizeCard = imageService.getIdolizedCard(unitId, true, true, layerFlag);
+		WritableImage normalImage = SwingFXUtils.toFXImage(normalCard.getImage(), null);
+		WritableImage idolizeImage = SwingFXUtils.toFXImage(idolizeCard.getImage(), null);
+		normalCardImage.setImage(normalImage);
+		idolizeCardImage.setImage(idolizeImage);
 	}
 }
