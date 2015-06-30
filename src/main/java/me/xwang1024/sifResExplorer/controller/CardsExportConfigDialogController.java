@@ -145,17 +145,17 @@ public class CardsExportConfigDialogController {
 							try {
 								CardImage card = imageService.getNormalCard(unit.getId(), urFlag);
 								BufferedImage img = card.getImage();
-								if(urLayerWb.isSelected()) {
+								if (urLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
-										+ "_card_normal.png");
+								File exportFile = new File(file, unit.numProperty().get() + "_card_normal.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
 									ImageIO.write(img, "png", exportFile);
@@ -172,16 +172,17 @@ public class CardsExportConfigDialogController {
 								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
 										false, urFlag);
 								BufferedImage img = card.getImage();
-								if(urLayerWb.isSelected()) {
+								if (urLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
+								File exportFile = new File(file, unit.numProperty().get()
 										+ "_card_levelMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
@@ -199,17 +200,17 @@ public class CardsExportConfigDialogController {
 								CardImage card = imageService.getIdolizedCard(unit.getId(), false,
 										true, urFlag);
 								BufferedImage img = card.getImage();
-								if(urLayerWb.isSelected()) {
+								if (urLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
-										+ "_card_bondMax.png");
+								File exportFile = new File(file, unit.numProperty().get() + "_card_bondMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
 									ImageIO.write(img, "png", exportFile);
@@ -226,16 +227,17 @@ public class CardsExportConfigDialogController {
 								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
 										true, urFlag);
 								BufferedImage img = card.getImage();
-								if(urLayerWb.isSelected()) {
+								if (urLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
+								File exportFile = new File(file, unit.numProperty().get()
 										+ "_card_doubleMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
@@ -253,17 +255,17 @@ public class CardsExportConfigDialogController {
 							try {
 								CardImage card = imageService.getNormalCard(unit.getId(), srFlag);
 								BufferedImage img = card.getImage();
-								if(srLayerWb.isSelected()) {
+								if (srLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
-										+ "_card_normal.png");
+								File exportFile = new File(file, unit.numProperty().get() + "_card_normal.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
 									ImageIO.write(img, "png", exportFile);
@@ -280,16 +282,17 @@ public class CardsExportConfigDialogController {
 								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
 										false, srFlag);
 								BufferedImage img = card.getImage();
-								if(srLayerWb.isSelected()) {
+								if (srLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
+								File exportFile = new File(file, unit.numProperty().get()
 										+ "_card_levelMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
@@ -307,17 +310,17 @@ public class CardsExportConfigDialogController {
 								CardImage card = imageService.getIdolizedCard(unit.getId(), false,
 										true, srFlag);
 								BufferedImage img = card.getImage();
-								if(srLayerWb.isSelected()) {
+								if (srLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
-										+ "_card_bondMax.png");
+								File exportFile = new File(file, unit.numProperty().get() + "_card_bondMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
 									ImageIO.write(img, "png", exportFile);
@@ -334,16 +337,17 @@ public class CardsExportConfigDialogController {
 								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
 										true, srFlag);
 								BufferedImage img = card.getImage();
-								if(srLayerWb.isSelected()) {
+								if (srLayerWb.isSelected()) {
 									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+									BufferedImage bk = new BufferedImage(img.getWidth(),
+											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 									bk.getGraphics().setColor(Color.WHITE);
 									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
 									imgList.add(bk);
 									imgList.add(img);
 									img = ImageUtil.merge(imgList);
 								}
-								File exportFile = new File(file, unit.getId()
+								File exportFile = new File(file, unit.numProperty().get()
 										+ "_card_doubleMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {

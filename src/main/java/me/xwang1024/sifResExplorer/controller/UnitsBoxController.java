@@ -160,11 +160,11 @@ public class UnitsBoxController {
 	@FXML
 	public void onExportIconAction(ActionEvent event) {
 		ObservableList<UnitLine> list = unitsTable.getItems();
-		final LinkedList<Integer> exportList = new LinkedList<Integer>();
+		final LinkedList<UnitLine> exportList = new LinkedList<UnitLine>();
 		for (UnitLine item : list) {
 			if (item.getSelected()) {
 				logger.debug("Selected:" + item.getId());
-				exportList.add(item.getId());
+				exportList.add(item);
 			}
 		}
 		if(exportList.isEmpty()) {
@@ -193,9 +193,10 @@ public class UnitsBoxController {
 						if (isCancelled()) {
 							break;
 						}
+						UnitLine unit = exportList.get(i);
 						try {
-							BufferedImage img = imageService.getNormalAvatar(exportList.get(i),new boolean[]{true,true,true});
-							File exportFile = new File(file, exportList.get(i)+"_icon_normal.png");
+							BufferedImage img = imageService.getNormalAvatar(unit.getId(),new boolean[]{true,true,true});
+							File exportFile = new File(file, unit.numProperty().get()+"_icon_normal.png");
 							exportFile.getParentFile().mkdirs();
 							if (img != null) {
 								ImageIO.write(img, "png", exportFile);
@@ -211,8 +212,8 @@ public class UnitsBoxController {
 						}
 						
 						try {
-							BufferedImage img = imageService.getIdolizedAvatar(exportList.get(i),new boolean[]{true,true,true});
-							File exportFile = new File(file, exportList.get(i)+"_icon_idolized.png");
+							BufferedImage img = imageService.getIdolizedAvatar(unit.getId(),new boolean[]{true,true,true});
+							File exportFile = new File(file, unit.numProperty().get()+"_icon_idolized.png");
 							exportFile.getParentFile().mkdirs();
 							if (img != null) {
 								ImageIO.write(img, "png", exportFile);
@@ -245,11 +246,11 @@ public class UnitsBoxController {
 	@FXML
 	public void onExportNaviAction(ActionEvent event) {
 		ObservableList<UnitLine> list = unitsTable.getItems();
-		final LinkedList<Integer> exportList = new LinkedList<Integer>();
+		final LinkedList<UnitLine> exportList = new LinkedList<UnitLine>();
 		for (UnitLine item : list) {
 			if (item.getSelected()) {
 				logger.debug("Selected:" + item.getId());
-				exportList.add(item.getId());
+				exportList.add(item);
 			}
 		}
 		if(exportList.isEmpty()) {
@@ -278,9 +279,11 @@ public class UnitsBoxController {
 						if (isCancelled()) {
 							break;
 						}
+						
+						UnitLine unit = exportList.get(i);
 						try {
-							BufferedImage img = imageService.getNormalCG(exportList.get(i));
-							File exportFile = new File(file, exportList.get(i)+"_navi_normal.png");
+							BufferedImage img = imageService.getNormalCG(unit.getId());
+							File exportFile = new File(file, unit.numProperty().get()+"_navi_normal.png");
 							exportFile.getParentFile().mkdirs();
 							if (img != null) {
 								ImageIO.write(img, "png", exportFile);
@@ -296,8 +299,8 @@ public class UnitsBoxController {
 						}
 						
 						try {
-							BufferedImage img = imageService.getIdolizedCG(exportList.get(i));
-							File exportFile = new File(file, exportList.get(i)+"_navi_idolized.png");
+							BufferedImage img = imageService.getIdolizedCG(unit.getId());
+							File exportFile = new File(file, unit.numProperty().get()+"_navi_idolized.png");
 							exportFile.getParentFile().mkdirs();
 							if (img != null) {
 								ImageIO.write(img, "png", exportFile);
