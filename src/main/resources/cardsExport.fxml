@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="600.0" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.CardsExportConfigDialogController">
+   <children>
+      <FlowPane alignment="CENTER_LEFT" maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="800.0" style="-fx-background-color: #333;">
+         <children>
+            <Label prefHeight="24.0" prefWidth="188.0" text="Card Export Options" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="30.0" right="30.0" />
+         </padding>
+      </FlowPane>
+      <FlowPane alignment="CENTER_LEFT" hgap="20.0" minWidth="800.0" prefHeight="60.0" prefWidth="800.0" style="-fx-background-color: #eee;" vgap="20.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label text="Export Directory: " textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="pathField" prefHeight="23.0" prefWidth="443.0" />
+            <Button fx:id="selectPathBtn" mnemonicParsing="false" onAction="#onSelectPathAction" prefWidth="90.0" text="Select" />
+         </children>
+         <padding>
+            <Insets left="60.0" right="60.0" />
+         </padding>
+      </FlowPane>
+      <VBox minWidth="800.0" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #eee;" VBox.vgrow="ALWAYS">
+         <children>
+            <FlowPane alignment="CENTER_LEFT" hgap="10.0" prefHeight="21.0" prefWidth="181.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="110.0" text="N/R/SR Layer(?):" textAlignment="RIGHT">
+                     <tooltip>
+                        <Tooltip text="Recommend: 12345678W or 123478W" />
+                     </tooltip>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="srLayer1" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="1" />
+                  <CheckBox fx:id="srLayer2" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="2" />
+                  <CheckBox fx:id="srLayer3" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="3" />
+                  <CheckBox fx:id="srLayer4" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="4" />
+                  <CheckBox fx:id="srLayer5" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="5" />
+                  <CheckBox fx:id="srLayer6" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="6" />
+                  <CheckBox fx:id="srLayer7" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="7" />
+                  <CheckBox fx:id="srLayer8" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="8" />
+                  <CheckBox fx:id="srLayerWb" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="White Board(?)">
+                     <tooltip>
+                        <Tooltip text="Ensure card opaque" />
+                     </tooltip>
+                  </CheckBox>
+               </children>
+            </FlowPane>
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <VBox>
+                     <children>
+                        <FlowPane alignment="CENTER_LEFT" hgap="10.0" prefHeight="196.0" prefWidth="121.0">
+                           <children>
+                              <Label prefHeight="15.0" prefWidth="110.0" text="Card Sample:" />
+                           </children>
+                        </FlowPane>
+                        <FlowPane alignment="CENTER_LEFT" hgap="10.0" prefHeight="20.0" prefWidth="121.0">
+                           <children>
+                              <Label prefHeight="8.0" prefWidth="110.0" text="Export Type:" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <BorderPane>
+                     <center>
+                        <ImageView fx:id="normalNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                     <bottom>
+                        <CheckBox fx:id="srNormalBox" mnemonicParsing="false" selected="true" text="Normal" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="srLevelMaxBox" mnemonicParsing="false" text="Level Max" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="lvMaxNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="srBondMaxBox" mnemonicParsing="false" text="Bond Max" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="bondMaxNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="srDoubleMaxBox" mnemonicParsing="false" selected="true" text="Double Max" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="dbMaxNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="60.0" right="60.0" />
+         </padding>
+      </VBox>
+      <VBox minWidth="800.0" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: #eee;" VBox.vgrow="ALWAYS">
+         <children>
+            <FlowPane alignment="CENTER_LEFT" hgap="10.0" prefHeight="21.0" prefWidth="181.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="110.0" text="UR Layer(?):" textAlignment="RIGHT">
+                     <tooltip>
+                        <Tooltip text="Recommend: 2345W or 125W" />
+                     </tooltip>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="urLayer1" mnemonicParsing="false" onAction="#onUpdateURCardAction" text="1" />
+                  <CheckBox fx:id="urLayer2" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="2" />
+                  <CheckBox fx:id="urLayer3" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="3" />
+                  <CheckBox fx:id="urLayer4" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="4" />
+                  <CheckBox fx:id="urLayer5" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="5" />
+                  <CheckBox fx:id="urLayerWb" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="White Board(?)">
+                     <tooltip>
+                        <Tooltip text="Ensure card opaque" />
+                     </tooltip>
+                  </CheckBox>
+               </children>
+            </FlowPane>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <VBox>
+                     <children>
+                        <FlowPane alignment="CENTER_LEFT" hgap="10.0" prefHeight="196.0" prefWidth="121.0">
+                           <children>
+                              <Label prefHeight="15.0" prefWidth="110.0" text="Card Sample:" />
+                           </children>
+                        </FlowPane>
+                        <FlowPane alignment="CENTER_LEFT" hgap="10.0" prefHeight="20.0" prefWidth="121.0">
+                           <children>
+                              <Label prefHeight="7.0" prefWidth="110.0" text="Export Type:" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="urNormalBox" mnemonicParsing="false" selected="true" text="Normal" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="normalURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="urLevelMaxBox" mnemonicParsing="false" text="Level Max" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="lvMaxURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="urBondMaxBox" mnemonicParsing="false" text="Bond Max" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="bondMaxURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane>
+                     <bottom>
+                        <CheckBox fx:id="urDoubleMaxBox" mnemonicParsing="false" selected="true" text="Double Max" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <ImageView fx:id="dbMaxURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="60.0" right="60.0" />
+         </padding>
+      </VBox>
+      <FlowPane alignment="CENTER_RIGHT" hgap="20.0" maxHeight="60.0" minHeight="45.0" prefHeight="60.0" prefWidth="800.0" style="-fx-background-color: darkgray;">
+         <padding>
+            <Insets left="30.0" right="30.0" />
+         </padding>
+         <children>
+            <Button fx:id="exportBtn" disable="true" mnemonicParsing="false" onAction="#onExportAction" prefWidth="90.0" text="Export" />
+            <Button mnemonicParsing="false" onAction="#onCancelAction" prefWidth="90.0" text="Cancel" />
+         </children>
+      </FlowPane>
+   </children>
+</VBox>

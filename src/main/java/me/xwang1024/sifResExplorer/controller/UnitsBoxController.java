@@ -1,21 +1,36 @@
 package me.xwang1024.sifResExplorer.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import me.xwang1024.sifResExplorer.model.Unit;
+import me.xwang1024.sifResExplorer.presentation.ApplicationContext;
+import me.xwang1024.sifResExplorer.presentation.CardsExportDialog;
+import me.xwang1024.sifResExplorer.presentation.ProgressStage;
+import me.xwang1024.sifResExplorer.presentation.builder.impl.AssetsBoxBuilder.AssetLine;
 import me.xwang1024.sifResExplorer.presentation.builder.impl.UnitsBoxBuilder.UnitLine;
+import me.xwang1024.sifResExplorer.service.ImageService;
 import me.xwang1024.sifResExplorer.service.UnitService;
 
 import org.slf4j.Logger;
@@ -126,16 +141,189 @@ public class UnitsBoxController {
 
 	@FXML
 	public void onExportCardAction(ActionEvent event) {
-		
+		logger.debug("onExportCardAction");
+		ObservableList<UnitLine> list = unitsTable.getItems();
+		final LinkedList<UnitLine> exportList = new LinkedList<UnitLine>();
+		for (UnitLine item : list) {
+			if (item.getSelected()) {
+				logger.debug("Selected:" + item.getId());
+				exportList.add(item);
+			}
+		}
+		try {
+			new CardsExportDialog((Stage) unitsTable.getScene().getWindow(), exportList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
 	public void onExportIconAction(ActionEvent event) {
+		ObservableList<UnitLine> list = unitsTable.getItems();
+		final LinkedList<Integer> exportList = new LinkedList<Integer>();
+		for (UnitLine item : list) {
+			if (item.getSelected()) {
+				logger.debug("Selected:" + item.getId());
+				exportList.add(item.getId());
+			}
+		}
+		if(exportList.isEmpty()) {
+			return;
+		}
+		DirectoryChooser chooser = new DirectoryChooser();
+		chooser.setTitle("Select a directory to export...");
+		chooser.setInitialDirectory(ApplicationContext.tracedFile);
+		final File file = chooser.showDialog(ApplicationContext.stageStack.peek().getStage());
+		if (file != null) {
+			Task<Void> task;
+			task = new Task<Void>() {
 
+				protected Void call() throws Exception {
+					ImageService imageService = new ImageService();
+					List<String> errorList = new ArrayList<String>();
+					// init
+					updateMessage("0/" + exportList.size()*2);
+					updateProgress(0, exportList.size()*2);
+					// init dir
+					if (!file.exists() || file.isDirectory()) {
+						file.mkdirs();
+					}
+
+					for (int i = 0; i < exportList.size(); i++) {
+						if (isCancelled()) {
+							break;
+						}
+						try {
+							BufferedImage img = imageService.getNormalAvatar(exportList.get(i),new boolean[]{true,true,true});
+							File exportFile = new File(file, exportList.get(i)+"_icon_normal.png");
+							exportFile.getParentFile().mkdirs();
+							if (img != null) {
+								ImageIO.write(img, "png", exportFile);
+							} else {
+								errorList.add(exportList.get(i)+"_icon_normal.png");
+							}
+						} catch (Exception e) {
+							errorList.add(exportList.get(i)+"_icon_normal.png");
+							e.printStackTrace();
+						} finally {
+							updateMessage((i*2 + 1) + "/" + exportList.size()*2);
+							updateProgress((i*2 + 1), exportList.size()*2);
+						}
+						
+						try {
+							BufferedImage img = imageService.getIdolizedAvatar(exportList.get(i),new boolean[]{true,true,true});
+							File exportFile = new File(file, exportList.get(i)+"_icon_idolized.png");
+							exportFile.getParentFile().mkdirs();
+							if (img != null) {
+								ImageIO.write(img, "png", exportFile);
+							} else {
+								errorList.add(exportList.get(i)+"_icon_idolized.png");
+							}
+						} catch (Exception e) {
+							errorList.add(exportList.get(i)+"_icon_idolized.png");
+							e.printStackTrace();
+						} finally {
+							updateMessage((i*2 + 2) + "/" + exportList.size()*2);
+							updateProgress((i*2 + 2), exportList.size()*2);
+						}
+					}
+
+					for (String error : errorList) {
+						System.out.println("Error:" + error);
+					}
+					return null;
+				}
+			};
+			try {
+				new ProgressStage(ApplicationContext.stageStack.peek().getStage(), task);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@FXML
 	public void onExportNaviAction(ActionEvent event) {
+		ObservableList<UnitLine> list = unitsTable.getItems();
+		final LinkedList<Integer> exportList = new LinkedList<Integer>();
+		for (UnitLine item : list) {
+			if (item.getSelected()) {
+				logger.debug("Selected:" + item.getId());
+				exportList.add(item.getId());
+			}
+		}
+		if(exportList.isEmpty()) {
+			return;
+		}
+		DirectoryChooser chooser = new DirectoryChooser();
+		chooser.setTitle("Select a directory to export...");
+		chooser.setInitialDirectory(ApplicationContext.tracedFile);
+		final File file = chooser.showDialog(ApplicationContext.stageStack.peek().getStage());
+		if (file != null) {
+			Task<Void> task;
+			task = new Task<Void>() {
 
+				protected Void call() throws Exception {
+					ImageService imageService = new ImageService();
+					List<String> errorList = new ArrayList<String>();
+					// init
+					updateMessage("0/" + exportList.size()*2);
+					updateProgress(0, exportList.size()*2);
+					// init dir
+					if (!file.exists() || file.isDirectory()) {
+						file.mkdirs();
+					}
+
+					for (int i = 0; i < exportList.size(); i++) {
+						if (isCancelled()) {
+							break;
+						}
+						try {
+							BufferedImage img = imageService.getNormalCG(exportList.get(i));
+							File exportFile = new File(file, exportList.get(i)+"_navi_normal.png");
+							exportFile.getParentFile().mkdirs();
+							if (img != null) {
+								ImageIO.write(img, "png", exportFile);
+							} else {
+								errorList.add(exportList.get(i)+"_navi_normal.png");
+							}
+						} catch (Exception e) {
+							errorList.add(exportList.get(i)+"_navi_normal.png");
+							e.printStackTrace();
+						} finally {
+							updateMessage((i*2 + 1) + "/" + exportList.size()*2);
+							updateProgress((i*2 + 1), exportList.size()*2);
+						}
+						
+						try {
+							BufferedImage img = imageService.getIdolizedCG(exportList.get(i));
+							File exportFile = new File(file, exportList.get(i)+"_navi_idolized.png");
+							exportFile.getParentFile().mkdirs();
+							if (img != null) {
+								ImageIO.write(img, "png", exportFile);
+							} else {
+								errorList.add(exportList.get(i)+"_navi_idolized.png");
+							}
+						} catch (Exception e) {
+							errorList.add(exportList.get(i)+"_navi_idolized.png");
+							e.printStackTrace();
+						} finally {
+							updateMessage((i*2 + 2) + "/" + exportList.size()*2);
+							updateProgress((i*2 + 2), exportList.size()*2);
+						}
+					}
+
+					for (String error : errorList) {
+						System.out.println("Error:" + error);
+					}
+					return null;
+				}
+			};
+			try {
+				new ProgressStage(ApplicationContext.stageStack.peek().getStage(), task);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
