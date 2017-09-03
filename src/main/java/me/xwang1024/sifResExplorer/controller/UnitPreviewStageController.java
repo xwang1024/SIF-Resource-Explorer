@@ -112,7 +112,7 @@ public class UnitPreviewStageController {
 			layerFlag[i] = layerBox[i].isSelected();
 		}
 		CardImage normalCard = imageService.getNormalCard(unitId, layerFlag);
-		CardImage idolizeCard = imageService.getIdolizedCard(unitId, true, true, layerFlag);
+		CardImage idolizeCard = imageService.getIdolizedCard(unitId, layerFlag);
 		WritableImage normalImage = SwingFXUtils.toFXImage(normalCard.getImage(), null);
 		WritableImage idolizeImage = SwingFXUtils.toFXImage(idolizeCard.getImage(), null);
 		normalCardImage.setImage(normalImage);

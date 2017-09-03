@@ -416,26 +416,9 @@ public class ImageService {
 		return getCard(unit.getNormalCardId(), layerFlag, id, 0);
 	}
 
-	public CardImage getIdolizedCard(int id, boolean isLevelMax, boolean isBondMax,
-			boolean[] layerFlag) throws SQLException, IOException {
+	public CardImage getIdolizedCard(int id, boolean[] layerFlag) throws SQLException, IOException {
 		UnitDTO unit = unitDao.getUnitById(id);
-		if (!isLevelMax && !isBondMax) {
-			logger.info("Getting Idolized card");
-			return getCard(unit.getIdolizeCardId(), layerFlag, id, 1);
-		}
-		if (isLevelMax && isBondMax) {
-			logger.info("Getting All Max card");
-			return getCard(unit.getAllMaxCardId(), layerFlag, id, 1);
-		}
-		if (isLevelMax) {
-			logger.info("Getting Level Max card");
-			return getCard(unit.getMaxLevelCardId(), layerFlag, id, 1);
-		}
-		if (isBondMax) {
-			logger.info("Getting Bond Max card");
-			return getCard(unit.getMaxBondCardId(), layerFlag, id, 1);
-		}
-		return null;
+		return getCard(unit.getIdolizeCardId(), layerFlag, id, 1);
 	}
 
 	public BufferedImage getNormalCG(int id) throws SQLException, IOException {

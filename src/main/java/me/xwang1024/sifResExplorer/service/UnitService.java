@@ -210,25 +210,6 @@ public class UnitService {
 	}
 
 	public Unit getUnitById(int id) {
-		/*Unit u = unitList.get(id > (unitList.size() - 1) ? (unitList.size() - 1) : id);
-		if (u.getId() == id) {
-			return u;
-		} else if (u.getId() > id) {
-			for (int i = id - 1; i >= 0; i--) {
-				u = unitList.get(i);
-				if (u.getId() == id) {
-					return u;
-				}
-			}
-		} else {
-			for (int i = id + 1; i < unitList.size(); i++) {
-				u = unitList.get(i);
-				if (u.getId() == id) {
-					return u;
-				}
-			}
-		}
-		return null;*/
 		Unit u;
 		for(int i = 1; i < unitList.size(); i++){
 			u = unitList.get(i);

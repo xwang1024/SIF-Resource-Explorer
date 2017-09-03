@@ -197,7 +197,7 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 			layerFlag[i] = layerBox[i].isSelected();
 		}
 		CardImage normalCard = imageService.getNormalCard(unit.getId(), layerFlag);
-		CardImage idolizeCard = imageService.getIdolizedCard(unit.getId(), true, true, layerFlag);
+		CardImage idolizeCard = imageService.getIdolizedCard(unit.getId(), layerFlag);
 		// ------ Init layer box ------
 		LayerStatus[] normalStatus = normalCard.getLayerStatus();
 		LayerStatus[] idolizeStatus = idolizeCard.getLayerStatus();

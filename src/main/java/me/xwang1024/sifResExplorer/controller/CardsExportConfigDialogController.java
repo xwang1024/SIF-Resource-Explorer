@@ -55,14 +55,10 @@ public class CardsExportConfigDialogController {
 	@FXML
 	private CheckBox srLayer8;
 	@FXML
-	private CheckBox srLayerWb;
+	private CheckBox srLayer9;
 
 	@FXML
 	private CheckBox srNormalBox;
-	@FXML
-	private CheckBox srLevelMaxBox;
-	@FXML
-	private CheckBox srBondMaxBox;
 	@FXML
 	private CheckBox srDoubleMaxBox;
 
@@ -77,14 +73,16 @@ public class CardsExportConfigDialogController {
 	@FXML
 	private CheckBox urLayer5;
 	@FXML
-	private CheckBox urLayerWb;
+	private CheckBox urLayer6;
+	@FXML
+	private CheckBox urLayer7;
+	@FXML
+	private CheckBox urLayer8;
+	@FXML
+	private CheckBox urLayer9;
 
 	@FXML
 	private CheckBox urNormalBox;
-	@FXML
-	private CheckBox urLevelMaxBox;
-	@FXML
-	private CheckBox urBondMaxBox;
 	@FXML
 	private CheckBox urDoubleMaxBox;
 
@@ -113,10 +111,12 @@ public class CardsExportConfigDialogController {
 	public void onExportAction(ActionEvent event) {
 		final boolean[] srFlag = new boolean[] { srLayer1.isSelected(), srLayer2.isSelected(),
 				srLayer3.isSelected(), srLayer4.isSelected(), srLayer5.isSelected(),
-				srLayer6.isSelected(), srLayer7.isSelected(), srLayer8.isSelected() };
+				srLayer6.isSelected(), srLayer7.isSelected(), srLayer8.isSelected(),
+				srLayer9.isSelected()};
 		final boolean[] urFlag = new boolean[] { urLayer1.isSelected(), urLayer2.isSelected(),
-				urLayer3.isSelected(), urLayer4.isSelected(), urLayer5.isSelected(), false, false,
-				false };
+				urLayer3.isSelected(), urLayer4.isSelected(), urLayer5.isSelected(),
+				urLayer6.isSelected(), urLayer7.isSelected(), urLayer8.isSelected(),
+				urLayer9.isSelected() };
 		if (exportList == null || exportList.isEmpty() || pathField.getText().equals("")) {
 			return;
 		}
@@ -145,16 +145,6 @@ public class CardsExportConfigDialogController {
 							try {
 								CardImage card = imageService.getNormalCard(unit.getId(), urFlag);
 								BufferedImage img = card.getImage();
-								if (urLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
 								File exportFile = new File(file, unit.numProperty().get() + "_card_normal.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
@@ -167,86 +157,20 @@ public class CardsExportConfigDialogController {
 								e.printStackTrace();
 							}
 						}
-						if (urLevelMaxBox.isSelected()) {
-							try {
-								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
-										false, urFlag);
-								BufferedImage img = card.getImage();
-								if (urLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
-								File exportFile = new File(file, unit.numProperty().get()
-										+ "_card_levelMax.png");
-								exportFile.getParentFile().mkdirs();
-								if (img != null) {
-									ImageIO.write(img, "png", exportFile);
-								} else {
-									errorList.add(unit.getId() + "_card_levelMax.png");
-								}
-							} catch (Exception e) {
-								errorList.add(unit.getId() + "_card_levelMax.png");
-								e.printStackTrace();
-							}
-						}
-						if (urBondMaxBox.isSelected()) {
-							try {
-								CardImage card = imageService.getIdolizedCard(unit.getId(), false,
-										true, urFlag);
-								BufferedImage img = card.getImage();
-								if (urLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
-								File exportFile = new File(file, unit.numProperty().get() + "_card_bondMax.png");
-								exportFile.getParentFile().mkdirs();
-								if (img != null) {
-									ImageIO.write(img, "png", exportFile);
-								} else {
-									errorList.add(unit.getId() + "_card_bondMax.png");
-								}
-							} catch (Exception e) {
-								errorList.add(unit.getId() + "_card_bondMax.png");
-								e.printStackTrace();
-							}
-						}
 						if (urDoubleMaxBox.isSelected()) {
 							try {
-								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
-										true, urFlag);
+								CardImage card = imageService.getIdolizedCard(unit.getId(), urFlag);
 								BufferedImage img = card.getImage();
-								if (urLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
 								File exportFile = new File(file, unit.numProperty().get()
 										+ "_card_doubleMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
 									ImageIO.write(img, "png", exportFile);
 								} else {
-									errorList.add(unit.getId() + "_card_doubleMax.png");
+									errorList.add(unit.getId() + "_card_Idolized.png");
 								}
 							} catch (Exception e) {
-								errorList.add(unit.getId() + "_card_doubleMax.png");
+								errorList.add(unit.getId() + "_card_Idolized.png");
 								e.printStackTrace();
 							}
 						}
@@ -255,16 +179,6 @@ public class CardsExportConfigDialogController {
 							try {
 								CardImage card = imageService.getNormalCard(unit.getId(), srFlag);
 								BufferedImage img = card.getImage();
-								if (srLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
 								File exportFile = new File(file, unit.numProperty().get() + "_card_normal.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
@@ -277,86 +191,20 @@ public class CardsExportConfigDialogController {
 								e.printStackTrace();
 							}
 						}
-						if (srLevelMaxBox.isSelected()) {
-							try {
-								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
-										false, srFlag);
-								BufferedImage img = card.getImage();
-								if (srLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
-								File exportFile = new File(file, unit.numProperty().get()
-										+ "_card_levelMax.png");
-								exportFile.getParentFile().mkdirs();
-								if (img != null) {
-									ImageIO.write(img, "png", exportFile);
-								} else {
-									errorList.add(unit.getId() + "_card_levelMax.png");
-								}
-							} catch (Exception e) {
-								errorList.add(unit.getId() + "_card_levelMax.png");
-								e.printStackTrace();
-							}
-						}
-						if (srBondMaxBox.isSelected()) {
-							try {
-								CardImage card = imageService.getIdolizedCard(unit.getId(), false,
-										true, srFlag);
-								BufferedImage img = card.getImage();
-								if (srLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
-								File exportFile = new File(file, unit.numProperty().get() + "_card_bondMax.png");
-								exportFile.getParentFile().mkdirs();
-								if (img != null) {
-									ImageIO.write(img, "png", exportFile);
-								} else {
-									errorList.add(unit.getId() + "_card_bondMax.png");
-								}
-							} catch (Exception e) {
-								errorList.add(unit.getId() + "_card_bondMax.png");
-								e.printStackTrace();
-							}
-						}
 						if (srDoubleMaxBox.isSelected()) {
 							try {
-								CardImage card = imageService.getIdolizedCard(unit.getId(), true,
-										true, srFlag);
+								CardImage card = imageService.getIdolizedCard(unit.getId(), srFlag);
 								BufferedImage img = card.getImage();
-								if (srLayerWb.isSelected()) {
-									ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-									BufferedImage bk = new BufferedImage(img.getWidth(),
-											img.getHeight(), BufferedImage.TYPE_INT_ARGB);
-									bk.getGraphics().setColor(Color.WHITE);
-									bk.getGraphics().fillRect(0, 0, bk.getWidth(), bk.getHeight());
-									imgList.add(bk);
-									imgList.add(img);
-									img = ImageUtil.merge(imgList);
-								}
 								File exportFile = new File(file, unit.numProperty().get()
 										+ "_card_doubleMax.png");
 								exportFile.getParentFile().mkdirs();
 								if (img != null) {
 									ImageIO.write(img, "png", exportFile);
 								} else {
-									errorList.add(unit.getId() + "_card_doubleMax.png");
+									errorList.add(unit.getId() + "_card_Idolized.png");
 								}
 							} catch (Exception e) {
-								errorList.add(unit.getId() + "_card_doubleMax.png");
+								errorList.add(unit.getId() + "_card_Idolized.png");
 								e.printStackTrace();
 							}
 						}
