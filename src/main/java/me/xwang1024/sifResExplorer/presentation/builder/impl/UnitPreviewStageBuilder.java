@@ -37,7 +37,9 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 	private Label coolLb;
 
 	private CheckBox bkBox;
+	private CheckBox bgBox;
 	private CheckBox avatarBox;
+	private CheckBox frameBox;
 	private CheckBox starBox;
 
 	private CheckBox[] layerBox = new CheckBox[8];
@@ -76,7 +78,9 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 		coolLb = (Label) loader.getNamespace().get("coolLb");
 
 		bkBox = (CheckBox) loader.getNamespace().get("bkBox");
+		bgBox = (CheckBox) loader.getNamespace().get("bgBox");
 		avatarBox = (CheckBox) loader.getNamespace().get("avatarBox");
+		frameBox = (CheckBox) loader.getNamespace().get("frameBox");
 		starBox = (CheckBox) loader.getNamespace().get("starBox");
 
 		for (int i = 0; i < layerBox.length; i++) {
@@ -110,8 +114,8 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 	}
 
 	private void initAvatar() throws SQLException, IOException {
-		boolean[] layerFlag = new boolean[] { bkBox.isSelected(), avatarBox.isSelected(),
-				starBox.isSelected() };
+		boolean[] layerFlag = new boolean[] { bkBox.isSelected(), bgBox.isSelected(), avatarBox.isSelected(),
+				frameBox.isSelected(), starBox.isSelected() };
 		BufferedImage normal = imageService.getNormalAvatar(unit.getId(), layerFlag);
 		BufferedImage idolize = imageService.getIdolizedAvatar(unit.getId(), layerFlag);
 		WritableImage normalImage = SwingFXUtils.toFXImage(normal, null);
@@ -144,7 +148,7 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 		idolizeCardImage.setFitWidth(resW);
 		idolizeCardImage.setFitHeight(resH);
 	}
-	
+
 	private void resizeCGImage(int stageW, int stageH) {
 		int w = (stageW - 10) / 2;
 		int h = (stageH - 120);
@@ -208,7 +212,7 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 		normalCardImage.setImage(normalImage);
 		idolizeCardImage.setImage(idolizeImage);
 	}
-	
+
 	private void initCG() throws SQLException, IOException {
 		BufferedImage normal = imageService.getNormalCG(unit.getId());
 		BufferedImage idolize = imageService.getIdolizedCG(unit.getId());

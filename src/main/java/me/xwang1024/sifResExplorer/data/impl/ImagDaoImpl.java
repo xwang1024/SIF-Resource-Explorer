@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,7 +117,16 @@ public class ImagDaoImpl implements ImagDao {
 		logger.info("Extract Texture: {}", texbFile.getAbsolutePath());
 		// 解压Texb文件
 		Texb t = new Texb();
-		DataInputStream dis = new DataInputStream(new FileInputStream(texbFile));
+		FileInputStream texbFile_;
+		try{
+			texbFile_ = new FileInputStream(texbFile);
+		}catch(FileNotFoundException e){
+			logger.info("Can't find image in external, searching in install...");
+			root = new File(assetsPath.replace("external", "install")).getParentFile();
+			texbFile = new File(root, texbPath);
+			texbFile_ = new FileInputStream(texbFile);
+		}
+		DataInputStream dis = new DataInputStream(texbFile_);
 		t.tag = readString(dis, 4);
 		t.size = dis.readInt();
 		t.pathLen = dis.readUnsignedShort();
@@ -284,7 +294,16 @@ public class ImagDaoImpl implements ImagDao {
 		}
 
 		Imag imag = new Imag();
-		DataInputStream dis = new DataInputStream(new FileInputStream(imagFile));
+		FileInputStream imagFile_;
+		try{
+			imagFile_ = new FileInputStream(imagFile);
+		}catch(FileNotFoundException e){
+			logger.info("Can't find image in external, searching in install...");
+			root = new File(assetsPath.replace("external", "install")).getParentFile();
+			imagFile = new File(root, imagPath);
+			imagFile_ = new FileInputStream(imagFile);
+		}
+		DataInputStream dis = new DataInputStream(imagFile_);
 		imag.tag = readString(dis, 4);
 		imag.pathLen = dis.readInt();
 		imag.texbPath = readString(dis, imag.pathLen).trim();

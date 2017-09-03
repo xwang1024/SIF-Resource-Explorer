@@ -16,7 +16,7 @@ import me.xwang1024.sifResExplorer.service.ImageService;
 
 public class UnitPreviewStageController {
 	private final ImageService imageService;
-	
+
 	@FXML
 	private Label nameLb;
 	@FXML
@@ -32,6 +32,10 @@ public class UnitPreviewStageController {
 
 	@FXML
 	private CheckBox bkBox;
+	@FXML
+	private CheckBox bgBox;
+	@FXML
+	private CheckBox frameBox;
 	@FXML
 	private CheckBox avatarBox;
 	@FXML
@@ -53,7 +57,7 @@ public class UnitPreviewStageController {
 	private CheckBox layer7Box;
 	@FXML
 	private CheckBox layer8Box;
-	
+
 	private CheckBox[] layerBox = new CheckBox[8];
 
 	@FXML
@@ -68,12 +72,12 @@ public class UnitPreviewStageController {
 	private ImageView normalCGImage;
 	@FXML
 	private ImageView idolizeCGImage;
-	
-	
-	
+
+
+
 	public UnitPreviewStageController() throws ClassNotFoundException, FileNotFoundException, SQLException {
 		imageService = new ImageService();
-		
+
 	}
 
 	@FXML
@@ -98,7 +102,7 @@ public class UnitPreviewStageController {
 		layerBox[5] = layer6Box;
 		layerBox[6] = layer7Box;
 		layerBox[7] = layer8Box;
-		
+
 		int unitId = Integer.parseInt(idLb.getText());
 		boolean[] layerFlag = new boolean[8];
 		for(int i = 0; i < layerFlag.length; i++) {

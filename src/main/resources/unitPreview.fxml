@@ -37,8 +37,10 @@
 									<items>
 										<Label text="Avatar Layer: " />
 										<CheckBox fx:id="bkBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="bk" />
+										<CheckBox fx:id="bgBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="bg" />
 										<CheckBox fx:id="avatarBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="avatar" />
-										<CheckBox fx:id="starBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="star" />
+										<CheckBox fx:id="frameBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="frame" />
+										<CheckBox fx:id="starBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="rarity" />
 										<Pane prefHeight="40.0" prefWidth="10.0" />
 										<Button mnemonicParsing="false" prefHeight="23.0" prefWidth="64.0" text="Export" />
 										<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="30.0">
