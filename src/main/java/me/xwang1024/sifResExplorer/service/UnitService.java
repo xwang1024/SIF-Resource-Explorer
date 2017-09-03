@@ -210,7 +210,7 @@ public class UnitService {
 	}
 
 	public Unit getUnitById(int id) {
-		Unit u = unitList.get(id > (unitList.size() - 1) ? (unitList.size() - 1) : id);
+		/*Unit u = unitList.get(id > (unitList.size() - 1) ? (unitList.size() - 1) : id);
 		if (u.getId() == id) {
 			return u;
 		} else if (u.getId() > id) {
@@ -228,9 +228,17 @@ public class UnitService {
 				}
 			}
 		}
+		return null;*/
+		Unit u;
+		for(int i = 1; i < unitList.size(); i++){
+			u = unitList.get(i);
+			if (u.getId() == id) {
+				return u;
+			}
+		}
 		return null;
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		SIFConfig.getInstance().loadConfig();
 		UnitService.getInstance().initUnitList();
