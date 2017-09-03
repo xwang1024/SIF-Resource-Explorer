@@ -14,15 +14,15 @@ A desktop application which can explore the resources of the game named `Love Li
 * Export some/all avatar
 * Export some/all CG image (Trailer/Background image)
 
-## Plan?
-* SIF Music Player?
-* SIF Trainer?
-* SIF Notification?
+## Compile
+* Install Maven
+* Execute `mvn install`
+* And you will find the compiled jar file under `target` folder
 
 ## Attention
 * You need to import the raw resource files which must be decrypted
 * These images or data cannot be used for commercial purposes
-* All these images is designed by `Bushimo Inc` and `KLAB Inc`
+* All these images was designed by `Bushimo Inc` and `KLab Inc`
 
 ## Shortage  (っ*'ω'*c)
 * 对配置的路径进行验证时，并没有验证里面的内容，就看文件夹名字对不对= =
