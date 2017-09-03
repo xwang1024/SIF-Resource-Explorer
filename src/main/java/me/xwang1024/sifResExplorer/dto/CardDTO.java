@@ -82,12 +82,10 @@ public class CardDTO {
 	}
 
 	public String getFlashAsset() {
-		logger.info("GOT FLASH ASSET " + flashAsset);
 		return flashAsset;
 	}
 
 	public void setFlashAsset(String flashAsset) {
-		logger.info("SET FLASH ASSET " + flashAsset);
 		this.flashAsset = flashAsset;
 	}
 

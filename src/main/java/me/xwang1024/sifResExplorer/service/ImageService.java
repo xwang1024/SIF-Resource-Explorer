@@ -364,23 +364,28 @@ public class ImageService {
 		UnitDTO unit = unitDao.getUnitById(id);
 		CardDTO card = cardDao.getCard(cardId);
 		logger.info("Got card " + cardId);
-		//卡片背景
 		String background;
-		if(unit.getRarity() < 4){
-			background = getBackgroundName(unit.getRarity(), unit.getAttrId(), idolized);
-		}else{
-			background = card.getFlashAsset();
+		BufferedImage img;
+
+		if(layerFlag[0]){
+			//卡片背景
+
+			if(unit.getRarity() < 4){
+				background = getBackgroundName(unit.getRarity(), unit.getAttrId(), idolized);
+			}else{
+				background = card.getFlashAsset();
+			}
+			image.setLayerStatus(0, LayerStatus.ON);
+			img = imagDao.getImage(background);
+			list.add(img);
 		}
-		image.setLayerStatus(0, LayerStatus.ON);
-		BufferedImage img = imagDao.getImage(background);
-		list.add(img);
 
 		//立绘
 
 		if(unit.getRarity() >= 4){
 			image.setLayerStatus(1, LayerStatus.OFF);
 			image.setLayerStatus(1, LayerStatus.DISABLED);
-		}else{
+		}else if(layerFlag[1]){
 			image.setLayerStatus(1, LayerStatus.ON);
 			String texbPath = imagDao.getRefTextureFilePath(unitDao.getUnitNaviAsset(card.getUnitNaviAssetId()));
 			img = imagDao.getImageWithoutSplit(texbPath);
@@ -389,15 +394,19 @@ public class ImageService {
 			list.add(img);
 		}
 
-		//框
-		image.setLayerStatus(2, LayerStatus.ON);
-		img = imagDao.getImage(getFrameName(unit.getRarity(), unit.getAttrId()));
-		list.add(img);
+		if(layerFlag[2]){
+			//框
+			image.setLayerStatus(2, LayerStatus.ON);
+			img = imagDao.getImage(getFrameName(unit.getRarity(), unit.getAttrId()));
+			list.add(img);
+		}
 
-		//稀有度（左上角的UR和右下角的圈）
-		image.setLayerStatus(3, LayerStatus.ON);
-		img = imagDao.getImage(getRarityName(unit.getRarity(), unit.getAttrId()));
-		list.add(img);
+		if(layerFlag[3]){
+			//稀有度（左上角的UR和右下角的圈）
+			image.setLayerStatus(3, LayerStatus.ON);
+			img = imagDao.getImage(getRarityName(unit.getRarity(), unit.getAttrId()));
+			list.add(img);
+		}
 
 		image.setLayerStatus(4, LayerStatus.OFF);
 		image.setLayerStatus(5, LayerStatus.OFF);
@@ -415,15 +424,19 @@ public class ImageService {
 			list.add(img);
 		}*/
 
-		//左下角星数
-		image.setLayerStatus(6, LayerStatus.ON);
-		img = imagDao.getImage(getStarName(unit.getRarity(), idolized == 1));
-		list.add(img);
+		if(layerFlag[6]){
+			//左下角星数
+			image.setLayerStatus(6, LayerStatus.ON);
+			img = imagDao.getImage(getStarName(unit.getRarity(), idolized == 1));
+			list.add(img);
+		}
 
-		//名字
-		image.setLayerStatus(7, LayerStatus.ON);
-		img = imagDao.getImage(unitDao.getUnitNameImgPath(unit.getUnitTypeId()));
-		list.add(img);
+		if(layerFlag[7]){
+			//名字
+			image.setLayerStatus(7, LayerStatus.ON);
+			img = imagDao.getImage(unitDao.getUnitNameImgPath(unit.getUnitTypeId()));
+			list.add(img);
+		}
 
 		list.add(0, new BufferedImage(512, 720, BufferedImage.TYPE_INT_ARGB));
 		BufferedImage cardImage = ImageUtil.merge(list);

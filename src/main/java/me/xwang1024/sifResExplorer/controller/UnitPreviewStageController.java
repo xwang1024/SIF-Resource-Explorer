@@ -83,7 +83,7 @@ public class UnitPreviewStageController {
 	@FXML
 	public void onUpdateAvatarAction(ActionEvent event) throws Exception {
 		int unitId = Integer.parseInt(idLb.getText());
-		boolean[] layerFlag = new boolean[]{bkBox.isSelected(),avatarBox.isSelected(),starBox.isSelected()};
+		boolean[] layerFlag = new boolean[]{bkBox.isSelected(),bgBox.isSelected(),avatarBox.isSelected(),frameBox.isSelected(),starBox.isSelected()};
 		BufferedImage normal = imageService.getNormalAvatar(unitId, layerFlag);
 		WritableImage normalImage = SwingFXUtils.toFXImage(normal, null);
 		normalAvatarImage.setImage(normalImage);
