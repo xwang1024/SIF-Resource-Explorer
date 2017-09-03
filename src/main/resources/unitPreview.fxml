@@ -56,7 +56,8 @@
 										<CheckBox fx:id="layer5Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="5" />
 										<CheckBox fx:id="layer6Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="6" />
 										<CheckBox fx:id="layer7Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="7" />
-                              <CheckBox fx:id="layer8Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="8" />
+                              			<CheckBox fx:id="layer8Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="8" />
+                              			<CheckBox fx:id="layer9Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="9" />
 										<Pane prefHeight="40.0" prefWidth="10.0" />
 										<Button mnemonicParsing="false" prefHeight="23.0" prefWidth="69.0" text="Export" />
 									</items>

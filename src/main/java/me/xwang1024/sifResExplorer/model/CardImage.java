@@ -7,12 +7,12 @@ public class CardImage {
 		ON, OFF, DISABLED
 	}
 
-	private LayerStatus[] layerStatus = new LayerStatus[8];
+	private LayerStatus[] layerStatus = new LayerStatus[9];
 	private BufferedImage image;
 	private String imagePath;
 
 	public CardImage() {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 9; i++) {
 			layerStatus[i] = LayerStatus.DISABLED;
 		}
 	}

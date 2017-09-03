@@ -322,45 +322,8 @@ public class ImageService {
 	}
 
 	private CardImage getCard(int cardId, boolean[] layerFlag, int id, int idolized) throws SQLException, IOException {
-		/*String[] imagePathArr = new String[8];
-		CardDTO card = cardDao.getCard(cardId);
-		// ------ Set navi layer ------
-		int naviIndex = card.getNaviLayerOrder();
-		imagePathArr[naviIndex] = unitDao.getUnitNaviAsset(card.getUnitNaviAssetId());
-		// ----------------------------
-		List<CardBaseDTO> baseList = cardDao.getCardBase(card.getCardBaseId());
-		for (CardBaseDTO base : baseList) {
-			imagePathArr[base.getLayerOrder() - 1] = cardDao.getCardLayer(base.getCardLayerId())
-					.getCardLayerAsset();
-		}
 		CardImage image = new CardImage();
-		ArrayList<BufferedImage> list = new ArrayList<BufferedImage>(8);
-		for (int i = 0; i < imagePathArr.length; i++) {
-			if (layerFlag[i]) {
-				if (imagePathArr[i] == null) {
-					image.setLayerStatus(i, LayerStatus.DISABLED);
-				} else {
-					image.setLayerStatus(i, LayerStatus.ON);
-					if (i == naviIndex) {
-						String texbPath = imagDao.getRefTextureFilePath(imagePathArr[i]);
-						BufferedImage img = imagDao.getImageWithoutSplit(texbPath);
-						img = ImageUtil.resize(img, card.getNaviSizeRatio());
-						img = ImageUtil.move(img, card.getNaviMoveX(), card.getNaviMoveY());
-						list.add(img);
-					} else {
-						BufferedImage img = imagDao.getImage(imagePathArr[i]);
-						list.add(img);
-					}
-				}
-			} else {
-				image.setLayerStatus(i, LayerStatus.OFF);
-			}
-		}
-		list.add(0, new BufferedImage(512, 720, BufferedImage.TYPE_INT_ARGB));
-		BufferedImage cardImage = ImageUtil.merge(list);
-		image.setImage(cardImage);*/
-		CardImage image = new CardImage();
-		ArrayList<BufferedImage> list = new ArrayList<BufferedImage>(8);
+		ArrayList<BufferedImage> list = new ArrayList<BufferedImage>(9);
 		UnitDTO unit = unitDao.getUnitById(id);
 		CardDTO card = cardDao.getCard(cardId);
 		logger.info("Got card " + cardId);
@@ -383,7 +346,6 @@ public class ImageService {
 		//立绘
 
 		if(unit.getRarity() >= 4){
-			image.setLayerStatus(1, LayerStatus.OFF);
 			image.setLayerStatus(1, LayerStatus.DISABLED);
 		}else if(layerFlag[1]){
 			image.setLayerStatus(1, LayerStatus.ON);
@@ -408,8 +370,6 @@ public class ImageService {
 			list.add(img);
 		}
 
-		image.setLayerStatus(4, LayerStatus.OFF);
-		image.setLayerStatus(5, LayerStatus.OFF);
 		image.setLayerStatus(4, LayerStatus.DISABLED);
 		image.setLayerStatus(5, LayerStatus.DISABLED);
 		/*if(unit.getAttrId() <= 3){ //全属性的没有这两个图层
@@ -435,6 +395,13 @@ public class ImageService {
 			//名字
 			image.setLayerStatus(7, LayerStatus.ON);
 			img = imagDao.getImage(unitDao.getUnitNameImgPath(unit.getUnitTypeId()));
+			list.add(img);
+		}
+
+		if(layerFlag[8] && idolized == 1){
+			//觉醒卡牌金色三角
+			image.setLayerStatus(8, LayerStatus.ON);
+			img = imagDao.getImage("assets/image/cards/evolution/ev_01.png.imag");
 			list.add(img);
 		}
 

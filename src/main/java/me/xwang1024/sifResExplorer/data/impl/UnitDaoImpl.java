@@ -144,7 +144,7 @@ public class UnitDaoImpl implements UnitDao {
 	@Override
 	public List<UnitDTO> getAllUnits() throws SQLException {
 		List<UnitDTO> list = new ArrayList<UnitDTO>();
-		PreparedStatement preStatement = conn.prepareStatement("select * from unit_m");
+		PreparedStatement preStatement = conn.prepareStatement("select * from unit_m where unit_number != 0");
 		ResultSet rs = preStatement.executeQuery();
 		while (rs.next()) {
 			UnitDTO dto = new UnitDTO();

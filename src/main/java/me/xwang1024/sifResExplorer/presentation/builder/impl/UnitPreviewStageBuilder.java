@@ -42,7 +42,7 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 	private CheckBox frameBox;
 	private CheckBox starBox;
 
-	private CheckBox[] layerBox = new CheckBox[8];
+	private CheckBox[] layerBox = new CheckBox[9];
 
 	private StackPane normalCardPane;
 	private StackPane idolizeCardPane;
@@ -192,7 +192,7 @@ public class UnitPreviewStageBuilder extends AbsStageBuilder {
 	}
 
 	private void initCard() throws SQLException, IOException {
-		boolean[] layerFlag = new boolean[8];
+		boolean[] layerFlag = new boolean[9];
 		for (int i = 0; i < layerFlag.length; i++) {
 			layerFlag[i] = layerBox[i].isSelected();
 		}

@@ -57,8 +57,10 @@ public class UnitPreviewStageController {
 	private CheckBox layer7Box;
 	@FXML
 	private CheckBox layer8Box;
+	@FXML
+	private CheckBox layer9Box;
 
-	private CheckBox[] layerBox = new CheckBox[8];
+	private CheckBox[] layerBox = new CheckBox[9];
 
 	@FXML
 	private ImageView normalAvatarImage;
@@ -102,9 +104,10 @@ public class UnitPreviewStageController {
 		layerBox[5] = layer6Box;
 		layerBox[6] = layer7Box;
 		layerBox[7] = layer8Box;
+		layerBox[8] = layer9Box;
 
 		int unitId = Integer.parseInt(idLb.getText());
-		boolean[] layerFlag = new boolean[8];
+		boolean[] layerFlag = new boolean[9];
 		for(int i = 0; i < layerFlag.length; i++) {
 			layerFlag[i] = layerBox[i].isSelected();
 		}
