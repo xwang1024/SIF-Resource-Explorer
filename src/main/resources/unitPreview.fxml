@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.UnitPreviewStageController">
+<VBox prefHeight="900.0" prefWidth="1100.0" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.UnitPreviewStageController">
 	<children>
 		<FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="600.0" styleClass="titlePane">
 			<VBox.margin>
