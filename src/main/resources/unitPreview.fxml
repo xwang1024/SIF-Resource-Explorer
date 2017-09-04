@@ -9,9 +9,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.UnitPreviewStageController">
+<VBox prefHeight="900.0" prefWidth="1100.0" stylesheets="@styles/sif.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.xwang1024.sifResExplorer.controller.UnitPreviewStageController">
 	<children>
-		<FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="600.0" styleClass="titlePane">
+		<FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #555;" styleClass="titlePane">
 			<VBox.margin>
 				<Insets />
 			</VBox.margin>
@@ -37,8 +37,10 @@
 									<items>
 										<Label text="Avatar Layer: " />
 										<CheckBox fx:id="bkBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="bk" />
+										<CheckBox fx:id="bgBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="bg" />
 										<CheckBox fx:id="avatarBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="avatar" />
-										<CheckBox fx:id="starBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="star" />
+										<CheckBox fx:id="frameBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="frame" />
+										<CheckBox fx:id="starBox" mnemonicParsing="false" onAction="#onUpdateAvatarAction" selected="true" text="rarity" />
 										<Pane prefHeight="40.0" prefWidth="10.0" />
 										<Button mnemonicParsing="false" prefHeight="23.0" prefWidth="64.0" text="Export" />
 										<Separator maxHeight="30.0" orientation="VERTICAL" prefHeight="30.0">
@@ -54,16 +56,17 @@
 										<CheckBox fx:id="layer5Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="5" />
 										<CheckBox fx:id="layer6Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="6" />
 										<CheckBox fx:id="layer7Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="7" />
-                              <CheckBox fx:id="layer8Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="8" />
+                              			<CheckBox fx:id="layer8Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="8" />
+                              			<CheckBox fx:id="layer9Box" mnemonicParsing="false" onAction="#onUpdateCardAction" selected="true" text="9" />
 										<Pane prefHeight="40.0" prefWidth="10.0" />
 										<Button mnemonicParsing="false" prefHeight="23.0" prefWidth="69.0" text="Export" />
 									</items>
 								</ToolBar>
 								<HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 									<children>
-										<VBox prefHeight="492.0" prefWidth="85.0" style="-fx-border-color: gray; -fx-border-width: 0 1 0 0;" styleClass="titlePane">
+										<VBox prefHeight="492.0" prefWidth="85.0" style="-fx-border-color: gray; -fx-border-width: 0 1 0 0;-fx-background-color: #555;" styleClass="titlePane">
 											<children>
-												<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="21.0" prefWidth="64.0" styleClass="titlePane">
+												<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="21.0" prefWidth="64.0" style="-fx-background-color: #555;" styleClass="titlePane">
 													<children>
 														<Label text="Avatar" textFill="WHITE" />
 													</children>
@@ -78,12 +81,12 @@
 														<Insets bottom="5.0" left="5.0" right="5.0" />
 													</VBox.margin>
 												</ImageView>
-												<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="21.0" prefWidth="64.0" styleClass="titlePane">
+												<FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="21.0" prefWidth="64.0" style="-fx-background-color: #555;" styleClass="titlePane">
 													<children>
 														<Label text="Attr.val" textFill="WHITE" />
 													</children>
 												</FlowPane>
-												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;" styleClass="stamina">
+												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;-fx-background-color: #999;" styleClass="stamina">
 													<children>
 														<Label text="Stamina" textFill="WHITE">
 															<font>
@@ -103,7 +106,7 @@
 														<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 													</VBox.margin>
 												</VBox>
-												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;" styleClass="smile">
+												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;-fx-background-color: #ff669c;" styleClass="smile">
 													<VBox.margin>
 														<Insets bottom="5.0" left="5.0" right="5.0" />
 													</VBox.margin>
@@ -123,7 +126,7 @@
 														<Insets bottom="5.0" top="5.0" />
 													</padding>
 												</VBox>
-												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;" styleClass="pure">
+												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;-fx-background-color: #04cb2b;" styleClass="pure">
 													<children>
 														<Label text="Pure" textFill="WHITE">
 															<font>
@@ -143,7 +146,7 @@
 														<Insets bottom="5.0" left="5.0" right="5.0" />
 													</VBox.margin>
 												</VBox>
-												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;" styleClass="cool">
+												<VBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="64.0" spacing="2.0" style="-fx-background-radius: 5;-fx-background-color: #0ca7fd;" styleClass="cool">
 													<children>
 														<Label text="Cool" textFill="WHITE">
 															<font>

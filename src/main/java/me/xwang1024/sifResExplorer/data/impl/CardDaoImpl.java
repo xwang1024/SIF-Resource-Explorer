@@ -73,11 +73,12 @@ public class CardDaoImpl implements CardDao {
 			dto.setCardId(cardId);
 			dto.setCardBaseId(rs.getInt("card_base_id"));
 			dto.setUnitNaviAssetId(rs.getInt("unit_navi_asset_id"));
-			dto.setNaviLayerOrder(rs.getInt("navi_layer_order"));
+			dto.setNaviLayerOrder(2);
 			dto.setNaviRotation(rs.getInt("navi_rotation"));
 			dto.setNaviMoveX(rs.getInt("navi_move_x"));
 			dto.setNaviMoveY(rs.getInt("navi_move_y"));
 			dto.setNaviSizeRatio(rs.getDouble("navi_size_ratio"));
+			dto.setFlashAsset(rs.getString("flash_asset"));
 			return dto;
 		}
 		return null;

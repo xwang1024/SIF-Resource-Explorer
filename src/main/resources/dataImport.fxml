@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="204.0"
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="204.0"
 	minWidth="600.0" prefHeight="204.0" prefWidth="600.0"
 	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="me.xwang1024.sifResExplorer.controller.DataImportDialogController">

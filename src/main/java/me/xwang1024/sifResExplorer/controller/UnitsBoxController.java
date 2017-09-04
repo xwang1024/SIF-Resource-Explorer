@@ -195,7 +195,7 @@ public class UnitsBoxController {
 						}
 						UnitLine unit = exportList.get(i);
 						try {
-							BufferedImage img = imageService.getNormalAvatar(unit.getId(),new boolean[]{true,true,true});
+							BufferedImage img = imageService.getNormalAvatar(unit.getId(),new boolean[]{true,true,true,true,true});
 							File exportFile = new File(file, unit.numProperty().get()+"_icon_normal.png");
 							exportFile.getParentFile().mkdirs();
 							if (img != null) {
@@ -210,9 +210,9 @@ public class UnitsBoxController {
 							updateMessage((i*2 + 1) + "/" + exportList.size()*2);
 							updateProgress((i*2 + 1), exportList.size()*2);
 						}
-						
+
 						try {
-							BufferedImage img = imageService.getIdolizedAvatar(unit.getId(),new boolean[]{true,true,true});
+							BufferedImage img = imageService.getIdolizedAvatar(unit.getId(),new boolean[]{true,true,true,true,true});
 							File exportFile = new File(file, unit.numProperty().get()+"_icon_idolized.png");
 							exportFile.getParentFile().mkdirs();
 							if (img != null) {
@@ -279,7 +279,7 @@ public class UnitsBoxController {
 						if (isCancelled()) {
 							break;
 						}
-						
+
 						UnitLine unit = exportList.get(i);
 						try {
 							BufferedImage img = imageService.getNormalCG(unit.getId());
@@ -297,7 +297,7 @@ public class UnitsBoxController {
 							updateMessage((i*2 + 1) + "/" + exportList.size()*2);
 							updateProgress((i*2 + 1), exportList.size()*2);
 						}
-						
+
 						try {
 							BufferedImage img = imageService.getIdolizedCG(unit.getId());
 							File exportFile = new File(file, unit.numProperty().get()+"_navi_idolized.png");

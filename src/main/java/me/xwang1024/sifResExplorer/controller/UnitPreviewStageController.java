@@ -16,7 +16,7 @@ import me.xwang1024.sifResExplorer.service.ImageService;
 
 public class UnitPreviewStageController {
 	private final ImageService imageService;
-	
+
 	@FXML
 	private Label nameLb;
 	@FXML
@@ -32,6 +32,10 @@ public class UnitPreviewStageController {
 
 	@FXML
 	private CheckBox bkBox;
+	@FXML
+	private CheckBox bgBox;
+	@FXML
+	private CheckBox frameBox;
 	@FXML
 	private CheckBox avatarBox;
 	@FXML
@@ -53,8 +57,10 @@ public class UnitPreviewStageController {
 	private CheckBox layer7Box;
 	@FXML
 	private CheckBox layer8Box;
-	
-	private CheckBox[] layerBox = new CheckBox[8];
+	@FXML
+	private CheckBox layer9Box;
+
+	private CheckBox[] layerBox = new CheckBox[9];
 
 	@FXML
 	private ImageView normalAvatarImage;
@@ -68,18 +74,18 @@ public class UnitPreviewStageController {
 	private ImageView normalCGImage;
 	@FXML
 	private ImageView idolizeCGImage;
-	
-	
-	
+
+
+
 	public UnitPreviewStageController() throws ClassNotFoundException, FileNotFoundException, SQLException {
 		imageService = new ImageService();
-		
+
 	}
 
 	@FXML
 	public void onUpdateAvatarAction(ActionEvent event) throws Exception {
 		int unitId = Integer.parseInt(idLb.getText());
-		boolean[] layerFlag = new boolean[]{bkBox.isSelected(),avatarBox.isSelected(),starBox.isSelected()};
+		boolean[] layerFlag = new boolean[]{bkBox.isSelected(),bgBox.isSelected(),avatarBox.isSelected(),frameBox.isSelected(),starBox.isSelected()};
 		BufferedImage normal = imageService.getNormalAvatar(unitId, layerFlag);
 		WritableImage normalImage = SwingFXUtils.toFXImage(normal, null);
 		normalAvatarImage.setImage(normalImage);
@@ -98,14 +104,15 @@ public class UnitPreviewStageController {
 		layerBox[5] = layer6Box;
 		layerBox[6] = layer7Box;
 		layerBox[7] = layer8Box;
-		
+		layerBox[8] = layer9Box;
+
 		int unitId = Integer.parseInt(idLb.getText());
-		boolean[] layerFlag = new boolean[8];
+		boolean[] layerFlag = new boolean[9];
 		for(int i = 0; i < layerFlag.length; i++) {
 			layerFlag[i] = layerBox[i].isSelected();
 		}
 		CardImage normalCard = imageService.getNormalCard(unitId, layerFlag);
-		CardImage idolizeCard = imageService.getIdolizedCard(unitId, true, true, layerFlag);
+		CardImage idolizeCard = imageService.getIdolizedCard(unitId, layerFlag);
 		WritableImage normalImage = SwingFXUtils.toFXImage(normalCard.getImage(), null);
 		WritableImage idolizeImage = SwingFXUtils.toFXImage(idolizeCard.getImage(), null);
 		normalCardImage.setImage(normalImage);

@@ -70,19 +70,19 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setName(rs.getString("name"));
 			dto.setNormalCardId(rs.getInt("normal_card_id"));
 			dto.setIdolizeCardId(rs.getInt("rank_max_card_id"));
-			dto.setMaxBondCardId(rs.getInt("love_max_card_id"));
-			dto.setMaxLevelCardId(rs.getInt("level_max_card_id"));
-			dto.setAllMaxCardId(rs.getInt("all_max_card_id"));
-			dto.setNormalAvatarPath(rs.getString("normal_live_asset"));
-			dto.setIdolizeAvatarPath(rs.getString("level_love_max_live_asset"));
+			dto.setMaxBondCardId(0);
+			dto.setMaxLevelCardId(0);
+			dto.setAllMaxCardId(rs.getInt("rank_max_card_id"));
+			dto.setNormalAvatarPath(rs.getString("normal_icon_asset"));
+			dto.setIdolizeAvatarPath(rs.getString("rank_max_icon_asset"));
 			dto.setNormalCGAssetId(rs.getInt("normal_unit_navi_asset_id"));
 			dto.setIdolizeCGAssetId(rs.getInt("rank_max_unit_navi_asset_id"));
 			dto.setRarity(rs.getInt("rarity"));
 			dto.setAttrId(rs.getInt("attribute_id"));
 			dto.setDefaultSkillId(rs.getInt("default_unit_skill_id"));
-			dto.setSkillAssetVoiceId(rs.getInt("skill_asset_voice_id"));
+			dto.setSkillAssetVoiceId(0);
 			dto.setDefaultLeaderSkillId(rs.getInt("default_leader_skill_id"));
-			dto.setMessage(rs.getString("unit_message"));
+			dto.setMessage("");
 			dto.setMaxNormalBond(rs.getInt("before_love_max"));
 			dto.setMaxIdolizeBond(rs.getInt("after_love_max"));
 			dto.setMaxNormalLevel(rs.getInt("before_level_max"));
@@ -113,9 +113,9 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setName(rs.getString("name"));
 			dto.setNormalCardId(rs.getInt("normal_card_id"));
 			dto.setIdolizeCardId(rs.getInt("rank_max_card_id"));
-			dto.setMaxBondCardId(rs.getInt("love_max_card_id"));
-			dto.setMaxLevelCardId(rs.getInt("level_max_card_id"));
-			dto.setAllMaxCardId(rs.getInt("all_max_card_id"));
+			dto.setMaxBondCardId(0);
+			dto.setMaxLevelCardId(0);
+			dto.setAllMaxCardId(rs.getInt("rank_max_card_id"));
 			dto.setNormalAvatarPath(rs.getString("normal_live_asset"));
 			dto.setIdolizeAvatarPath(rs.getString("level_love_max_live_asset"));
 			dto.setNormalCGAssetId(rs.getInt("normal_unit_navi_asset_id"));
@@ -123,7 +123,7 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setRarity(rs.getInt("rarity"));
 			dto.setAttrId(rs.getInt("attribute_id"));
 			dto.setDefaultSkillId(rs.getInt("default_unit_skill_id"));
-			dto.setSkillAssetVoiceId(rs.getInt("skill_asset_voice_id"));
+			dto.setSkillAssetVoiceId(0);
 			dto.setDefaultLeaderSkillId(rs.getInt("default_leader_skill_id"));
 			dto.setMessage(rs.getString("unit_message"));
 			dto.setMaxNormalBond(rs.getInt("before_love_max"));
@@ -144,7 +144,7 @@ public class UnitDaoImpl implements UnitDao {
 	@Override
 	public List<UnitDTO> getAllUnits() throws SQLException {
 		List<UnitDTO> list = new ArrayList<UnitDTO>();
-		PreparedStatement preStatement = conn.prepareStatement("select * from unit_m");
+		PreparedStatement preStatement = conn.prepareStatement("select * from unit_m where unit_number != 0");
 		ResultSet rs = preStatement.executeQuery();
 		while (rs.next()) {
 			UnitDTO dto = new UnitDTO();
@@ -155,23 +155,25 @@ public class UnitDaoImpl implements UnitDao {
 			dto.setName(rs.getString("name"));
 			dto.setNormalCardId(rs.getInt("normal_card_id"));
 			dto.setIdolizeCardId(rs.getInt("rank_max_card_id"));
-			dto.setMaxBondCardId(rs.getInt("love_max_card_id"));
-			dto.setMaxLevelCardId(rs.getInt("level_max_card_id"));
-			dto.setAllMaxCardId(rs.getInt("all_max_card_id"));
-			dto.setNormalAvatarPath(rs.getString("normal_live_asset"));
-			dto.setIdolizeAvatarPath(rs.getString("level_love_max_live_asset"));
+			dto.setMaxBondCardId(0);
+			dto.setMaxLevelCardId(0);
+			dto.setAllMaxCardId(rs.getInt("rank_max_card_id"));
+			dto.setNormalAvatarPath(rs.getString("normal_icon_asset"));
+			dto.setIdolizeAvatarPath(rs.getString("rank_max_icon_asset"));
 			dto.setNormalCGAssetId(rs.getInt("normal_unit_navi_asset_id"));
 			dto.setIdolizeCGAssetId(rs.getInt("rank_max_unit_navi_asset_id"));
 			dto.setRarity(rs.getInt("rarity"));
 			dto.setAttrId(rs.getInt("attribute_id"));
 			dto.setDefaultSkillId(rs.getInt("default_unit_skill_id"));
-			dto.setSkillAssetVoiceId(rs.getInt("skill_asset_voice_id"));
+			dto.setSkillAssetVoiceId(0);
 			dto.setDefaultLeaderSkillId(rs.getInt("default_leader_skill_id"));
-			dto.setMessage(rs.getString("unit_message"));
+			dto.setMessage("");
 			dto.setMaxNormalBond(rs.getInt("before_love_max"));
 			dto.setMaxIdolizeBond(rs.getInt("after_love_max"));
 			dto.setMaxNormalLevel(rs.getInt("before_level_max"));
 			dto.setMaxIdolizeLevel(rs.getInt("after_level_max"));
+			//dto.setDefaultSkillCapacity(rs.getInt("default_removable_skill_capacity"));
+			//dto.setMaxSkillCapacity(rs.getInt("max_removable_skill_capacity"));
 			dto.setLevelUpPatternId(rs.getInt("unit_level_up_pattern_id"));
 			dto.setMaxStamina(rs.getInt("hp_max"));
 			dto.setMaxSmile(rs.getInt("smile_max"));
@@ -192,19 +194,37 @@ public class UnitDaoImpl implements UnitDao {
 		if (rs.next()) {
 			return rs.getString("name");
 		}
+		return "Encrypted";
+	}
+
+	@Override
+	public String getUnitNameImgPath(int type_id) throws SQLException {
+		PreparedStatement preStatement = conn
+				.prepareStatement("select name_image_asset from unit_type_m where unit_type_id = ?");
+		preStatement.setInt(1, type_id);
+		ResultSet rs = preStatement.executeQuery();
+		if (rs.next()) {
+			return rs.getString("name_image_asset");
+		}
 		return null;
 	}
 
 	@Override
 	public String getRarityName(int rarityId) throws SQLException {
-		PreparedStatement preStatement = conn
-				.prepareStatement("select name from unit_rarity_m where unit_rarity_id=?");
-		preStatement.setInt(1, rarityId);
-		ResultSet rs = preStatement.executeQuery();
-		if (rs.next()) {
-			return rs.getString("name");
+		String result = "";
+		switch(rarityId){
+		case 1:
+			result = "N";break;
+		case 2:
+			result = "R";break;
+		case 3:
+			result = "SR";break;
+		case 4:
+			result = "UR";break;
+		case 5:
+			result = "SSR";break;
 		}
-		return null;
+		return result;
 	}
 
 	@Override

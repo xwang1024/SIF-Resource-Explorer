@@ -55,11 +55,7 @@
                   <CheckBox fx:id="srLayer6" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="6" />
                   <CheckBox fx:id="srLayer7" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="7" />
                   <CheckBox fx:id="srLayer8" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="8" />
-                  <CheckBox fx:id="srLayerWb" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="White Board(?)">
-                     <tooltip>
-                        <Tooltip text="Ensure card opaque" />
-                     </tooltip>
-                  </CheckBox>
+                  <CheckBox fx:id="srLayer9" mnemonicParsing="false" onAction="#onUpdateNCardAction" selected="true" text="9" />
                </children>
             </FlowPane>
             <HBox alignment="BOTTOM_LEFT">
@@ -88,23 +84,7 @@
                   </BorderPane>
                   <BorderPane>
                      <bottom>
-                        <CheckBox fx:id="srLevelMaxBox" mnemonicParsing="false" text="Level Max" BorderPane.alignment="CENTER" />
-                     </bottom>
-                     <center>
-                        <ImageView fx:id="lvMaxNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane>
-                     <bottom>
-                        <CheckBox fx:id="srBondMaxBox" mnemonicParsing="false" text="Bond Max" BorderPane.alignment="CENTER" />
-                     </bottom>
-                     <center>
-                        <ImageView fx:id="bondMaxNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane>
-                     <bottom>
-                        <CheckBox fx:id="srDoubleMaxBox" mnemonicParsing="false" selected="true" text="Double Max" BorderPane.alignment="CENTER" />
+                        <CheckBox fx:id="srDoubleMaxBox" mnemonicParsing="false" selected="true" text="Idolized" BorderPane.alignment="CENTER" />
                      </bottom>
                      <center>
                         <ImageView fx:id="dbMaxNCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
@@ -129,16 +109,15 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="urLayer1" mnemonicParsing="false" onAction="#onUpdateURCardAction" text="1" />
+                  <CheckBox fx:id="urLayer1" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="1" />
                   <CheckBox fx:id="urLayer2" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="2" />
                   <CheckBox fx:id="urLayer3" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="3" />
                   <CheckBox fx:id="urLayer4" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="4" />
                   <CheckBox fx:id="urLayer5" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="5" />
-                  <CheckBox fx:id="urLayerWb" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="White Board(?)">
-                     <tooltip>
-                        <Tooltip text="Ensure card opaque" />
-                     </tooltip>
-                  </CheckBox>
+                  <CheckBox fx:id="urLayer6" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="6" />
+                  <CheckBox fx:id="urLayer7" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="7" />
+                  <CheckBox fx:id="urLayer8" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="8" />
+                  <CheckBox fx:id="urLayer9" mnemonicParsing="false" onAction="#onUpdateURCardAction" selected="true" text="9" />
                </children>
             </FlowPane>
             <HBox alignment="CENTER_LEFT">
@@ -167,23 +146,7 @@
                   </BorderPane>
                   <BorderPane>
                      <bottom>
-                        <CheckBox fx:id="urLevelMaxBox" mnemonicParsing="false" text="Level Max" BorderPane.alignment="CENTER" />
-                     </bottom>
-                     <center>
-                        <ImageView fx:id="lvMaxURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane>
-                     <bottom>
-                        <CheckBox fx:id="urBondMaxBox" mnemonicParsing="false" text="Bond Max" BorderPane.alignment="CENTER" />
-                     </bottom>
-                     <center>
-                        <ImageView fx:id="bondMaxURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane>
-                     <bottom>
-                        <CheckBox fx:id="urDoubleMaxBox" mnemonicParsing="false" selected="true" text="Double Max" BorderPane.alignment="CENTER" />
+                        <CheckBox fx:id="urDoubleMaxBox" mnemonicParsing="false" selected="true" text="Idolized" BorderPane.alignment="CENTER" />
                      </bottom>
                      <center>
                         <ImageView fx:id="dbMaxURCardImage" fitHeight="200.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />

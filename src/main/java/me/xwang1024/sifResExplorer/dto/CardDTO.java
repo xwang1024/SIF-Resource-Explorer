@@ -1,6 +1,12 @@
 package me.xwang1024.sifResExplorer.dto;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import me.xwang1024.sifResExplorer.service.ImageService;
+
 public class CardDTO {
+	private static final Logger logger = LoggerFactory.getLogger(CardDTO.class);
 	private int cardId;
 	private int cardBaseId;
 	private int unitNaviAssetId;
@@ -9,6 +15,7 @@ public class CardDTO {
 	private int naviMoveX;
 	private int naviMoveY;
 	private double naviSizeRatio;
+	private String flashAsset;
 
 	public int getCardId() {
 		return cardId;
@@ -74,12 +81,20 @@ public class CardDTO {
 		this.naviSizeRatio = naviSizeRatio;
 	}
 
+	public String getFlashAsset() {
+		return flashAsset;
+	}
+
+	public void setFlashAsset(String flashAsset) {
+		this.flashAsset = flashAsset;
+	}
+
 	@Override
 	public String toString() {
 		return "CardDTO [cardId=" + cardId + ", cardBaseId=" + cardBaseId + ", unitNaviAssetId="
 				+ unitNaviAssetId + ", naviLayerOrder=" + naviLayerOrder + ", naviRotation="
 				+ naviRotation + ", naviMoveX=" + naviMoveX + ", naviMoveY=" + naviMoveY
-				+ ", naviSizeRatio=" + naviSizeRatio + "]";
+				+ ", naviSizeRatio=" + naviSizeRatio + ", flashAsset=" + flashAsset + "]";
 	}
 
 }
